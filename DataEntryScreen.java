@@ -1,7 +1,7 @@
 import java.awt.event.*;
 import javax.swing.*;
 
-class DataEntryScreen extends JFrame implements ActionListener {
+class DataEntryGUI extends JFrame implements ActionListener {
     // JTextField
     static JTextField t1, t2, t3;
 
@@ -15,7 +15,7 @@ class DataEntryScreen extends JFrame implements ActionListener {
     static JLabel l1, l2, l3;
 
     // Default constructor
-    DataEntryScreen() {
+    DataEntryGUI() {
     }
 
     // Main class
@@ -32,7 +32,7 @@ class DataEntryScreen extends JFrame implements ActionListener {
         b = new JButton("Submit");
 
         // Create an object of the TextFieldsDemo class
-        DataEntryScreen demo = new DataEntryScreen();
+        DataEntryGUI demo = new DataEntryGUI();
 
         // Add ActionListener to the button
         b.addActionListener(demo);
