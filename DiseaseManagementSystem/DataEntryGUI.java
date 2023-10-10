@@ -1,3 +1,4 @@
+package DiseaseManagementSystem;
 import java.awt.event.*;
 import javax.swing.*;
 

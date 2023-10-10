@@ -1,3 +1,6 @@
+package DiseaseManagementSystem;
+import DiseaseManagementSystem.InfectedUserData;
+
 public class ReviewingSystem {
     public boolean reviewStatus;
 

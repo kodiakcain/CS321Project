@@ -1,3 +1,4 @@
+package DiseaseManagementSystem;
 public class InfectedUserData {
     String date = "";
     int formNumber = 0;
