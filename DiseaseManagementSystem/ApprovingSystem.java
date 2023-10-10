@@ -5,7 +5,7 @@ public class ApprovingSystem {
     private InfectedUserData applicantForm;
 
     public void loadApproverScreen() {
-
+        int x = 0;
     }
 
     private int getNextApproveItemID() {
