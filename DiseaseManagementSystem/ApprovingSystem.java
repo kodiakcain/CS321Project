@@ -9,11 +9,15 @@ public class ApprovingSystem {
     }
 
     private int getNextApproveItemID() {
+        int ID = 0;
 
+        return ID;
     }
 
     private InfectedUserData loadForm() {
+        InfectedUserData form = new InfectedUserData(null, null, null);
 
+        return form;
     }
 
     public void acceptForm() {
@@ -29,6 +33,8 @@ public class ApprovingSystem {
     }
 
     private boolean returnForCorrection() {
-        
+        boolean correct = true;
+
+        return correct;
     }
 }
