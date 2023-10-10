@@ -20,6 +20,10 @@ public class InfectedUserData {
         this.birthdate = birthdate;
     }
 
+    public String getData() {
+        return this.data; 
+    }
+
     public int validateInfectiousData(String data) {
         int flag = 0;
 

@@ -1,4 +1,4 @@
-package Testing;
+package test;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
@@ -10,8 +10,8 @@ import DiseaseManagementSystem.InfectedUserData;
 public class InfectedUserDataTest {
     
     @Test
-    public void HelloWorldTest() {
-        InfectedUserData testobj = new InfectedUserData(null, null, null)
-        assertEquals(testobj.getMessage(), "Hello, World!");
+    public void Test() {
+        InfectedUserData testobj = new InfectedUserData("hi", null, null);
+        assertEquals(testobj.getData(), "");
     }
 }

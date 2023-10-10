@@ -1,4 +1,6 @@
-package Testing;
+package test;
+
+
 
 public @interface Test {
 
