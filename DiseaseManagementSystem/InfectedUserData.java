@@ -15,7 +15,9 @@ public class InfectedUserData {
     int isParent = 0;
 
     public InfectedUserData (String data, String email, String birthdate) {
-        
+        this.data = data;
+        this.email = email;
+        this.birthdate = birthdate;
     }
 
     public int validateInfectiousData(String data) {
