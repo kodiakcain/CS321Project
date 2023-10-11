@@ -138,9 +138,13 @@ public class InfectedUserData {
      * @return Returns 0 for invalid, 1 for valid. 
      */
     public int validateInfectiousData(String data) {
-        int flag = 0;
-
-        return flag;
+        if (data.length() > 321) {
+            return 0;
+        } else if (data.length() <= 0) {
+            return 0;
+        } else {
+            return 1;
+        }
     }
 
     public int validateEmail(String email) {
@@ -155,9 +159,7 @@ public class InfectedUserData {
     }
 
     public int validateBirthdate(String birthdate) {
-        if (birthdate.length() < 5) {
-            return 0;
-        } else if (birthdate.length() > 60) {
+        if (birthdate.length() != 10) {
             return 0;
         } else {
             return 1;

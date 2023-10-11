@@ -1,5 +1,3 @@
-
-
 import static org.junit.Assert.*;
 import org.junit.Test;
 
@@ -7,66 +5,70 @@ import DiseaseManagementSystem.InfectedUserData;
 
 public class InfectedUserDataTest {
     
+    //trying to enter data with 0 characters
     @Test
     public void LessDataTest() {
-        InfectedUserData testobj = new InfectedUserData("j", null, null, 0, false, false);
-
-        int minLength = 1;
-        int maxLength = 128;
-        int dataLength = testobj.getDataSize();
+        InfectedUserData testobj = new InfectedUserData("", null, null, 0, false, false);
 
         // Check that the length of the string is within the specified range
-        assertTrue(dataLength >= minLength && dataLength <= maxLength);
+        assertTrue(testobj.validateInfectiousData(testobj.getData()) == 0);
     }
 
-    /** 
-
+    //trying to enter data with 322 characters
     @Test
     public void MoreDataTest() {
-        InfectedUserData testobj = new InfectedUserData("431fq432vrv42iu483fni483uv3qrncec93q2qubviv3ircjnr3n2u39nr3iv3v9314c3oiv4vu4nggbrjksadlcmdkoqv3jir3940q31ijfn239i4j130fnrvuinvvnd", null, null, 0, false, false);
-
-        int minLength = 1;
-        int maxLength = 128;
+        InfectedUserData testobj = new InfectedUserData("431fq432vrv42iu483fni483uv3qrncec9vkhjtjfcrdhrtgfcgctrhdtrdhkhbuewd7832udbc2u297g2ubebdjebui2o4hr9872eyh3ubfry382gf78ybrvfy4ubfhfewkjfwbqhfwerbf478yu2ufbhkuebfewihfb784yfg82fubhfrhbvreukhcbewkqykhejvkrewhqrvbhe78387843bhrvbkhrjbvhakbrgbarhkurbvhevbkurabkherhvbiuoewbhuh8vr3u9iwudehfifjn589riennejifuj8ruhcc39c39c39c9928cuh", null, null, 0, false, false);
 
         // Check that the length of the string is within the specified range
-        assertThat(testobj.getDataSize(), both(greaterThanOrEqualTo(minLength)).and(lessThanOrEqualTo(maxLength)));
+        assertTrue(testobj.validateInfectiousData(testobj.getData()) == 0);
     }
 
+    //trying to enter data with 50 characters
+    @Test
+    public void NormalDataTest() {
+        InfectedUserData testobj = new InfectedUserData("431fq432vrv42iu483fni483uv3qrncec9vkhjtjfcrdhrtgfc", null, null, 0, false, false);
+
+        // Check that the length of the string is within the specified range
+        assertTrue(testobj.validateInfectiousData(testobj.getData()) == 1);
+    }
+
+    //trying email with 4 characters
     @Test
     public void EmailLengthTestLess() {
         InfectedUserData testobj = new InfectedUserData("I have covid.", "cain", "02/15/2003", 0, false, false);
 
-        int minLength = 5;
-        int maxLength = 60;
-
-        // Check that the length of the string is within the specified range
-        assertThat(testobj.getEmailLength(), both(greaterThanOrEqualTo(minLength)).and(lessThanOrEqualTo(maxLength)));
+        assertTrue(testobj.validateEmail(testobj.getEmail()) == 0);
 
     }
 
+    //trying email with 61 characters
     @Test
     public void EmailLengthTestMore() {
         InfectedUserData testobj = new InfectedUserData("I have covid.", "431fq432vrv42iu483fni483uv3qrncec9vkhjtjfcrdhrtgfcgctrhdtrdhk", "02/15/2003", 0, false, false);
 
-        int minLength = 5;
-        int maxLength = 60;
-
-        // Check that the length of the string is within the specified range
-        assertThat(testobj.getEmailLength(), both(greaterThanOrEqualTo(minLength)).and(lessThanOrEqualTo(maxLength)));
+        assertTrue(testobj.validateEmail(testobj.getEmail()) == 0);
 
     }
 
+    //trying email with 24 characters
+    @Test
+    public void EmailLengthTestNormal() {
+        InfectedUserData testobj = new InfectedUserData("I have covid.", "myexampleemail@gmail.com", "02/15/2003", 0, false, false);
+
+        assertTrue(testobj.validateEmail(testobj.getEmail()) == 1);
+
+    }
+
+    //testing birthdate with 9 characters
     @Test
     public void BirthdateTestLess() {
         InfectedUserData testobj = new InfectedUserData("I have a cold.", "youssef@gmail.com", "2/15/2003", 0, false, false);
 
-        int minLength = 10;
-        int maxLength = 10;
-
-        // Check that the length of the string is within the specified range
-        assertThat(testobj.getBirthdateLength(), both(greaterThanOrEqualTo(minLength)).and(lessThanOrEqualTo(maxLength)));
+        assertTrue(testobj.validateBirthdate(testobj.getBirthdate()) == 0);
 
     }
+
+    /** 
 
     @Test
     public void BirthdateTestMore() {
