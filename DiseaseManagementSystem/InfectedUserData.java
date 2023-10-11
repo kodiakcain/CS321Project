@@ -9,19 +9,26 @@ public class InfectedUserData {
     int numChildren = 0;
 
     //0 is false, 1 is true
-    int isGuardian = 0;
+    boolean isGuardian = false;
 
     //1 is true
-    int isParent = 0;
+    boolean isParent = false;
 
-    public InfectedUserData (String data, String email, String birthdate) {
+    public InfectedUserData (String data, String email, String birthdate, int numChildren, boolean isGuardian, boolean isParent) {
         this.data = data;
         this.email = email;
         this.birthdate = birthdate;
+        this.numChildren = numChildren;
+        this.isGuardian =  isGuardian;
+        this.isParent = isParent;
     }
 
     public String getData() {
         return this.data; 
+    }
+
+    public int getDataSize() {
+        return this.data.length(); 
     }
 
     public int validateInfectiousData(String data) {
