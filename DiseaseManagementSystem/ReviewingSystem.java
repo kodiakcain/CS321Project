@@ -20,13 +20,13 @@ public class ReviewingSystem {
     }
 
     public InfectedUserData getNextReviewObject() {
-        InfectedUserData revObj = new InfectedUserData(null, null, null, 0, reviewStatus, reviewStatus);
+        InfectedUserData revObj = new InfectedUserData(null,null, null, null, 0, reviewStatus, reviewStatus);
 
         return revObj;
     }
 
     public InfectedUserData loadForm() {
-        InfectedUserData nextForm = new InfectedUserData(null, null, null, 0, reviewStatus, reviewStatus);
+        InfectedUserData nextForm = new InfectedUserData(null, null, null, null, 0, reviewStatus, reviewStatus);
 
         return nextForm;
     }

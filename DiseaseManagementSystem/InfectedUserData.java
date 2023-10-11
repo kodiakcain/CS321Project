@@ -228,7 +228,11 @@ public class InfectedUserData {
 
     public int validateName(String name) {
         
-        if (name == null) {
+        boolean containsNumber = name.matches(".*\\d.*");
+
+        boolean containsSpecialCharacter = name.matches(".*[^a-zA-Z0-9].*");
+
+        if (containsNumber == true || containsSpecialCharacter == true) {
             return 0;
         }
 

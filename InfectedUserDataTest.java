@@ -146,6 +146,22 @@ public class InfectedUserDataTest {
 
     }
 
+    @Test
+    public void SpecialCharName() {
+        InfectedUserData testobj = new InfectedUserData("cain@","I have a cold.", "youssef@gmail.com", "02/15/2003", 4, false, false);
+
+        assertTrue(testobj.validateName(testobj.getName()) == 0);
+
+    }
+
+    @Test
+    public void NumberName() {
+        InfectedUserData testobj = new InfectedUserData("cain12","I have a cold.", "youssef@gmail.com", "02/15/2003", 4, false, false);
+
+        assertTrue(testobj.validateName(testobj.getName()) == 0);
+
+    }
+
     //entering no data, null
     @Test
     public void NullData() {
