@@ -11,7 +11,7 @@ public class InfectedUserDataTest {
     
     @Test
     public void Test() {
-        InfectedUserData testobj = new InfectedUserData("hi", null, null);
+        InfectedUserData testobj = new InfectedUserData(null, null, null);
         assertEquals(testobj.getData(), "");
     }
 }
