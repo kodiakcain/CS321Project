@@ -1,8 +1,13 @@
 package DiseaseManagementSystem;
 import DiseaseManagementSystem.InfectedUserData;
 
+/**
+ * This is the ReviewingSystem class, which serves as a driver class for the reviewing system.
+ * It allows the review agent to review InfectedUserData forms and ensure their accuracy
+ * before sending them to the approval system.
+ */
 public class ReviewingSystem {
-    public boolean reviewStatus;
+   
 
     public void loadReviewerScreen() {
 
