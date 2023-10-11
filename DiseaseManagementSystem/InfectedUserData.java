@@ -1,5 +1,8 @@
 package DiseaseManagementSystem;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class InfectedUserData {
     String date = "";
     int formNumber = 0;
@@ -7,6 +10,7 @@ public class InfectedUserData {
     String data = "";
     String email = "";
     String birthdate = "";
+    String name = "";
     int numChildren = 0;
 
     // 0 is false, 1 is true
@@ -15,7 +19,7 @@ public class InfectedUserData {
     // 1 is true
     boolean isParent = false;
 
-    public InfectedUserData(String data, String email, String birthdate, int numChildren, boolean isGuardian,
+    public InfectedUserData(String name, String data, String email, String birthdate, int numChildren, boolean isGuardian,
             boolean isParent) {
         this.data = data;
         this.email = email;
@@ -23,6 +27,7 @@ public class InfectedUserData {
         this.numChildren = numChildren;
         this.isGuardian = isGuardian;
         this.isParent = isParent;
+        this.name = name;
     }
 
     
@@ -32,6 +37,14 @@ public class InfectedUserData {
      */
     public String getData() {
         return this.data;
+    }
+
+    /** 
+     * Get the name.
+     * @return Returns the name. 
+     */
+    public String getName() {
+        return this.name;
     }
 
     
@@ -109,11 +122,27 @@ public class InfectedUserData {
     }
 
     /**
+     * Setter for the name.
+     * @param name New name.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
      * Setter for the date.
      * @param date New date.
      */
-    public void setDate(String date) {
-        this.date = date;
+    public void setDateToCurrent(String date) {
+
+        LocalDate currentDate = LocalDate.now();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+
+        // Format the current date as a string
+        String formattedDate = currentDate.format(formatter);
+
+        this.date = formattedDate;
     }
 
     /**
@@ -138,6 +167,11 @@ public class InfectedUserData {
      * @return Returns 0 for invalid, 1 for valid. 
      */
     public int validateInfectiousData(String data) {
+
+        if (data == null) {
+            return 0;
+        }
+
         if (data.length() > 321) {
             return 0;
         } else if (data.length() <= 0) {
@@ -149,6 +183,10 @@ public class InfectedUserData {
 
     public int validateEmail(String email) {
 
+        if (email == null) {
+            return 0;
+        }
+
         if (email.length() < 5) {
             return 0;
         } else if (email.length() > 60) {
@@ -159,6 +197,18 @@ public class InfectedUserData {
     }
 
     public int validateBirthdate(String birthdate) {
+
+        char[] birthdateArray = birthdate.toCharArray();
+
+        for (int i = 0; i < birthdateArray.length; i++) {
+            if (Character.isLetter(birthdateArray[i])) {
+                return 0;
+            }
+        }
+
+        if (birthdate == null) {
+            return 0;
+        }
         if (birthdate.length() != 10) {
             return 0;
         } else {
@@ -167,6 +217,10 @@ public class InfectedUserData {
     }
 
     public int validateNumChild(int numChild) {
+
+        if (String.valueOf(numChild) == null) {
+            return 0;
+        }
         if (numChild < 0) {
             return 0;
         } else if (numChild > 100) {
