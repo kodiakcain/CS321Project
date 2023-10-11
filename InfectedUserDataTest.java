@@ -68,43 +68,49 @@ public class InfectedUserDataTest {
 
     }
 
-    /** 
-
+    //trying birthdate with 11 characters
     @Test
     public void BirthdateTestMore() {
         InfectedUserData testobj = new InfectedUserData("I have a cold.", "youssef@gmail.com", "02/15/20039", 0, false, false);
 
-        int minLength = 10;
-        int maxLength = 10;
-
-        // Check that the length of the string is within the specified range
-        assertThat(testobj.getBirthdateLength(), both(greaterThanOrEqualTo(minLength)).and(lessThanOrEqualTo(maxLength)));
-
+        assertTrue(testobj.validateBirthdate(testobj.getBirthdate()) == 0);
     }
 
+    //trying birthdate with 10 characters
+    @Test
+    public void BirthdateTestNormal() {
+        InfectedUserData testobj = new InfectedUserData("I have a cold.", "youssef@gmail.com", "02/15/2003", 0, false, false);
+
+        assertTrue(testobj.validateBirthdate(testobj.getBirthdate()) == 1);
+    }
+
+    //trying to enter negative amount of children
     @Test
     public void NegativeChildren() {
         InfectedUserData testobj = new InfectedUserData("I have a cold.", "youssef@gmail.com", "02/15/2003", -1, false, false);
 
-        int minLength = 0;
-        int maxLength = 100;
-
-        // Check that the length of the string is within the specified range
-        assertThat(testobj.getNumChildren(), both(greaterThanOrEqualTo(minLength)).and(lessThanOrEqualTo(maxLength)));
+        assertTrue(testobj.validateNumChild(testobj.getNumChildren()) == 0);
 
     }
 
+    //trying to enter 101 children
     @Test
     public void MoreChildren() {
         InfectedUserData testobj = new InfectedUserData("I have a cold.", "youssef@gmail.com", "02/15/2003", 101, false, false);
 
-        int minLength = 0;
-        int maxLength = 100;
-
-        // Check that the length of the string is within the specified range
-        assertThat(testobj.getNumChildren(), both(greaterThanOrEqualTo(minLength)).and(lessThanOrEqualTo(maxLength)));
+        assertTrue(testobj.validateNumChild(testobj.getNumChildren()) == 0);
 
     }
+
+    @Test
+    public void NormalChildren() {
+        InfectedUserData testobj = new InfectedUserData("I have a cold.", "youssef@gmail.com", "02/15/2003", 4, false, false);
+
+        assertTrue(testobj.validateNumChild(testobj.getNumChildren()) == 1);
+
+    }
+
+    /** 
 
     @Test
     public void NullData() {
