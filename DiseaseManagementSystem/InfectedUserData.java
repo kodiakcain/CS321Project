@@ -205,10 +205,6 @@ public class InfectedUserData {
                 return 0;
             }
         }
-
-        if (birthdate == null) {
-            return 0;
-        }
         if (birthdate.length() != 10) {
             return 0;
         } else {
@@ -224,6 +220,21 @@ public class InfectedUserData {
         if (numChild < 0) {
             return 0;
         } else if (numChild > 100) {
+            return 0;
+        } else {
+            return 1;
+        }
+    }
+
+    public int validateName(String name) {
+        
+        if (name == null) {
+            return 0;
+        }
+
+        if (name.length() <= 0) {
+            return 0;
+        } else if (name.length() > 60) {
             return 0;
         } else {
             return 1;

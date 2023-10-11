@@ -110,11 +110,39 @@ public class InfectedUserDataTest {
 
     }
 
+    //trying to enter 4 children
     @Test
     public void NormalChildren() {
         InfectedUserData testobj = new InfectedUserData(null,"I have a cold.", "youssef@gmail.com", "02/15/2003", 4, false, false);
 
         assertTrue(testobj.validateNumChild(testobj.getNumChildren()) == 1);
+
+    }
+
+    //empty name entered
+    @Test
+    public void EmptyName() {
+        InfectedUserData testobj = new InfectedUserData("","I have a cold.", "youssef@gmail.com", "02/15/2003", 4, false, false);
+
+        assertTrue(testobj.validateName(testobj.getName()) == 0);
+
+    }
+
+    //normal size name entered
+    @Test
+    public void NormalName() {
+        InfectedUserData testobj = new InfectedUserData("Cain","I have a cold.", "youssef@gmail.com", "02/15/2003", 4, false, false);
+
+        assertTrue(testobj.validateName(testobj.getName()) == 1);
+
+    }
+
+    //entering long name with 61 characters
+    @Test
+    public void LongName() {
+        InfectedUserData testobj = new InfectedUserData("caubcweuvhbljebqeuilvbwluBWLIABVLIBQVBUILVREBVIRVBLVBUIVUIWJK","I have a cold.", "youssef@gmail.com", "02/15/2003", 4, false, false);
+
+        assertTrue(testobj.validateName(testobj.getName()) == 0);
 
     }
 
