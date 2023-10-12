@@ -7,6 +7,8 @@ import DiseaseManagementSystem.InfectedUserData;
  * before sending them to the approval system.
  */
 public class ReviewingSystem {
+
+    public boolean reviewStatus;
    
 
     public void loadReviewerScreen() {
