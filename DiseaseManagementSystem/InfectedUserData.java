@@ -19,8 +19,18 @@ public class InfectedUserData {
     // 1 is true
     boolean isParent = false;
 
+    /**
+     * Constructor for InfectedUserData object form.
+     * @param name Name of the immigrant.
+     * @param data Infectious disease data.
+     * @param email Email of the immigrant.
+     * @param birthdate Immig
+     * @param numChildren
+     * @param isGuardian
+     * @param isParent
+     */
     public InfectedUserData(String name, String data, String email, String birthdate, int numChildren, boolean isGuardian,
-            boolean isParent) {
+            boolean isParent, String date) {
         this.data = data;
         this.email = email;
         this.birthdate = birthdate;
@@ -28,6 +38,7 @@ public class InfectedUserData {
         this.isGuardian = isGuardian;
         this.isParent = isParent;
         this.name = name;
+        this.date = date;
     }
 
     
@@ -98,6 +109,22 @@ public class InfectedUserData {
     }
 
     /**
+     * Get if user is parent.
+     * @return Returns if user is a parent.
+     */
+    public boolean getIsParent() {
+        return this.isParent;
+    }
+
+    /**
+     * Get if user is a guardian.
+     * @return Returns if user is a guardian.
+     */
+    public boolean getIsGuardian() {
+        return this.isGuardian;
+    }
+
+    /**
      * Setter for email.
      * @param email New email.
      */
@@ -131,9 +158,8 @@ public class InfectedUserData {
 
     /**
      * Setter for the date.
-     * @param date New date.
      */
-    public void setDateToCurrent(String date) {
+    public void setDateToCurrent() {
 
         LocalDate currentDate = LocalDate.now();
 
@@ -162,6 +188,22 @@ public class InfectedUserData {
     }
 
     /**
+     * Setter method to see if the user is a parent.
+     * @param isParent Says if the user is a parent or not.
+     */
+    public void setParent(boolean isParent) {
+        this.isParent = isParent;
+    }
+
+    /**
+     * Setter method to see if user is a guardian.
+     * @param isGuardian Says if user is a guardian or not.
+     */
+    public void setGuardian(boolean isGuardian) {
+        this.isGuardian = isGuardian;
+    }
+
+    /**
      * Validates length of Infectious data.
      * @param data Infectious data.
      * @return Returns 0 for invalid, 1 for valid. 
@@ -181,6 +223,11 @@ public class InfectedUserData {
         }
     }
 
+    /**
+     * Validates the email.
+     * @param email Email to be validated.
+     * @return Return 0 for invalid, 1 for valid.
+     */
     public int validateEmail(String email) {
 
         if (email == null) {
@@ -196,7 +243,16 @@ public class InfectedUserData {
         }
     }
 
+    /**
+     * Validates the brithdate
+     * @param birthdate Birthdate to be validated.
+     * @return Return 0 for invalid, 1 for valid.
+     */
     public int validateBirthdate(String birthdate) {
+
+        if (birthdate == null) {
+            return 0;
+        }
 
         char[] birthdateArray = birthdate.toCharArray();
 
@@ -205,6 +261,7 @@ public class InfectedUserData {
                 return 0;
             }
         }
+
         if (birthdate.length() != 10) {
             return 0;
         } else {
@@ -212,6 +269,11 @@ public class InfectedUserData {
         }
     }
 
+    /**
+     * Validates the number of children. 
+     * @param numChild Number of children to be validated.
+     * @return Return 0 for invalid, 1 for valid.
+     */
     public int validateNumChild(int numChild) {
 
         if (String.valueOf(numChild) == null) {
@@ -226,6 +288,11 @@ public class InfectedUserData {
         }
     }
 
+    /**
+     * Validates the immigrant name.
+     * @param name Name of the immigrant to be validated.
+     * @return Return 0 for invalid, 1 for valid.
+     */
     public int validateName(String name) {
         
         boolean containsNumber = name.matches(".*\\d.*");
@@ -245,16 +312,26 @@ public class InfectedUserData {
         }
     }
 
+    /**
+     * Calculates a unique form ID.
+     * @return Returns unique form ID for the form.
+     */
     public int calculateFormNumber() {
         int formNumber = 0;
 
         return formNumber;
     }
 
+    /**
+     * Stores all the data in the
+     */
     public void storeAllData() {
 
     }
 
+    /**
+     * Add the form ID and status of the form to the workflow table.
+     */
     public void addEntry() {
 
     }
