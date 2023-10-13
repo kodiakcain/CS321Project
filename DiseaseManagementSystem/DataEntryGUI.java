@@ -130,6 +130,7 @@ class DataEntryGUI extends JFrame implements ActionListener {
             dataEntryForm.setGuardian(true);
         }
 
+        //add validations
         dataEntryForm.setName(name);
         dataEntryForm.setData(diseaseData);
         
