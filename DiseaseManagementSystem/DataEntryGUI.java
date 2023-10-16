@@ -118,21 +118,58 @@ class DataEntryGUI extends JFrame implements ActionListener {
         f.setVisible(true);
 
 
-        //Create the form.
-        InfectedUserData dataEntryForm = new InfectedUserData(name, diseaseData, email, birthdate, Integer.parseInt(children), false, false, null);
+        //Create the placeholder form.
+        InfectedUserData placeholderEntryForm = new InfectedUserData(name, diseaseData, email, birthdate, Integer.parseInt(children), false, null);
+
+        //Create the final form for after validations
+        InfectedUserData finalEntryForm = new InfectedUserData(null, null, null, null, 0, false, null);
 
         //Set the form date to the current date.
-        dataEntryForm.setDateToCurrent();
+        placeholderEntryForm.setDateToCurrent();
 
         //If the user has children, set parent and guardian to true.
-        if (dataEntryForm.getNumChildren() > 0) {
-            dataEntryForm.setParent(true);
-            dataEntryForm.setGuardian(true);
+        if (placeholderEntryForm.getNumChildren() > 0) {
+            placeholderEntryForm.setGuardian(true);
         }
 
-        //add validations
-        dataEntryForm.setName(name);
-        dataEntryForm.setData(diseaseData);
+        //add validation for name
+        if (placeholderEntryForm.validateName(name) == 1) {
+            finalEntryForm.setName(name);
+        } else {
+            //add clear data form and show name error message
+        }
+
+        //add validation for disease data
+        if (placeholderEntryForm.validateInfectiousData(diseaseData) == 1) {
+            finalEntryForm.setData(diseaseData);
+        } else {
+            //add clear data form and show data error message
+        }
+
+        //add validation for email
+        if (placeholderEntryForm.validateEmail(email) == 1) {
+            finalEntryForm.setEmail(email);
+        } else {
+            //add clear data form and show email error message
+        }
+
+        //add validation for birthdate
+        if (placeholderEntryForm.validateBirthdate(birthdate) == 1) {
+            finalEntryForm.setBirthdate(birthdate);
+        } else {
+            //add clear data form and show birthdate error message
+        }
+
+        //add validation for number of children
+        //FIXME bug with entering string into box with validations using Integer.parseInt
+        if (placeholderEntryForm.validateNumChild(Integer.parseInt(children)) == 1) {
+            finalEntryForm.setNumChildren(Integer.parseInt(children));
+        } else {
+            //add clear data form and show birthdate error message
+        }
+
+        //set parent or guardian 
+
         
     }
 
