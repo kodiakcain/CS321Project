@@ -60,8 +60,7 @@ public class ApprovingSystem {
      */
     private InfectedUserData loadForm(int ID) {
         InfectedUserData form = new InfectedUserData(null, null,
-        null, null, 0, false,
-        false, null);
+        null, null, 0, false, null);
 
         this.applicantForm = form;
 

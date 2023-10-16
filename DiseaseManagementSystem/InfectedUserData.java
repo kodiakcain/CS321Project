@@ -16,27 +16,22 @@ public class InfectedUserData {
     // 0 is false, 1 is true
     boolean isGuardian = false;
 
-    // 1 is true
-    boolean isParent = false;
-
     /**
      * Constructor for InfectedUserData object form.
      * @param name Name of the immigrant.
      * @param data Infectious disease data.
      * @param email Email of the immigrant.
-     * @param birthdate Immig
-     * @param numChildren
-     * @param isGuardian
-     * @param isParent
+     * @param birthdate Immigrant birthdate.
+     * @param numChildren Number of children the immigrant has.
+     * @param isGuardian Boolean if the immigrant is a guardian.
+     * @param date Current date.
      */
-    public InfectedUserData(String name, String data, String email, String birthdate, int numChildren, boolean isGuardian,
-            boolean isParent, String date) {
+    public InfectedUserData(String name, String data, String email, String birthdate, int numChildren, boolean isGuardian, String date) {
         this.data = data;
         this.email = email;
         this.birthdate = birthdate;
         this.numChildren = numChildren;
         this.isGuardian = isGuardian;
-        this.isParent = isParent;
         this.name = name;
         this.date = date;
     }
@@ -109,19 +104,15 @@ public class InfectedUserData {
     }
 
     /**
-     * Get if user is parent.
-     * @return Returns if user is a parent.
-     */
-    public boolean getIsParent() {
-        return this.isParent;
-    }
-
-    /**
      * Get if user is a guardian.
      * @return Returns if user is a guardian.
      */
     public boolean getIsGuardian() {
         return this.isGuardian;
+    }
+
+    public String getDate() {
+        return this.date;
     }
 
     /**
@@ -185,14 +176,6 @@ public class InfectedUserData {
      */
     public void setNumChildren(int numchildren) {
         this.numChildren = numchildren;
-    }
-
-    /**
-     * Setter method to see if the user is a parent.
-     * @param isParent Says if the user is a parent or not.
-     */
-    public void setParent(boolean isParent) {
-        this.isParent = isParent;
     }
 
     /**
