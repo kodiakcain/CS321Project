@@ -30,12 +30,58 @@ public class ApprovingSystem {
     private InfectedUserData applicantForm;
 
     /**
-     * Loads the screen of the approving process to begin.
+     * Returns the approval status of the applicant's Infectious Disease Form.
+     *     The form has either been approved or declined.
+     * 
+     * @return the approval status of the applicant's Infectious Disease Form.
      */
-    public void loadApproverScreen() {
+    public boolean getApprovalStatus() {
+        return this.approvalStatus;
+    }
+
+    /**
+     * Sets the status of the applicant's Infectious Disease form to either
+     *     approved or declined using the given approvalStatus.
+     * 
+     * @param approvalStatus for the given status to set the applicant's
+     *     Infectious Disease Form.
+     */
+    public void setApprovalStatus(boolean approvalStatus) {
+        this.approvalStatus = approvalStatus;
+    }
+
+    /**
+     * Returns the applicant's Infectious Disease form with its corresponding
+     *     data.
+     * 
+     * @return the applicant's Infectious Disease form that contains its
+     *     corresponding data.
+     */
+    public InfectedUserData getApplicantForm() {
+        return this.applicantForm;
+    }
+
+    /**
+     * Sets the applicant's Infectious Disease form with its corresponding
+     *     data.
+     * 
+     * @param applicantForm for the InfectedUserData object that contains
+     *     the data of the applicant's Infectious Disease Form.
+     */
+    public void setApplicantForm(InfectedUserData applicantForm) {
+        this.applicantForm = applicantForm;
+    }
+
+    /**
+     * Loads the screen of the approving process to begin.
+     * 
+     * @return true if the approving screen loaded successfully,
+     *     otherwise return false.
+     */
+    public boolean loadApproverScreen() {
         int x = 0;
 
-        return;
+        return true;
     }
 
     /**
