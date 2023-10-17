@@ -39,8 +39,6 @@ class DataEntryGUI extends JFrame implements ActionListener {
         if (firstSubmission == false) {
             DataEntryGUI.loadDataScreen();
         }
-        
-
 
     }
 
