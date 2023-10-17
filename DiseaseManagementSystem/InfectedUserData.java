@@ -277,6 +277,10 @@ public class InfectedUserData {
      * @return Return 0 for invalid, 1 for valid.
      */
     public int validateName(String name) {
+
+        if (name == null) {
+            return 0;
+        }
         
         boolean containsNumber = name.matches(".*\\d.*");
 
