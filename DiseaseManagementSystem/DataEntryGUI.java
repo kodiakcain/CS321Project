@@ -27,17 +27,111 @@ class DataEntryGUI extends JFrame implements ActionListener {
     //amount of times submitted
     static int tries = 0;
 
-    static InfectedUserData placeholderEntryForm;
+    //immigrant data form
+    static InfectedUserData ImmigrantDataForm;
 
+    //boolean for first submission
     static boolean firstSubmission = false;
-
-    // Default constructor
-    DataEntryGUI() {
-    }
 
     // Main class
     public static void main(String[] args) {
 
+        if (firstSubmission == false) {
+            DataEntryGUI.loadDataScreen();
+        }
+        
+
+
+    }
+
+    // If the button is pressed
+    public void actionPerformed(ActionEvent e) {
+        String s = e.getActionCommand();
+        if (s.equals("Submit")) {
+
+            //once the button is pressed the first submission is done
+            firstSubmission = true;
+
+            //add a try to tries
+            tries++;
+
+            //get data from textfields
+            name = t1.getText();
+            email = t2.getText();
+            birthdate = t3.getText();
+            children = t4.getText();
+            diseaseData = t5.getText();
+
+            //fill the form with the data
+            ImmigrantDataForm = new InfectedUserData(name, diseaseData, email, birthdate, 0, false, null);
+
+            //if there is more than zero children, the immigrant is a parent or guardian
+            if (Integer.parseInt(children) > 0) {
+                ImmigrantDataForm.setGuardian(true);
+            }
+
+            //if all validations are not done, dispose of the old screen, and reload a new screen for data entry 
+            if (DataEntryGUI.validate(ImmigrantDataForm) != 5) {
+        
+                f.dispose();
+                DataEntryGUI.loadDataScreen();
+
+            }
+
+            //if all fields are valid, 
+            if (DataEntryGUI.validate(ImmigrantDataForm) == 5) {
+            Container contentPane = f.getContentPane();
+            contentPane.removeAll();
+            contentPane.repaint();
+        } 
+    }
+    }
+
+    public static int validate(InfectedUserData form) {
+        int finalNum = 0;
+
+
+        //add validation for name
+        if (form.validateName(name) == 1) {
+            finalNum++;
+        } else {
+            //add clear data form and show name error message
+        }
+
+        //add validation for disease data
+        if (form.validateInfectiousData(diseaseData) == 1) {
+            finalNum++;
+        } else {
+            //add clear data form and show data error message
+        }
+
+        //add validation for email
+        if (form.validateEmail(email) == 1) {
+            finalNum++;
+        } else {
+            //add clear data form and show email error message
+        }
+
+        //add validation for birthdate
+        if (form.validateBirthdate(birthdate) == 1) {
+            finalNum++;
+        } else {
+            //add clear data form and show birthdate error message
+        }
+
+        //add validation for number of children
+        //FIXME bug with entering string into box with validations using Integer.parseInt
+        if (form.validateNumChild(Integer.parseInt(children)) == 1) {
+            finalNum++;
+        } else {
+            //add clear data form and show birthdate error message
+        }
+        
+        
+        return finalNum;
+    }
+
+    public static void loadDataScreen() {
         firstSubmission = false;
 
         if (firstSubmission == false) {
@@ -132,117 +226,8 @@ class DataEntryGUI extends JFrame implements ActionListener {
 
             // Make the frame visible
             f.setVisible(true);
-
-        placeholderEntryForm = new InfectedUserData(name, diseaseData, email, birthdate, 0, false, null);
-
-
-        }
-
-        //System.out.println("TEST: " + DataEntryGUI.validate(placeholderEntryForm));
-
-        
+            f.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
     }
-
-    // If the button is pressed
-    public void actionPerformed(ActionEvent e) {
-        String s = e.getActionCommand();
-        if (s.equals("Submit")) {
-
-            firstSubmission = true;
-            tries++;
-
-            // Retrieve data from text fields and store in variables
-            name = t1.getText();
-            email = t2.getText();
-            birthdate = t3.getText();
-            children = t4.getText();
-            diseaseData = t5.getText();
-
-            // Clear text fields
-            t1.setText("");
-            t2.setText("");
-            t3.setText("");
-            t4.setText("");
-            t5.setText("");
-
-            // Print the stored data to the console
-            System.out.println("Name: " + name);
-            System.out.println("Email: " + email);
-            System.out.println("Birthdate: " + birthdate);
-            System.out.println("Number of Children: " + children);
-            System.out.println("Disease Data: " + diseaseData);
-
-            while (DataEntryGUI.validate(placeholderEntryForm) != 5) {
-            
-
-                t1.setText("");
-                t2.setText("");
-                t3.setText("");
-                t4.setText("");
-                t5.setText("");
-
-
-            }
-
-            if (DataEntryGUI.validate(placeholderEntryForm) == 5) {
-            Container contentPane = f.getContentPane();
-            contentPane.removeAll();
-            contentPane.repaint();
-        } 
-    }
-    }
-
-    public static int validate(InfectedUserData form) {
-        int finalNum = 5;
-
-        /* 
-        System.out.println("FORM NAME: " + form.getName());
-        System.out.println("FORM DATA: " + form.getData());
-        System.out.println("FORM Email: " + form.getEmail());
-        System.out.println("FORM Birthdate: " + form.getBirthdate());
-        System.out.println("FORM NumChild: " + form.getNumChildren());
-
-        //add validation for name
-        if (form.validateName(name) == 1) {
-            finalNum++;
-        } else {
-            //add clear data form and show name error message
-        }
-
-        //add validation for disease data
-        if (form.validateInfectiousData(diseaseData) == 1) {
-            finalNum++;
-        } else {
-            //add clear data form and show data error message
-        }
-
-        //add validation for email
-        if (form.validateEmail(email) == 1) {
-            finalNum++;
-        } else {
-            //add clear data form and show email error message
-        }
-
-        //add validation for birthdate
-        if (form.validateBirthdate(birthdate) == 1) {
-            finalNum++;
-        } else {
-            //add clear data form and show birthdate error message
-        }
-
-        //add validation for number of children
-        //FIXME bug with entering string into box with validations using Integer.parseInt
-        if (form.validateNumChild(0) == 1) {
-            finalNum++;
-        } else {
-            //add clear data form and show birthdate error message
-        }
-
-        System.out.println("Final Num: " + finalNum);
-
-        */
-        
-        return finalNum;
-    }
+}
 }
