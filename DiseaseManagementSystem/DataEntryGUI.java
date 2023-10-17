@@ -83,13 +83,24 @@ class DataEntryGUI extends JFrame implements ActionListener {
             Container contentPane = f.getContentPane();
             contentPane.removeAll();
             contentPane.repaint();
+
+            //load the loading icon
+            ImageIcon loading = new ImageIcon("DiseaseManagementSystem/loading.gif");
+
+            //show loading icon
+            f.add(new JLabel("", loading, JLabel.CENTER));
+
+            f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            f.setExtendedState(JFrame.MAXIMIZED_BOTH);
+            f.setVisible(true);
         } 
     }
     }
 
     public static int validate(InfectedUserData form) {
-        int finalNum = 0;
 
+        //final number of valid parts
+        int finalNum = 0;
 
         //add validation for name
         if (form.validateName(name) == 1) {
@@ -120,14 +131,13 @@ class DataEntryGUI extends JFrame implements ActionListener {
         }
 
         //add validation for number of children
-        //FIXME bug with entering string into box with validations using Integer.parseInt
         if (form.validateNumChild(Integer.parseInt(children)) == 1) {
             finalNum++;
         } else {
             //add clear data form and show birthdate error message
         }
         
-        
+        //return total valid
         return finalNum;
     }
 
@@ -135,10 +145,10 @@ class DataEntryGUI extends JFrame implements ActionListener {
         firstSubmission = false;
 
         if (firstSubmission == false) {
-            // Create a new frame to store text fields and button
+            //Make the JFrame
             f = new JFrame("Disease Management System");
 
-            // Create labels to display text
+            //Labels for text
             title = new JLabel("Disease Management System");
             title.setFont(title.getFont().deriveFont(18.0f)); // Increase font size
 
@@ -148,23 +158,23 @@ class DataEntryGUI extends JFrame implements ActionListener {
             l4 = new JLabel("Enter Number of Children (Parent or guardian):");
             l5 = new JLabel("Enter Disease Data:");
 
-            // Create a new button
+            //=Create submit button
             b = new JButton("Submit");
 
-            // Create an object of the TextFieldsDemo class
-            DataEntryGUI demo = new DataEntryGUI();
+            //make the gui object
+            DataEntryGUI gui = new DataEntryGUI();
 
-            // Add ActionListener to the button
-            b.addActionListener(demo);
+            //make the 
+            b.addActionListener(gui);
 
-            // Create five objects of JTextField
+            //make the five textfields
             t1 = new JTextField(16);
             t2 = new JTextField(16);
             t3 = new JTextField(16);
             t4 = new JTextField(16);
             t5 = new JTextField(16);
 
-            // Set the preferred size for the text fields (smaller width and height)
+            //set the size of the textfields
             Dimension fieldSize = new Dimension(100, 20); // Adjust the size as needed
             t1.setPreferredSize(fieldSize);
             t2.setPreferredSize(fieldSize);
@@ -172,24 +182,24 @@ class DataEntryGUI extends JFrame implements ActionListener {
             t4.setPreferredSize(fieldSize);
             t5.setPreferredSize(fieldSize);
 
-            // Create a panel with GridBagLayout
+            //create panel
             JPanel p = new JPanel(new GridBagLayout());
 
-            // Create GridBagConstraints to center components
+            //center components
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.insets.set(5, 5, 5, 5);
 
-            // Add the title label at the top
+            //add title to top
             gbc.anchor = GridBagConstraints.CENTER;
             gbc.gridx = 0;
             gbc.gridy = 0;
             gbc.gridwidth = 2;
             p.add(title, gbc);
 
-            // Reset gridwidth for other components
+            //reset gridwidth
             gbc.gridwidth = 1;
 
-            // Add labels, text fields, and the button to the panel with GridBagConstraints
+            //add labels and textfields
             gbc.anchor = GridBagConstraints.WEST;
             gbc.gridy++;
             p.add(l1, gbc);
@@ -215,17 +225,19 @@ class DataEntryGUI extends JFrame implements ActionListener {
             gbc.anchor = GridBagConstraints.CENTER;
             p.add(b, gbc);
 
-            // Add the panel to the frame
+            //add panel to frame
             f.add(p);
 
-            // Set the size of the frame
+            //set size of frame
             f.setSize(300, 300); // Adjust the size as needed
 
-            // Center the frame on the screen
+            //center the frame
             f.setLocationRelativeTo(null);
 
-            // Make the frame visible
+            //set the frame to visible
             f.setVisible(true);
+
+            //maximize the screen size
             f.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
     }
