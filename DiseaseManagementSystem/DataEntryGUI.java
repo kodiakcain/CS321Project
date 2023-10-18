@@ -1,8 +1,13 @@
 package DiseaseManagementSystem;
 import java.awt.event.*;
+import java.security.NoSuchAlgorithmException;
+
 import javax.swing.*;
 import java.awt.*;
-import java.util.concurrent.TimeUnit;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
 import DiseaseManagementSystem.*;
 
 class DataEntryGUI extends JFrame implements ActionListener {
@@ -33,9 +38,14 @@ class DataEntryGUI extends JFrame implements ActionListener {
     //boolean for first submission
     static boolean firstSubmission = false;
 
+    //flag for completion of data entry screen and ready for approval screen
     static boolean flag1 = false;
 
-    // Main class
+    //workflow table for approvalQueue
+    static Queue<String> approvalQueue = new LinkedList<>();
+
+    //workflow table for reviewQueue
+    static Queue<String> reviewQueue = new LinkedList<>();
     public static void main(String[] args) {
 
         //load the initial data screen
@@ -81,32 +91,30 @@ class DataEntryGUI extends JFrame implements ActionListener {
 
             //if all fields are valid, 
             if (DataEntryGUI.validate(ImmigrantDataForm) == 5) {
+            
+            //remove everything from the screen
             Container contentPane = f.getContentPane();
             contentPane.removeAll();
             contentPane.repaint();
 
-            //load the loading icon
-            ImageIcon loading = new ImageIcon("DiseaseManagementSystem/loading.gif");
-
-            //show loading icon
-            f.add(new JLabel("", loading, JLabel.CENTER));
-
-            f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            f.setExtendedState(JFrame.MAXIMIZED_BOTH);
-            f.setVisible(true);
-
-            //add delay for loading screen
-                try {
-                    TimeUnit.SECONDS.sleep(1);
-                } catch (InterruptedException e1) {
-                    // TODO Auto-generated catch block
-                    e1.printStackTrace();
-                }
-
+            //set the flag to true
             flag1 = true;
 
+            System.out.println("BEFORE HASH: " + ImmigrantDataForm.getEmail());
+
+            //calculate the form number based on the SHA-256 hash of the email, and replace the email
+            try {
+                ImmigrantDataForm.calculateFormNumber();
+            } catch (NoSuchAlgorithmException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+
+            System.out.println("HASH: " + ImmigrantDataForm.getEmail());
+            //new approval gui object
             ApprovalGUI approval = new ApprovalGUI();
 
+            //once flag is true, close the data entry screen and load the approval screen
             if (flag1 == true) {
                 //TODO close the original screen
 

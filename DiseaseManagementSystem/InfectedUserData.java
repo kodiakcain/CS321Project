@@ -2,6 +2,8 @@ package DiseaseManagementSystem;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class InfectedUserData {
     String date = "";
@@ -302,11 +304,27 @@ public class InfectedUserData {
     /**
      * Calculates a unique form ID.
      * @return Returns unique form ID for the form.
+     * @throws NoSuchAlgorithmException
      */
-    public int calculateFormNumber() {
-        int formNumber = 0;
+    public void calculateFormNumber() throws NoSuchAlgorithmException {
 
-        return formNumber;
+        String hashString = this.getEmail();
+
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+
+        // compute the hash of the input string
+        byte[] hash = md.digest(hashString.getBytes());
+
+        // convert the hash to a hexadecimal string
+        StringBuilder hexString = new StringBuilder();
+        for (byte b : hash) {
+        hexString.append(String.format("%02x", b));
+        }
+
+        String newEmail = hexString.toString();
+        
+
+        this.email = newEmail;
     }
 
     /**
