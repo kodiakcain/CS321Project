@@ -2,7 +2,7 @@ package DiseaseManagementSystem;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
-
+import java.util.concurrent.TimeUnit;
 import DiseaseManagementSystem.*;
 
 class DataEntryGUI extends JFrame implements ActionListener {
@@ -33,9 +33,12 @@ class DataEntryGUI extends JFrame implements ActionListener {
     //boolean for first submission
     static boolean firstSubmission = false;
 
+    static boolean flag1 = false;
+
     // Main class
     public static void main(String[] args) {
 
+        //load the initial data screen
         if (firstSubmission == false) {
             DataEntryGUI.loadDataScreen();
         }
@@ -91,6 +94,28 @@ class DataEntryGUI extends JFrame implements ActionListener {
             f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             f.setExtendedState(JFrame.MAXIMIZED_BOTH);
             f.setVisible(true);
+
+            //add delay for loading screen
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                } catch (InterruptedException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+
+            flag1 = true;
+
+            ApprovalGUI approval = new ApprovalGUI();
+
+            if (flag1 == true) {
+                //TODO close the original screen
+
+
+                f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                f.setVisible(false);
+
+                ApprovalGUI.loadApprovalScreen();
+            }
         } 
     }
     }
@@ -144,7 +169,7 @@ class DataEntryGUI extends JFrame implements ActionListener {
 
         if (firstSubmission == false) {
             //Make the JFrame
-            f = new JFrame("Disease Management System");
+            f = new JFrame("Disease Management System - Enter Data");
 
             //Labels for text
             title = new JLabel("Disease Management System");
