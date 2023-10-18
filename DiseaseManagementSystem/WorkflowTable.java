@@ -21,14 +21,27 @@ public class WorkflowTable {
      */
     private LinkedList<Integer> approveIDQueue;
 
+    /**
+     * Helper method that constructs the Workflow Table with its lists of
+     *     IDs for all forms to be checked for review and approval.
+     */
     private WorkflowTable() {
         this.reviewIDQueue = new LinkedList<Integer>();
         this.approveIDQueue = new LinkedList<Integer>();
     }
 
-    public WorkflowTable createWorkflowTable() {
-        return WorkflowTable();
-    }    
+    /**
+     * Creates the Workflow Table with its lists of IDs for all forms to be
+     *     checked for review and approval.
+     * 
+     * @return the Workflow Table withs its lists of IDs for all forms to be
+     *     checked for review and approval.
+     */
+    public static WorkflowTable createWorkflowTable() {
+        WorkflowTable newTable = new WorkflowTable();   
+        return newTable;
+    }
 
+    
 
 }
