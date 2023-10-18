@@ -42,10 +42,10 @@ class DataEntryGUI extends JFrame implements ActionListener {
     static boolean flag1 = false;
 
     //workflow table for approvalQueue
-    static Queue<String> approvalQueue = new LinkedList<>();
+    static Queue<String> approvalQueue = new LinkedList<String>();
 
     //workflow table for reviewQueue
-    static Queue<String> reviewQueue = new LinkedList<>();
+    static Queue<String> reviewQueue = new LinkedList<String>();
     public static void main(String[] args) {
 
         //load the initial data screen
