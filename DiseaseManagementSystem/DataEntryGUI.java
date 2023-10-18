@@ -38,8 +38,11 @@ class DataEntryGUI extends JFrame implements ActionListener {
     //boolean for first submission
     static boolean firstSubmission = false;
 
-    //flag for completion of data entry screen and ready for approval screen
+    //flag for completion of data entry screen and ready for review screen
     static boolean flag1 = false;
+
+    //flag for completion of review screen and ready for approval screen
+    static boolean flag2 = false;
 
     //workflow table for approvalQueue
     static Queue<String> approvalQueue = new LinkedList<String>();
@@ -108,14 +111,39 @@ class DataEntryGUI extends JFrame implements ActionListener {
                 e1.printStackTrace();
             }
 
-            //add the ID hash to the approval queue
-            approvalQueue.add(ImmigrantDataForm.getEmail());
+            //add the ID hash to the review queue
+            reviewQueue.add(ImmigrantDataForm.getEmail());
+
+            //new review gui object
+            ReviewGUI review = new ReviewGUI();
+
+            if (flag1 == true) {
+
+                f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                f.setVisible(false);
+
+                ReviewGUI.loadReviewScreen(name, email, birthdate, children, diseaseData);
+            }
+
+            //review screen complete flag is false
+            flag2 = false;
+
+            /*
+             * 
+             * 
+             * 
+             * //FIXME REVIEW CODE ADDED HERE, once complete set flag2 to true, make close method for the screen
+             * 
+             * 
+             * 
+             * 
+             */
 
             //new approval gui object
             ApprovalGUI approval = new ApprovalGUI();
 
-            //once flag is true, close the data entry screen and load the approval screen
-            if (flag1 == true) {
+            //once flag is true, close the review screen and load the approval screen
+            if (flag2 == true) {
                 //TODO close the original screen
 
 
