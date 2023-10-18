@@ -26,7 +26,7 @@ class DataEntryGUI extends JFrame implements ActionListener {
     // Labels to display text
     static JLabel l1, l2, l3, l4, l5, title;
 
-    // Data variables
+    // Data variables, all data from textfields stored here
     static String name, email, birthdate, children, diseaseData;
 
     //amount of times submitted
@@ -100,8 +100,6 @@ class DataEntryGUI extends JFrame implements ActionListener {
             //set the flag to true
             flag1 = true;
 
-            System.out.println("BEFORE HASH: " + ImmigrantDataForm.getEmail());
-
             //calculate the form number based on the SHA-256 hash of the email, and replace the email
             try {
                 ImmigrantDataForm.calculateFormNumber();
@@ -110,7 +108,9 @@ class DataEntryGUI extends JFrame implements ActionListener {
                 e1.printStackTrace();
             }
 
-            System.out.println("HASH: " + ImmigrantDataForm.getEmail());
+            //add the ID hash to the approval queue
+            approvalQueue.add(ImmigrantDataForm.getEmail());
+
             //new approval gui object
             ApprovalGUI approval = new ApprovalGUI();
 
@@ -122,7 +122,7 @@ class DataEntryGUI extends JFrame implements ActionListener {
                 f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 f.setVisible(false);
 
-                ApprovalGUI.loadApprovalScreen();
+                ApprovalGUI.loadApprovalScreen(name, email, birthdate, children, diseaseData);
             }
         } 
     }
