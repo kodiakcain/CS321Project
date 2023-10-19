@@ -10,7 +10,7 @@ import DiseaseManagementSystem.InfectedUserData;
 public class InfectedUserDataTest {
     
     /**
-    *Trying to enter data with 0 characters.
+    * Trying to enter data with 0 characters.
      */
     @Test
     public void lessDataTest() {
