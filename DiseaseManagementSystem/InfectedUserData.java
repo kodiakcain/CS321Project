@@ -228,7 +228,6 @@ public class InfectedUserData {
     /**
      * Calculates a unique form ID.
      * @return Returns unique form ID for the form.
-     * @throws NoSuchAlgorithmException
      */
     public void calculateformID() {
 
