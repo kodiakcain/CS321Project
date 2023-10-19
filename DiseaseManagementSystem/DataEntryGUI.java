@@ -105,7 +105,7 @@ class DataEntryGUI extends JFrame implements ActionListener {
 
             //calculate the form number based on the SHA-256 hash of the email, and replace the email
             try {
-                ImmigrantDataForm.calculateFormNumber();
+                ImmigrantDataForm.calculateformID();
             } catch (NoSuchAlgorithmException e1) {
                 // TODO Auto-generated catch block
                 e1.printStackTrace();

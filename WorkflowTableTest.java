@@ -19,11 +19,18 @@ public class WorkflowTableTest {
         boolean expected = true;
 
         assertEquals(expected, actual);
+
     }
     
     @Test
     public void test1GetNextReviewID() {
 
+        WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
+        workflowTable.addReviewID(1);
+        int actual = workflowTable.getNextReviewID();
+        int expected = 1;
+
+        assertEquals(expected, actual);
     }
 
     @Test
