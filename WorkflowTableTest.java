@@ -1,53 +1,50 @@
-
 import static org.junit.Assert.*;
 import org.junit.Test;
 
 import DiseaseManagementSystem.WorkflowTable;
 
 /**
- * Tester for the WorkflowTable class
+ * Tester for the WorkflowTable class.
  */
 public class WorkflowTableTest {
-
-    /* AddReviewID() Test Section */
+    
+    /* ==================== addReviewID() Test Section ==================== */
 
     /**
-     * Tests if adding a form ID to the review queue is successful.
+     * Tests if adding a form ID to the reviewIDQueue is successful.
      */
     @Test
-    public void test1AddReviewID() {
+    public void addReviewIDReturnsTrue() {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
         
         boolean actual = workflowTable.addReviewID(1);
         boolean expected = true;
 
         assertEquals(expected, actual);
-
     }
 
     /**
-     * Tests if adding a form ID to the review queue is not successful.
-     * This would occur if the queue was not initialized properly.
+     * Tests if adding a form ID to the reviewIDQueue is not successful.
+     *     This would occur if the queue was not initialized properly.
      */
     @Test
-    public void test2AddReviewID() {
+    public void addReviewIDReturnsFalse() {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
         
         boolean actual = workflowTable.addReviewID(1);
         boolean expected = false;
 
         assertEquals(expected, actual);
-
     }
     
-    /* getNextReviewID() Test Section */
+    /* ================== getNextReviewID() Test Section ================== */
 
     /**
-     * Tests that getting the next review ID from the review queue is successful.
+     * Tests that getting the next review ID from the reviewIDQueue is
+     *     successful.
      */
     @Test
-    public void test1GetNextReviewID() {
-
+    public void getNextReviewIDReturnsFormID() {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
         workflowTable.addReviewID(1);
         int actual = workflowTable.getNextReviewID();
@@ -57,42 +54,40 @@ public class WorkflowTableTest {
     }
 
     /**
-     * Tests that getNextReviewID() fails (the reviewQueue was not initialized) and produces -1.
+     * Tests that getNextReviewID() fails (the reviewIDQueue was not
+     *     initialized) and produces -1.
      */
     @Test
-    public void test2GetNextReviewID() {
-
+    public void getNextReviewIDReturnsNegativeOne() {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
 
         int actual = workflowTable.getNextReviewID();
         int expected = -1;
 
         assertEquals(expected, actual);
-
     }
 
     /**
-     * Tests that getNextReviewID() fails (the reviewQueue was empty) and produces 0.
+     * Tests that getNextReviewID() fails (the reviewIDQueue was empty) and
+     *     produces 0.
      */
     @Test
-    public void test3GetNextReviewID() {
-
+    public void getNextReviewIDReturnsZero() {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
 
         int actual = workflowTable.getNextReviewID();
         int expected = 0;
 
         assertEquals(expected, actual);
-
     }
 
-    /* addApproveID() Test Section */
+    /* ==================== addApproveID() Test Section ==================== */
 
      /**
      * Tests if adding a form ID to the approve queue is successful.
      */
     @Test
-    public void test1AddApproveID() {
+    public void addApproveIDReturnsTrue() {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
         
         boolean actual = workflowTable.addApproveID(0);
@@ -103,10 +98,10 @@ public class WorkflowTableTest {
 
     /**
      * Tests if adding a form ID to the approve queue is not successful.
-     * This would occur if the queue was not initialized properly.
+     *     This would occur if the queue was not initialized properly.
      */
     @Test
-    public void test2AddApproveID() {
+    public void addApproveIDReturnsFalse() {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
         
         boolean actual = workflowTable.addApproveID(0);
@@ -115,13 +110,14 @@ public class WorkflowTableTest {
         assertEquals(expected, actual);
     }
 
-    /* getNextApproveID() Test Section */
+    /* ================= getNextApproveID() Test Section ================= */
 
     /**
-     * Tests that getting the next approve ID from the approve queue is successful.
+     * Tests that getting the next approve ID from the approve queue is
+     *     successful.
      */
     @Test
-    public void test1GetNextApproveID() {
+    public void getNextApproveIDReturnsFormID() {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
         workflowTable.addApproveID(1);
         int actual = workflowTable.getNextReviewID();
@@ -131,32 +127,30 @@ public class WorkflowTableTest {
     }
 
     /**
-     * Tests that getNextApprovalID() fails (the approveQueue was not initialized) and produces -1.
+     * Tests that getNextApprovalID() fails (the approveIDQueue was not
+     *      initialized) and produces -1.
      */
     @Test
-    public void test2GetNextApproveID() {
-
+    public void getNextApproveIDReturnsNegativeOne() {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
         
         int actual = workflowTable.getNextApproveID();
         int expected = -1;
 
         assertEquals(expected, actual);
-
     }
 
     /**
-     * Tests that getNextApproveID() fails (the approveQueue was empty) and produces 0.
+     * Tests that getNextApproveID() fails (the approveIDQueue was empty) and
+     *     produces 0.
      */
     @Test
-    public void test3GetNextApproveID() {
-
+    public void getNextApproveIDReturnsZero() {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
 
         int actual = workflowTable.getNextApproveID();
         int expected = 0;
 
         assertEquals(expected, actual);
-
     }
 }
