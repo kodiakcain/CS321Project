@@ -1,6 +1,0 @@
-package DiseaseManagementSystem;
-
-
-class DataEntryGUI  {
-    
-}
