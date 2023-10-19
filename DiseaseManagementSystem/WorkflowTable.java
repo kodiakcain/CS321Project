@@ -43,9 +43,41 @@ public class WorkflowTable {
     }
 
     /**
-     * Adds a form via its formID to the reviewIDQueue
+     * TODO:
+     * 
+     * @param formID
+     * @return
      */
-    public 
-    
+    public boolean addReviewID(int formID) {
+        return false;
+    }
+
+    /**
+     * TODO:
+     * 
+     * @return
+     */
+    public int getNextReviewID() {
+        return -1;
+    }
+
+    /**
+     * TODO:
+     * 
+     * @param formID
+     * @return
+     */
+    public boolean addApproveID(int formID) {
+        return false;
+    }
+
+    /**
+     * TODO:
+     * 
+     * @return
+     */
+    public int getNextApproveID() {
+        return -1;
+    }
 
 }
