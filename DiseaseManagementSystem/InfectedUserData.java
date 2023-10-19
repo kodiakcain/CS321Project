@@ -1,16 +1,50 @@
 package DiseaseManagementSystem;
 
 public class InfectedUserData {
+
+    /**
+     * Date of form creation.
+     */
     String date = "";
+
+    /**
+     * Unique formID.
+     */
     int formID = 0;
+
+    /**
+     * Status of the form.
+     */
     String formStatus = "";
+
+    /**
+     * Data within the form.
+     */
     String data = "";
+
+    /**
+     * Email user provided.
+     */
     String email = "";
+
+    /**
+     * Birthdate user enters.
+     */
     String birthdate = "";
+
+    /**
+     * Immigrant name.
+     */
     String name = "";
+
+    /**
+     * Number of children user has.
+     */
     int numChildren = 0;
 
-    // 0 is false, 1 is true
+    /**
+     * Boolean to show if the immigrant is a parent or guardian.
+     */
     boolean isGuardian = false;
 
     /**
