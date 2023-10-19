@@ -7,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class InfectedUserData {
     String date = "";
-    int formID = 0;
+    int formNumber = 0;
     String formStatus = "";
     String data = "";
     String email = "";
@@ -323,8 +323,8 @@ public class InfectedUserData {
 
         // String newEmail = hexString.toString();
         
-        String newFormID = hexString.toString();
-        this.formID = Integer.parseInt(newFormID, 16);
+        String newFormNumber = hexString.toString();
+        this.formNumber = Integer.parseInt(newFormNumber, 16);
 
         // this.email = newEmail;
     }
