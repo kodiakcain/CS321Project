@@ -7,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class InfectedUserData {
     String date = "";
-    int formNumber = 0;
+    int formID = 0;
     String formStatus = "";
     String data = "";
     String email = "";
@@ -129,8 +129,8 @@ public class InfectedUserData {
      * Setter for form number.
      * @param number Form number.
      */
-    public void setFormNumber(int number) {
-        this.formNumber = number;
+    public void setformID(int number) {
+        this.formID = number;
     }
 
     /**
@@ -306,7 +306,7 @@ public class InfectedUserData {
      * @return Returns unique form ID for the form.
      * @throws NoSuchAlgorithmException
      */
-    public void calculateFormNumber() throws NoSuchAlgorithmException {
+    public void calculateformID() throws NoSuchAlgorithmException {
 
         String hashString = this.getEmail();
 
@@ -323,8 +323,8 @@ public class InfectedUserData {
 
         // String newEmail = hexString.toString();
         
-        String newFormNumber = hexString.toString();
-        this.formNumber = Integer.parseInt(newFormNumber, 16);
+        String newformID = hexString.toString();
+        this.formID = Integer.parseInt(newformID, 16);
 
         // this.email = newEmail;
     }
