@@ -1,5 +1,8 @@
 package DiseaseManagementSystem;
 
+/**
+ * This is the common business object, it is a form with all infected user data from the immigrant.
+ */
 public class InfectedUserData {
 
     /**
