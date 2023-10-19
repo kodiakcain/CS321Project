@@ -1,10 +1,5 @@
 package DiseaseManagementSystem;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-
 public class InfectedUserData {
     String date = "";
     int formID = 0;
@@ -154,14 +149,6 @@ public class InfectedUserData {
      */
     public void setDateToCurrent() {
 
-        LocalDate currentDate = LocalDate.now();
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-
-        // Format the current date as a string
-        String formattedDate = currentDate.format(formatter);
-
-        this.date = formattedDate;
     }
 
     /**
@@ -195,17 +182,7 @@ public class InfectedUserData {
      */
     public int validateInfectiousData(String data) {
 
-        if (data == null) {
-            return 0;
-        }
-
-        if (data.length() > 321) {
-            return 0;
-        } else if (data.length() <= 0) {
-            return 0;
-        } else {
-            return 1;
-        }
+        return 0;
     }
 
     /**
@@ -215,17 +192,7 @@ public class InfectedUserData {
      */
     public int validateEmail(String email) {
 
-        if (email == null) {
-            return 0;
-        }
-
-        if (email.length() < 5) {
-            return 0;
-        } else if (email.length() > 60) {
-            return 0;
-        } else {
-            return 1;
-        }
+        return 0;
     }
 
     /**
@@ -235,23 +202,7 @@ public class InfectedUserData {
      */
     public int validateBirthdate(String birthdate) {
 
-        if (birthdate == null) {
-            return 0;
-        }
-
-        char[] birthdateArray = birthdate.toCharArray();
-
-        for (int i = 0; i < birthdateArray.length; i++) {
-            if (Character.isLetter(birthdateArray[i])) {
-                return 0;
-            }
-        }
-
-        if (birthdate.length() != 10) {
-            return 0;
-        } else {
-            return 1;
-        }
+        return 0;
     }
 
     /**
@@ -261,16 +212,7 @@ public class InfectedUserData {
      */
     public int validateNumChild(int numChild) {
 
-        if (String.valueOf(numChild) == null) {
-            return 0;
-        }
-        if (numChild < 0) {
-            return 0;
-        } else if (numChild > 100) {
-            return 0;
-        } else {
-            return 1;
-        }
+        return 0;
     }
 
     /**
@@ -280,25 +222,7 @@ public class InfectedUserData {
      */
     public int validateName(String name) {
 
-        if (name == null) {
-            return 0;
-        }
-        
-        boolean containsNumber = name.matches(".*\\d.*");
-
-        boolean containsSpecialCharacter = name.matches(".*[^a-zA-Z0-9].*");
-
-        if (containsNumber == true || containsSpecialCharacter == true) {
-            return 0;
-        }
-
-        if (name.length() <= 0) {
-            return 0;
-        } else if (name.length() > 60) {
-            return 0;
-        } else {
-            return 1;
-        }
+        return 0;
     }
 
     /**
@@ -306,27 +230,8 @@ public class InfectedUserData {
      * @return Returns unique form ID for the form.
      * @throws NoSuchAlgorithmException
      */
-    public void calculateformID() throws NoSuchAlgorithmException {
+    public void calculateformID() {
 
-        String hashString = this.getEmail();
-
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
-
-        // compute the hash of the input string
-        byte[] hash = md.digest(hashString.getBytes());
-
-        // convert the hash to a hexadecimal string
-        StringBuilder hexString = new StringBuilder();
-        for (byte b : hash) {
-        hexString.append(String.format("%02x", b));
-        }
-
-        // String newEmail = hexString.toString();
-        
-        String newformID = hexString.toString();
-        this.formID = Integer.parseInt(newformID, 16);
-
-        // this.email = newEmail;
     }
 
     /**
