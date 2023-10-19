@@ -9,7 +9,7 @@ import DiseaseManagementSystem.WorkflowTable;
  */
 public class WorkflowTableTest {
     /**
-     * Checks for 
+     * Tests if adding a form ID to the review queue is successful.
      */
     @Test
     public void test1AddReviewID() {
@@ -22,6 +22,9 @@ public class WorkflowTableTest {
 
     }
     
+    /**
+     * Tests that getting the next review ID from the review queue is successful.
+     */
     @Test
     public void test1GetNextReviewID() {
 
@@ -33,6 +36,24 @@ public class WorkflowTableTest {
         assertEquals(expected, actual);
     }
 
+    /**
+     * Tests that getNextReviewID() fails and produces -1.
+     */
+    @Test
+    public void test2GetNextReviewID() {
+
+        WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
+        
+        int actual = workflowTable.getNextReviewID();
+        int expected = -1;
+
+        assertEquals(expected, actual);
+
+    }
+
+     /**
+     * Tests if adding a form ID to the approve queue is successful.
+     */
     @Test
     public void test1AddApproveID() {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
@@ -43,6 +64,24 @@ public class WorkflowTableTest {
         assertEquals(expected, actual);
     }
 
+    /**
+     * Tests that getNextApprovalID() fails and produces -1.
+     */
+    @Test
+    public void test2GetNextApprovalID() {
+
+        WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
+        
+        int actual = workflowTable.getNextApproveID();
+        int expected = -1;
+
+        assertEquals(expected, actual);
+
+    }
+
+    /**
+     * Tests that getting the next approve ID from the approve queue is successful.
+     */
     @Test
     public void test1GetNextApproveID() {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
