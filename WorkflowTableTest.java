@@ -5,6 +5,9 @@ import DiseaseManagementSystem.WorkflowTable;
 
 /**
  * Tester for the WorkflowTable class.
+ *
+ * @author John Fulton
+ * @author Youssef Melk
  */
 public class WorkflowTableTest {
     
