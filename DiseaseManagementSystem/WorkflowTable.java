@@ -43,38 +43,48 @@ public class WorkflowTable {
     }
 
     /**
-     * TODO:
+     * Adds the formID of an applicant's InfectedUserData to the end of the
+     *     reviewIDQueue.
      * 
-     * @param formID
-     * @return
+     * @param formID for the formID of the applicant's InfectedUserData.
+     * @return true if the formID was successfully added to the end of the
+     *     reviewIDQueue, otherwise return false.
      */
     public boolean addReviewID(int formID) {
         return false;
     }
 
     /**
-     * TODO:
+     * Returns the formID of an applicant's InfectedUserData to be reviewed
+     *     if it exitsts in the reviewIDQueue.
      * 
-     * @return
+     * @return the formID of the applicant's InfectedUserData if it was found
+     *     in the reviewIDQueue; return -1 if the reviewIDQueue was not
+     *     initialized; return 0 if the reviewIDQueue was empty.
      */
     public int getNextReviewID() {
         return -1;
     }
 
     /**
-     * TODO:
+     * Adds the formID of an applicant's InfectedUserData to the end of the
+     *     approveIDQueue.
      * 
-     * @param formID
-     * @return
+     * @param formID for the formID of the applicant's InfectedUserData.
+     * @return true if the formID was successfully added to the end of the
+     *     approveIDQueue, otherwise return false.
      */
     public boolean addApproveID(int formID) {
         return false;
     }
 
     /**
-     * TODO:
+     * Returns the formID of an applicant's InfectedUserData to be approved
+     *     if it exitsts in the approveIDQueue.
      * 
-     * @return
+     * @return the formID of the applicant's InfectedUserData if it was found
+     *     in the approveIDQueue; return -1 if the approveIDQueue was not
+     *     initialized; return 0 if the approveIDQueue was empty.
      */
     public int getNextApproveID() {
         return -1;
