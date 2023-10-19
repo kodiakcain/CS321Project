@@ -6,6 +6,8 @@ import DiseaseManagementSystem.InfectedUserData;
 
 /**
  * Tester class for InfectedUserData object.
+ *
+ * @author Cain Clifton.
  */
 public class InfectedUserDataTest {
     
