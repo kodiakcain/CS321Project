@@ -3,6 +3,10 @@ import org.junit.Test;
 
 import DiseaseManagementSystem.InfectedUserData;
 
+
+/**
+ * Tester class for InfectedUserData object.
+ */
 public class InfectedUserDataTest {
     
     /**
