@@ -35,12 +35,22 @@ public class WorkflowTableTest {
 
     @Test
     public void test1AddApproveID() {
+        WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
+        
+        boolean actual = workflowTable.addApproveID(0);
+        boolean expected = true;
 
+        assertEquals(expected, actual);
     }
 
     @Test
     public void test1GetNextApproveID() {
+        WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
+        workflowTable.addApproveID(1);
+        int actual = workflowTable.getNextReviewID();
+        int expected = 1;
 
+        assertEquals(expected, actual);
     }
 
 }
