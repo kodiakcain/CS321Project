@@ -13,21 +13,21 @@ public class WorkflowTable {
      * The list of IDs for all Infected User Data forms that are waiting to be
      *     reviewed.
      */
-    private LinkedList<Integer> reviewIDQueue;
+    private LinkedList<InfectedUserData> reviewIDQueue;
 
     /**
      * The list of IDs for all Infected User Data forms that are waiting to be
      *     approved.
      */
-    private LinkedList<Integer> approveIDQueue;
+    private LinkedList<InfectedUserData> approveIDQueue;
 
     /**
      * Helper method that constructs the Workflow Table with its lists of
      *     IDs for all forms to be checked for review and approval.
      */
     private WorkflowTable() {
-        this.reviewIDQueue = new LinkedList<Integer>();
-        this.approveIDQueue = new LinkedList<Integer>();
+        this.reviewIDQueue = new LinkedList<>();
+        this.approveIDQueue = new LinkedList<>();
     }
 
     /**
@@ -38,8 +38,7 @@ public class WorkflowTable {
      *     checked for review and approval.
      */
     public static WorkflowTable createWorkflowTable() {
-        WorkflowTable newTable = new WorkflowTable();   
-        return newTable;
+        return new WorkflowTable();   
     }
 
     /**
@@ -50,7 +49,7 @@ public class WorkflowTable {
      * @return true if the formID was successfully added to the end of the
      *     reviewIDQueue, otherwise return false.
      */
-    public boolean addReviewID(int formID) {
+    public boolean addReviewForm(InfectedUserData form) {
         return false;
     }
 
@@ -62,8 +61,8 @@ public class WorkflowTable {
      *     in the reviewIDQueue; return -1 if the reviewIDQueue was not
      *     initialized; return 0 if the reviewIDQueue was empty.
      */
-    public int getNextReviewID() {
-        return -1;
+    public InfectedUserData getNextReviewID() {
+        return null;
     }
 
     /**
@@ -74,7 +73,7 @@ public class WorkflowTable {
      * @return true if the formID was successfully added to the end of the
      *     approveIDQueue, otherwise return false.
      */
-    public boolean addApproveID(int formID) {
+    public boolean addApproveForm(InfectedUserData form) {
         return false;
     }
 
@@ -86,8 +85,8 @@ public class WorkflowTable {
      *     in the approveIDQueue; return -1 if the approveIDQueue was not
      *     initialized; return 0 if the approveIDQueue was empty.
      */
-    public int getNextApproveID() {
-        return -1;
+    public InfectedUserData getNextApproveForm() {
+        return null;
     }
 
 }
