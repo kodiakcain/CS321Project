@@ -50,6 +50,10 @@ public class WorkflowTable {
      *     reviewIDQueue, otherwise return false.
      */
     public boolean addReviewForm(InfectedUserData form) {
+
+        if (reviewQueue.add(form) == true) {
+            
+        }
         return false;
     }
 
@@ -62,7 +66,8 @@ public class WorkflowTable {
      *     initialized; return 0 if the reviewIDQueue was empty.
      */
     public InfectedUserData getNextReviewForm() {
-        return null;
+
+        return reviewQueue.peek();
     }
 
     /**
@@ -74,6 +79,7 @@ public class WorkflowTable {
      *     approvalIDQueue, otherwise return false.
      */
     public boolean addApprovalForm(InfectedUserData form) {
+        approvalQueue.add(form);
         return false;
     }
 
@@ -86,7 +92,9 @@ public class WorkflowTable {
      *     initialized; return 0 if the approvalIDQueue was empty.
      */
     public InfectedUserData getNextApprovalForm() {
-        return null;
+
+        return approvalQueue.peek();
+
     }
 
 }
