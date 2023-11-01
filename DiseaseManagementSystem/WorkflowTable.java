@@ -25,7 +25,7 @@ public class WorkflowTable {
      * Helper method that constructs the Workflow Table with its lists of
      *     IDs for all forms to be checked for review and approval.
      */
-    private WorkflowTable() {
+    WorkflowTable() {
         this.reviewQueue = new LinkedList<>();
         this.approvalQueue = new LinkedList<>();
     }

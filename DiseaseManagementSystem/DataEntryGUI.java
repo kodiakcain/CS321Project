@@ -128,6 +128,11 @@ class DataEntryGUI extends JFrame implements ActionListener {
             //review screen complete flag is false
             flag2 = false;
 
+            WorkflowTable workflowObject = new WorkflowTable();
+
+            workflowObject.addReviewForm(ImmigrantDataForm);
+
+
             /*
              * 
              * 
