@@ -1,6 +1,7 @@
 import static org.junit.Assert.*;
 import org.junit.Test;
 
+import DiseaseManagementSystem.InfectedUserData;
 import DiseaseManagementSystem.WorkflowTable;
 
 /**
@@ -17,10 +18,11 @@ public class WorkflowTableTest {
      * Tests if adding a form ID to the reviewIDQueue is successful.
      */
     @Test
-    public void addReviewIDReturnsTrue() {
+    public void addReviewFormReturnsTrue() {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
         
-        boolean actual = workflowTable.addReviewID(1);
+        InfectedUserData newImmigrant = new InfectedUserData(null, null, null, null, 0, false, null);
+        boolean actual = workflowTable.addReviewForm(newImmigrant);
         boolean expected = true;
 
         assertEquals(expected, actual);
@@ -31,10 +33,11 @@ public class WorkflowTableTest {
      *     This would occur if the queue was not initialized properly.
      */
     @Test
-    public void addReviewIDReturnsFalse() {
+    public void addReviewFormReturnsFalse() {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
         
-        boolean actual = workflowTable.addReviewID(1);
+        InfectedUserData newImmigrant = null;
+        boolean actual = workflowTable.addReviewForm(newImmigrant);
         boolean expected = false;
 
         assertEquals(expected, actual);
@@ -47,25 +50,27 @@ public class WorkflowTableTest {
      *     successful.
      */
     @Test
-    public void getNextReviewIDReturnsFormID() {
+    public void getNextReviewFormReturnsForm() {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
-        workflowTable.addReviewID(1);
-        int actual = workflowTable.getNextReviewID();
-        int expected = 1;
+        InfectedUserData newImmigrant = new InfectedUserData(null, null, null, null, 0, false, null);
+        workflowTable.addReviewForm(newImmigrant);
+
+        InfectedUserData actual = workflowTable.getNextReviewForm();
+        InfectedUserData expected = newImmigrant;
 
         assertEquals(expected, actual);
     }
 
     /**
      * Tests that getNextReviewID() fails (the reviewIDQueue was not
-     *     initialized) and produces -1.
+     *     initialized) and produces null.
      */
     @Test
     public void getNextReviewIDReturnsNegativeOne() {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
 
-        int actual = workflowTable.getNextReviewID();
-        int expected = -1;
+        InfectedUserData actual = workflowTable.getNextReviewForm();
+        InfectedUserData expected = null;
 
         assertEquals(expected, actual);
     }
@@ -78,8 +83,8 @@ public class WorkflowTableTest {
     public void getNextReviewIDReturnsZero() {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
 
-        int actual = workflowTable.getNextReviewID();
-        int expected = 0;
+        InfectedUserData actual = workflowTable.getNextReviewID();
+        InfectedUserData expected = 0;
 
         assertEquals(expected, actual);
     }
@@ -123,8 +128,8 @@ public class WorkflowTableTest {
     public void getNextApproveIDReturnsFormID() {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
         workflowTable.addApproveID(1);
-        int actual = workflowTable.getNextReviewID();
-        int expected = 1;
+        InfectedUserData actual = workflowTable.getNextReviewID();
+        InfectedUserData expected = 1;
 
         assertEquals(expected, actual);
     }
@@ -137,8 +142,8 @@ public class WorkflowTableTest {
     public void getNextApproveIDReturnsNegativeOne() {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
         
-        int actual = workflowTable.getNextApproveID();
-        int expected = -1;
+        InfectedUserData actual = workflowTable.getNextApproveID();
+        InfectedUserData expected = -1;
 
         assertEquals(expected, actual);
     }
@@ -151,8 +156,8 @@ public class WorkflowTableTest {
     public void getNextApproveIDReturnsZero() {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
 
-        int actual = workflowTable.getNextApproveID();
-        int expected = 0;
+        InfectedUserData actual = workflowTable.getNextApproveID();
+        InfectedUserData expected = 0;
 
         assertEquals(expected, actual);
     }

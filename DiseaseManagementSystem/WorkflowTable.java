@@ -61,31 +61,31 @@ public class WorkflowTable {
      *     in the reviewIDQueue; return -1 if the reviewIDQueue was not
      *     initialized; return 0 if the reviewIDQueue was empty.
      */
-    public InfectedUserData getNextReviewID() {
+    public InfectedUserData getNextReviewForm() {
         return null;
     }
 
     /**
      * Adds the formID of an applicant's InfectedUserData to the end of the
-     *     approveIDQueue.
+     *     approvalIDQueue.
      * 
      * @param formID for the formID of the applicant's InfectedUserData.
      * @return true if the formID was successfully added to the end of the
-     *     approveIDQueue, otherwise return false.
+     *     approvalIDQueue, otherwise return false.
      */
-    public boolean addApproveForm(InfectedUserData form) {
+    public boolean addApprovalForm(InfectedUserData form) {
         return false;
     }
 
     /**
      * Returns the formID of an applicant's InfectedUserData to be approved
-     *     if it exitsts in the approveIDQueue.
+     *     if it exitsts in the approvalIDQueue.
      * 
      * @return the formID of the applicant's InfectedUserData if it was found
-     *     in the approveIDQueue; return -1 if the approveIDQueue was not
-     *     initialized; return 0 if the approveIDQueue was empty.
+     *     in the approvalIDQueue; return -1 if the approvalIDQueue was not
+     *     initialized; return 0 if the approvalIDQueue was empty.
      */
-    public InfectedUserData getNextApproveForm() {
+    public InfectedUserData getNextApprovalForm() {
         return null;
     }
 
