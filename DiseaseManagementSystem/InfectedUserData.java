@@ -286,7 +286,7 @@ public class InfectedUserData {
         
         boolean containsNumber = name.matches(".*\\d.*");
 
-        boolean containsSpecialCharacter = name.matches(".*[^a-zA-Z0-9].*");
+        boolean containsSpecialCharacter = name.matches(".*[^a-zA-Z0-9\\s].*");
 
         if (containsNumber == true || containsSpecialCharacter == true) {
             return 0;
