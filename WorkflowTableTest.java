@@ -66,7 +66,7 @@ public class WorkflowTableTest {
      *     initialized) and produces null.
      */
     @Test
-    public void getNextReviewIDReturnsNegativeOne() {
+    public void getNextReviewIDUninitializedQueue() {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
 
         InfectedUserData actual = workflowTable.getNextReviewForm();
@@ -80,11 +80,11 @@ public class WorkflowTableTest {
      *     produces 0.
      */
     @Test
-    public void getNextReviewIDReturnsZero() {
+    public void getNextReviewIDEmptyQueue() {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
 
-        InfectedUserData actual = workflowTable.getNextReviewID();
-        InfectedUserData expected = 0;
+        InfectedUserData actual = workflowTable.getNextReviewForm();
+        InfectedUserData expected = null;
 
         assertEquals(expected, actual);
     }
