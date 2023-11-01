@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "DataEntryGUI",
+            "request": "launch",
+            "mainClass": "DiseaseManagementSystem.DataEntryGUI",
+            "projectName": "CS321Project_d4d1137f"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"

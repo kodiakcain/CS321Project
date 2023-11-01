@@ -50,7 +50,12 @@ public class WorkflowTable {
      *     reviewIDQueue, otherwise return false.
      */
     public boolean addReviewForm(InfectedUserData form) {
-        return false;
+
+        if (reviewQueue.add(form) == true) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -62,7 +67,14 @@ public class WorkflowTable {
      *     initialized; return 0 if the reviewIDQueue was empty.
      */
     public InfectedUserData getNextReviewForm() {
-        return null;
+
+        InfectedUserData placeholder = new InfectedUserData(null, null, null, null, 0, false, null);
+
+        if (!reviewQueue.isEmpty()) {
+            return reviewQueue.peek();
+        } else {
+            return placeholder;
+        }
     }
 
     /**
@@ -74,7 +86,11 @@ public class WorkflowTable {
      *     approvalIDQueue, otherwise return false.
      */
     public boolean addApprovalForm(InfectedUserData form) {
-        return false;
+        if (approvalQueue.add(form) == true) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -86,7 +102,15 @@ public class WorkflowTable {
      *     initialized; return 0 if the approvalIDQueue was empty.
      */
     public InfectedUserData getNextApprovalForm() {
-        return null;
+
+        InfectedUserData placeholder = new InfectedUserData(null, null, null, null, 0, false, null);
+
+        if (!approvalQueue.isEmpty()) {
+            return approvalQueue.peek();
+        } else {
+            return placeholder;
+        }
+
     }
 
 }
