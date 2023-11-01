@@ -1,59 +1,25 @@
 package DiseaseManagementSystem;
 
-/**
- * This is the common business object, it is a form with all infected user data
- *      from the immigrant.
- */
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class InfectedUserData {
-
-    /**
-     * Date of form creation.
-     */
     String date = "";
-
-    /**
-     * Unique formID.
-     */
-    int formID = 0;
-
-    /**
-     * Status of the form.
-     */
+    int formNumber = 0;
     String formStatus = "";
-
-    /**
-     * Data within the form.
-     */
     String data = "";
-
-    /**
-     * Email user provided.
-     */
     String email = "";
-
-    /**
-     * Birthdate user enters.
-     */
     String birthdate = "";
-
-    /**
-     * Immigrant name.
-     */
     String name = "";
-
-    /**
-     * Number of children user has.
-     */
     int numChildren = 0;
 
-    /**
-     * Boolean to show if the immigrant is a parent or guardian.
-     */
+    // 0 is false, 1 is true
     boolean isGuardian = false;
 
     /**
      * Constructor for InfectedUserData object form.
-     * 
      * @param name Name of the immigrant.
      * @param data Infectious disease data.
      * @param email Email of the immigrant.
@@ -72,9 +38,9 @@ public class InfectedUserData {
         this.date = date;
     }
 
+    
     /** 
      * Get the data.
-     * 
      * @return Returns the data. 
      */
     public String getData() {
@@ -83,25 +49,24 @@ public class InfectedUserData {
 
     /** 
      * Get the name.
-     * 
      * @return Returns the name. 
      */
     public String getName() {
         return this.name;
     }
+
     
     /** 
      * Get the length of the data.
-     * 
      * @return Returns the length of the data.
      */
     public int getDataSize() {
         return this.data.length();
     }
+
     
     /** 
      * Get the email.
-     * 
      * @return Returns the email.
      */
     public String getEmail() {
@@ -110,7 +75,6 @@ public class InfectedUserData {
 
     /**
      * Get the length of the Email.
-     * 
      * @return Returns the length of the email.
      */
     public int getEmailLength() {
@@ -119,7 +83,6 @@ public class InfectedUserData {
 
     /**
      * Get the birthdate.
-     * 
      * @return Returns the birthdate.
      */
     public String getBirthdate() {
@@ -128,7 +91,6 @@ public class InfectedUserData {
 
     /**
      * Get length of birthdate.
-     * 
      * @return Returns length of the birthdate.
      */
     public int getBirthdateLength() {
@@ -137,7 +99,6 @@ public class InfectedUserData {
 
     /**
      * Get number of children.
-     * 
      * @return Returns number of children.
      */
     public int getNumChildren() {
@@ -146,7 +107,6 @@ public class InfectedUserData {
 
     /**
      * Get if user is a guardian.
-     * 
      * @return Returns if user is a guardian.
      */
     public boolean getIsGuardian() {
@@ -159,7 +119,6 @@ public class InfectedUserData {
 
     /**
      * Setter for email.
-     * 
      * @param email New email.
      */
     public void setEmail(String email) {
@@ -168,16 +127,14 @@ public class InfectedUserData {
 
     /**
      * Setter for form number.
-     * 
      * @param number Form number.
      */
-    public void setformID(int number) {
-        this.formID = number;
+    public void setFormNumber(int number) {
+        this.formNumber = number;
     }
 
     /**
      * Setter for the data.
-     * 
      * @param data New data.
      */
     public void setData(String data) {
@@ -186,7 +143,6 @@ public class InfectedUserData {
 
     /**
      * Setter for the name.
-     * 
      * @param name New name.
      */
     public void setName(String name) {
@@ -198,11 +154,18 @@ public class InfectedUserData {
      */
     public void setDateToCurrent() {
 
+        LocalDate currentDate = LocalDate.now();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+
+        // Format the current date as a string
+        String formattedDate = currentDate.format(formatter);
+
+        this.date = formattedDate;
     }
 
     /**
      * Setter for the birthdate.
-     * 
      * @param birthdate New birthdate.
      */
     public void setBirthdate(String birthdate) {
@@ -211,7 +174,6 @@ public class InfectedUserData {
 
     /**
      * Setter for number of children.
-     * 
      * @param numchildren New number of children.
      */
     public void setNumChildren(int numchildren) {
@@ -220,7 +182,6 @@ public class InfectedUserData {
 
     /**
      * Setter method to see if user is a guardian.
-     * 
      * @param isGuardian Says if user is a guardian or not.
      */
     public void setGuardian(boolean isGuardian) {
@@ -229,76 +190,155 @@ public class InfectedUserData {
 
     /**
      * Validates length of Infectious data.
-     * 
      * @param data Infectious data.
      * @return Returns 0 for invalid, 1 for valid. 
      */
     public int validateInfectiousData(String data) {
 
-        return 0;
+        if (data == null) {
+            return 0;
+        }
+
+        if (data.length() > 321) {
+            return 0;
+        } else if (data.length() <= 0) {
+            return 0;
+        } else {
+            return 1;
+        }
     }
 
     /**
      * Validates the email.
-     * 
      * @param email Email to be validated.
      * @return Return 0 for invalid, 1 for valid.
      */
     public int validateEmail(String email) {
-        return 0;
+
+        if (email == null) {
+            return 0;
+        }
+
+        if (email.length() < 5) {
+            return 0;
+        } else if (email.length() > 60) {
+            return 0;
+        } else {
+            return 1;
+        }
     }
 
     /**
-     * Validates the brithdate.
-     * 
+     * Validates the brithdate
      * @param birthdate Birthdate to be validated.
      * @return Return 0 for invalid, 1 for valid.
      */
     public int validateBirthdate(String birthdate) {
-        return 0;
+
+        if (birthdate == null) {
+            return 0;
+        }
+
+        char[] birthdateArray = birthdate.toCharArray();
+
+        for (int i = 0; i < birthdateArray.length; i++) {
+            if (Character.isLetter(birthdateArray[i])) {
+                return 0;
+            }
+        }
+
+        if (birthdate.length() != 10) {
+            return 0;
+        } else {
+            return 1;
+        }
     }
 
     /**
      * Validates the number of children. 
-     * 
      * @param numChild Number of children to be validated.
      * @return Return 0 for invalid, 1 for valid.
      */
     public int validateNumChild(int numChild) {
-        return 0;
+
+        if (String.valueOf(numChild) == null) {
+            return 0;
+        }
+        if (numChild < 0) {
+            return 0;
+        } else if (numChild > 100) {
+            return 0;
+        } else {
+            return 1;
+        }
     }
 
     /**
      * Validates the immigrant name.
-     * 
      * @param name Name of the immigrant to be validated.
      * @return Return 0 for invalid, 1 for valid.
      */
     public int validateName(String name) {
-        return 0;
+
+        if (name == null) {
+            return 0;
+        }
+        
+        boolean containsNumber = name.matches(".*\\d.*");
+
+        boolean containsSpecialCharacter = name.matches(".*[^a-zA-Z0-9].*");
+
+        if (containsNumber == true || containsSpecialCharacter == true) {
+            return 0;
+        }
+
+        if (name.length() <= 0) {
+            return 0;
+        } else if (name.length() > 60) {
+            return 0;
+        } else {
+            return 1;
+        }
     }
 
     /**
      * Calculates a unique form ID.
-     * 
      * @return Returns unique form ID for the form.
+     * @throws NoSuchAlgorithmException
      */
-    public void calculateformID() {
-        return;
+    public void calculateFormNumber() throws NoSuchAlgorithmException {
+
+        String hashString = this.getEmail();
+
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+
+        // compute the hash of the input string
+        byte[] hash = md.digest(hashString.getBytes());
+
+        // convert the hash to a hexadecimal string
+        StringBuilder hexString = new StringBuilder();
+        for (byte b : hash) {
+        hexString.append(String.format("%02x", b));
+        }
+
+        String newEmail = hexString.toString();
+        
+
+        this.email = newEmail;
     }
 
     /**
      * Stores all the data in the
      */
     public void storeAllData() {
-        return;
+
     }
 
     /**
      * Add the form ID and status of the form to the workflow table.
      */
     public void addEntry() {
-        return;
+
     }
 
 }
