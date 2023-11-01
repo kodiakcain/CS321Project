@@ -96,6 +96,17 @@ public class ReviewGUI extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // TODO: Implement action handling if needed
+        String command = e.getActionCommand();
+        if ("Submit for Approval".equals(command)) {
+            // Create a new instance of ApprovalGUI
+            ApprovalGUI approval = new ApprovalGUI();
+            approval.loadApprovalScreen(
+                t1.getText(),
+                t2.getText(),
+                t3.getText(),
+                t4.getText(),
+                t5.getText()
+        );
     }
+}
 }
