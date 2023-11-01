@@ -8,26 +8,26 @@ import java.util.LinkedList;
  *     forms.
  */
 public class WorkflowTable {
-
+    
     /**
      * The list of IDs for all Infected User Data forms that are waiting to be
      *     reviewed.
      */
-    private LinkedList<InfectedUserData> reviewIDQueue;
+    private LinkedList<InfectedUserData> reviewQueue;
 
     /**
      * The list of IDs for all Infected User Data forms that are waiting to be
      *     approved.
      */
-    private LinkedList<InfectedUserData> approveIDQueue;
+    private LinkedList<InfectedUserData> approveQueue;
 
     /**
      * Helper method that constructs the Workflow Table with its lists of
      *     IDs for all forms to be checked for review and approval.
      */
     private WorkflowTable() {
-        this.reviewIDQueue = new LinkedList<>();
-        this.approveIDQueue = new LinkedList<>();
+        this.reviewQueue = new LinkedList<>();
+        this.approveQueue = new LinkedList<>();
     }
 
     /**
