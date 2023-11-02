@@ -132,8 +132,6 @@ class DataEntryGUI extends JFrame implements ActionListener {
 
             workflowObject.addReviewForm(ImmigrantDataForm);
 
-
-
             /*
              * 
              * 

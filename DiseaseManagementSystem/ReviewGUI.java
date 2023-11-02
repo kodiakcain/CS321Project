@@ -11,13 +11,15 @@ public class ReviewGUI extends JFrame implements ActionListener {
     static JLabel l1, l2, l3, l4, l5;
     // Add text fields
     static JTextField t1, t2, t3, t4, t5;
-    // JButton
-    static JButton b;
 
     public static void loadReviewScreen(String name, String email, String birthdate, String numChildren, String data) {
         f1 = new JFrame("Disease Management System - Review Data");
 
-        ApprovalGUI gui = new ApprovalGUI();
+        ReviewGUI gui = new ReviewGUI();
+
+        JButton b = new JButton("Submit for Approval");
+
+        b.addActionListener(gui);
 
         // Set the frame to visible
         f1.setVisible(true);
@@ -30,8 +32,6 @@ public class ReviewGUI extends JFrame implements ActionListener {
         l3 = new JLabel("Entered Birthdate: " + birthdate);
         l4 = new JLabel("Entered Number of Children: " + numChildren);
         l5 = new JLabel("Entered Disease Data: " + data);
-
-        b = new JButton("Submit for Approval");
 
         // Make the five text fields
         t1 = new JTextField(16);
@@ -97,7 +97,9 @@ public class ReviewGUI extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
-        if ("Submit for Approval".equals(command)) {
+        if (command.equals("Submit for")) {
+            f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                f1.setVisible(false);
             // Create a new instance of ApprovalGUI
             ApprovalGUI approval = new ApprovalGUI();
             approval.loadApprovalScreen(
