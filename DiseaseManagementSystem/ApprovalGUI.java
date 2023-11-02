@@ -16,7 +16,13 @@ public class ApprovalGUI extends JFrame implements ActionListener{
     
     static InfectedUserData immigrantDataForm;
 
+    static GridBagConstraints gbc;
+
+    static JPanel p;
+
     public static void loadApprovalScreen(InfectedUserData form) {
+        immigrantDataForm = form;
+        
         // New frame for Approving Agent
         f1 = new JFrame("Disease Management System - Approve Data");
         
@@ -43,9 +49,9 @@ public class ApprovalGUI extends JFrame implements ActionListener{
         l4 = new JLabel("Entered Number of Children: " + form.getNumChildren());
         l5 = new JLabel("Entered Disease Data: " + form.getData());
 
-        JPanel p = new JPanel(new GridBagLayout());
+        p = new JPanel(new GridBagLayout());
 
-        GridBagConstraints gbc = new GridBagConstraints();
+        gbc = new GridBagConstraints();
         gbc.insets.set(5, 5, 5, 5);
 
         // add title to top
@@ -89,23 +95,39 @@ public class ApprovalGUI extends JFrame implements ActionListener{
 
         if (command.equals("Send Approval Email")) {
             // Email-Sending logic
-            l6 =  new JLabel("Approval Email sent to Immigrant, Exiting System.");
-            l6.setText("Approval Email Sent, Exiting System");
+            l6 =  new JLabel("Approval Email sent to Immigrant, Exit System.");
+            l6.setText("Approval Email Sent, Exit System");
             
-            // GridBagConstraints gbc = new GridBagConstraints();
-            // JPanel p = new JPanel(new GridBagLayout());
-            // p.add(l6, gbc);
+            JButton closeButton  = new JButton("Exit System");
+            closeButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent event) {
+                    // Close window
+                    f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    f1.setVisible(false);
+                }
+            });
 
-            // Delay system execution before shutting down
-            // try {
-            //     TimeUnit.SECONDS.sleep(5);
-            // } catch (InterruptedException interruptException) {
-            //     Thread.currentThread().interrupt();
-            // }
+            gbc.anchor = GridBagConstraints.CENTER;
+            gbc.gridx--;
+            // Move downwards
+            gbc.gridy++;
+            p.add(l6, gbc);
+            gbc.gridy++;
+            p.add(closeButton, gbc);
 
+            // refresh the frame to show new label (tell layout manager of change)
+            f1.revalidate();
+            // ensure the change is displayed
+            f1.repaint();
+        }
+        else if (command.equals("Return for Review")) {
             // Close window
-            // f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            // f1.setVisible(false);
+            f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            f1.setVisible(false);
+            
+            ReviewGUI gui = new ReviewGUI();
+            gui.loadReviewScreen(immigrantDataForm);
         }
     }
 
