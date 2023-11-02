@@ -94,14 +94,85 @@ public class ReviewGUI extends JFrame implements ActionListener {
         f1.add(p);
     }
 
+    public static int validate(InfectedUserData form) {
+
+        //final number of valid parts
+        int finalNum = 0;
+
+        //add validation for name
+        if (form.validateName(form.name) == 1) {
+            finalNum++;
+        } else {
+            //add clear data form and show name error message
+        }
+
+        //add validation for disease data
+        if (form.validateInfectiousData(form.diseaseData) == 1) {
+            finalNum++;
+        } else {
+            //add clear data form and show data error message
+        }
+
+        //add validation for email
+        if (form.validateEmail(form.email) == 1) {
+            finalNum++;
+        } else {
+            //add clear data form and show email error message
+        }
+
+        //add validation for birthdate
+        if (form.validateBirthdate(form.birthdate) == 1) {
+            finalNum++;
+        } else {
+            //add clear data form and show birthdate error message
+        }
+
+        //add validation for number of children
+        if (form.validateNumChild(form.numChildren) == 1) {
+            finalNum++;
+        } else {
+            //add clear data form and show birthdate error message
+        }
+        
+        //return total valid
+        return finalNum;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
-        if (command.equals("Submit for")) {
+        if (command.equals("Submit for Approval")) {
             f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 f1.setVisible(false);
+
             // Create a new instance of ApprovalGUI
             ApprovalGUI approval = new ApprovalGUI();
+
+            //Validate any data that was entered by the review agent.
+            if (!(t1.getText().equals(""))) {
+                
+            } 
+            
+            if (!(t2.getText().equals(""))) {
+
+            }
+            
+            if (!(t3.getText().equals(""))) {
+
+            }
+            
+            if (!(t4.getText().equals(""))) {
+
+            } 
+            
+            if (!(t5.getText().equals(""))) {
+
+            }
+            
+            // Load approval system screen
+
+            // Needs to be fixed, currently is constructing the approval screen with the textfields (which can be empty)
+            // causing unanticipated behavior.
             approval.loadApprovalScreen(
                 t1.getText(),
                 t2.getText(),
