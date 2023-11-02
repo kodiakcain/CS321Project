@@ -12,8 +12,9 @@ public class ApprovalGUI extends JFrame implements ActionListener{
     // Labels to display text
     static JLabel l1, l2, l3, l4, l5;
     
+    static InfectedUserData immigrantDataForm;
 
-public static void loadApprovalScreen(String name, String email, String birthdate, String numChildren, String data) {
+public static void loadApprovalScreen(InfectedUserData form) {
     f1 = new JFrame("Disease Management System - Approve Data");
 
     ApprovalGUI gui = new ApprovalGUI();
@@ -24,11 +25,11 @@ public static void loadApprovalScreen(String name, String email, String birthdat
     //maximize the screen size
     f1.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-            l1 = new JLabel("Entered Name: " + name);
-            l2 = new JLabel("Entered Email: " + email);
-            l3 = new JLabel("Entered Birthdate: " + birthdate);
-            l4 = new JLabel("Entered Number of Children: " + numChildren);
-            l5 = new JLabel("Entered Disease Data: " + data);
+            l1 = new JLabel("Entered Name: " + form.getName());
+            l2 = new JLabel("Entered Email: " + form.getEmail());
+            l3 = new JLabel("Entered Birthdate: " + form.getBirthdate());
+            l4 = new JLabel("Entered Number of Children: " + form.getNumChildren());
+            l5 = new JLabel("Entered Disease Data: " + form.getData());
 
             JPanel p = new JPanel(new GridBagLayout());
 

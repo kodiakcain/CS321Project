@@ -122,7 +122,13 @@ class DataEntryGUI extends JFrame implements ActionListener {
                 f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 f.setVisible(false);
 
-                ReviewGUI.loadReviewScreen(name, email, birthdate, children, diseaseData);
+                ImmigrantDataForm.setName(name);
+                ImmigrantDataForm.setEmail(email);
+                ImmigrantDataForm.setBirthdate(birthdate);
+                ImmigrantDataForm.setNumChildren(Integer.parseInt(children));
+                ImmigrantDataForm.setData(diseaseData);
+
+                ReviewGUI.loadReviewScreen(ImmigrantDataForm);
             }
 
             //review screen complete flag is false
@@ -143,22 +149,9 @@ class DataEntryGUI extends JFrame implements ActionListener {
              * 
              */
 
-            //new approval gui object
-            ApprovalGUI approval = new ApprovalGUI();
-
-            //once flag is true, close the review screen and load the approval screen
-            if (flag2 == true) {
-                //TODO close the original screen
-
-
-                f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                f.setVisible(false);
-
-                ApprovalGUI.loadApprovalScreen(name, email, birthdate, children, diseaseData);
-            }
         } 
     }
-    }
+}
 
     public static int validate(InfectedUserData form) {
 

@@ -11,8 +11,11 @@ public class ReviewGUI extends JFrame implements ActionListener {
     static JLabel l1, l2, l3, l4, l5;
     // Add text fields
     static JTextField t1, t2, t3, t4, t5;
+    static InfectedUserData immigrantDataForm;
 
-    public static void loadReviewScreen(String name, String email, String birthdate, String numChildren, String data) {
+    public static void loadReviewScreen(InfectedUserData form) {
+
+        immigrantDataForm = form;
         f1 = new JFrame("Disease Management System - Review Data");
 
         ReviewGUI gui = new ReviewGUI();
@@ -27,11 +30,11 @@ public class ReviewGUI extends JFrame implements ActionListener {
         // Maximize the screen size
         f1.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-        l1 = new JLabel("Entered Name: " + name);
-        l2 = new JLabel("Entered Email: " + email);
-        l3 = new JLabel("Entered Birthdate: " + birthdate);
-        l4 = new JLabel("Entered Number of Children: " + numChildren);
-        l5 = new JLabel("Entered Disease Data: " + data);
+        l1 = new JLabel("Entered Name: " + form.name);
+        l2 = new JLabel("Entered Email: " + form.email);
+        l3 = new JLabel("Entered Birthdate: " + form.birthdate);
+        l4 = new JLabel("Entered Number of Children: " + form.numChildren);
+        l5 = new JLabel("Entered Disease Data: " + form.data);
 
         // Make the five text fields
         t1 = new JTextField(16);
@@ -100,35 +103,35 @@ public class ReviewGUI extends JFrame implements ActionListener {
         int finalNum = 0;
 
         //add validation for name
-        if (form.validateName(form.name) == 1) {
+        if (form.validateName(form.getName()) == 1) {
             finalNum++;
         } else {
             //add clear data form and show name error message
         }
 
         //add validation for disease data
-        if (form.validateInfectiousData(form.diseaseData) == 1) {
+        if (form.validateInfectiousData(form.getData()) == 1) {
             finalNum++;
         } else {
             //add clear data form and show data error message
         }
 
         //add validation for email
-        if (form.validateEmail(form.email) == 1) {
+        if (form.validateEmail(form.getEmail()) == 1) {
             finalNum++;
         } else {
             //add clear data form and show email error message
         }
 
         //add validation for birthdate
-        if (form.validateBirthdate(form.birthdate) == 1) {
+        if (form.validateBirthdate(form.getBirthdate()) == 1) {
             finalNum++;
         } else {
             //add clear data form and show birthdate error message
         }
 
         //add validation for number of children
-        if (form.validateNumChild(form.numChildren) == 1) {
+        if (form.validateNumChild(form.getNumChildren()) == 1) {
             finalNum++;
         } else {
             //add clear data form and show birthdate error message
@@ -148,38 +151,52 @@ public class ReviewGUI extends JFrame implements ActionListener {
             // Create a new instance of ApprovalGUI
             ApprovalGUI approval = new ApprovalGUI();
 
+            // InfectedUserData copy = immigrantDataForm;
+
+            InfectedUserData copy = new InfectedUserData(immigrantDataForm.getName(), immigrantDataForm.getData(), immigrantDataForm.getEmail(), immigrantDataForm.getBirthdate(), immigrantDataForm.getNumChildren(), immigrantDataForm.getIsGuardian(), immigrantDataForm.getDate());
             //Validate any data that was entered by the review agent.
             if (!(t1.getText().equals(""))) {
-                
+                copy.setName(t1.getText());
             } 
             
             if (!(t2.getText().equals(""))) {
-
+                copy.setEmail(t2.getText());
             }
             
             if (!(t3.getText().equals(""))) {
-
+                copy.setBirthdate(t3.getText());
             }
             
             if (!(t4.getText().equals(""))) {
-
+                if (Integer.parseInt(t4.getText()) > 0) {
+                    copy.setGuardian(true);
+                    copy.setNumChildren(Integer.parseInt(t4.getText()));
+                } else  {
+                    copy.setGuardian(false);
+                    copy.setNumChildren(Integer.parseInt(t4.getText()));
+                }
             } 
             
             if (!(t5.getText().equals(""))) {
-
+                copy.setData(t5.getText());
             }
             
-            // Load approval system screen
+            int validationResult = validate(copy);
 
-            // Needs to be fixed, currently is constructing the approval screen with the textfields (which can be empty)
-            // causing unanticipated behavior.
-            approval.loadApprovalScreen(
-                t1.getText(),
-                t2.getText(),
-                t3.getText(),
-                t4.getText(),
-                t5.getText()
-        );
+            if (validationResult != 5) {
+            // This means not all fields are valid
+                JOptionPane.showMessageDialog(f1, "Some fields have invalid data. Please check and try again.");
+                loadReviewScreen(immigrantDataForm);
+            } else {
+                // All fields are valid, so proceed
+                f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                f1.setVisible(false);
+
+                // Create a new instance of ApprovalGUI
+
+                approval.loadApprovalScreen(copy);
+
+            }
+        }
     }
-}
 }
