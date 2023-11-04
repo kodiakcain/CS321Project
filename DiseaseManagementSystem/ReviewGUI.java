@@ -29,7 +29,10 @@ public class ReviewGUI extends JFrame implements ActionListener {
      */
     public static void loadReviewScreen(InfectedUserData form) {
 
+        // creating copy of form 
         immigrantDataForm = form;
+
+        // displaying frame
         f1 = new JFrame("Disease Management System - Review Data");
 
         ReviewGUI gui = new ReviewGUI();
@@ -44,6 +47,7 @@ public class ReviewGUI extends JFrame implements ActionListener {
         // Maximize the screen size
         f1.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
+        // Displaying immigrant information
         l1 = new JLabel("Entered Name: " + form.name);
         l2 = new JLabel("Entered Email: " + form.email);
         l3 = new JLabel("Entered Birthdate: " + form.birthdate);
@@ -67,6 +71,7 @@ public class ReviewGUI extends JFrame implements ActionListener {
 
         JPanel p = new JPanel(new GridBagLayout());
 
+        // Adding and manipulating various 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets.set(5, 5, 5, 5);
 
@@ -180,10 +185,11 @@ public class ReviewGUI extends JFrame implements ActionListener {
             // Create a new instance of ApprovalGUI
             ApprovalGUI approval = new ApprovalGUI();
 
-            // InfectedUserData copy = immigrantDataForm;
-
+            
+            // Making a deep copy of the current immigrant form
             InfectedUserData copy = new InfectedUserData(immigrantDataForm.getName(), immigrantDataForm.getData(), immigrantDataForm.getEmail(), immigrantDataForm.getBirthdate(), immigrantDataForm.getNumChildren(), immigrantDataForm.getIsGuardian(), immigrantDataForm.getDate());
-            //Validate any data that was entered by the review agent.
+            
+            // Validate any data that was entered by the review agent.
             if (!(t1.getText().equals(""))) {
                 copy.setName(t1.getText());
             } 
@@ -210,6 +216,7 @@ public class ReviewGUI extends JFrame implements ActionListener {
                 copy.setData(t5.getText());
             }
             
+            // Validate the data and let the user know if it was invalid.
             int validationResult = validate(copy);
 
             if (validationResult != 5) {
@@ -221,8 +228,7 @@ public class ReviewGUI extends JFrame implements ActionListener {
                 f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 f1.setVisible(false);
 
-                // Create a new instance of ApprovalGUI
-
+                // load the approval screen with the new version of the form
                 approval.loadApprovalScreen(copy);
 
             }
