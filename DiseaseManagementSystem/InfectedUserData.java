@@ -6,7 +6,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * 
+ * This is the InfectedUserData class, which represents our form that stores the immigrants data.
+ * It is also our business object.
+ * @author Cain Clifton
  */
 public class InfectedUserData {
     String date = "";
@@ -328,7 +330,7 @@ public class InfectedUserData {
         
 
         this.email = newEmail;
-    }
+    }      
 
     /**
      * Stores all the data in the
