@@ -68,7 +68,7 @@ class DataEntryGUI extends JFrame implements ActionListener {
 
     /**
      * Handles action events triggered by the user interface elements. Specifically, this
-     * method is responsible for handling the submission for approval.
+     * method is responsible for handling when the user presses the submission for review button.
      *
      * @param e The ActionEvent that contains information about the event
      *          and its source (clicking the submit for approval button).
