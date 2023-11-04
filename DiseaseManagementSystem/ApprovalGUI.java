@@ -42,8 +42,7 @@ public class ApprovalGUI extends JFrame implements ActionListener {
 
     /**
      * Displays the Immigrant's infectious disease information to the Approving
-     *     Agent User. This Graphical User Interface is the screen for the
-     *     ApprovingSystem class.
+     *     Agent User.
      * 
      * @param form for the Immigrant's infectious disease form that contains
      *     its corresponding data.
