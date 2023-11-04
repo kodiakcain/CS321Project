@@ -118,16 +118,22 @@ public class ApprovalGUI extends JFrame implements ActionListener {
     }
 
     /**
+     * Handles action events triggered by the Approving Agent when they press
+     *     the following buttons: The "Send Approval Email" currently ONLY 
+     *     notifies the Approving Agent that an approval email has been sent
+     *     to the immigrant. The "Return for Review" button currently returns
+     *     the immigrant's infectious disease form data back to the Reviewing
+     *     Agent to be reviewed for correction.
      * 
-     * 
-     * @param e
+     * @param e for the ActionEvent to indicate that one of the following two
+     *     has been pressed: "Send Approval Email" or "Return for Review".
      */
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
 
         if (command.equals("Send Approval Email")) {
-            // Email-Sending logic
+            // email-sending logic
             l6 =  new JLabel("Approval Email sent to Immigrant, Exit System.");
             l6.setText("Approval Email Sent, Exit System");
             
@@ -135,7 +141,7 @@ public class ApprovalGUI extends JFrame implements ActionListener {
             closeButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent event) {
-                    // Close window
+                    // close window
                     f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     f1.setVisible(false);
                 }
@@ -154,14 +160,15 @@ public class ApprovalGUI extends JFrame implements ActionListener {
             // ensure the change is displayed
             f1.repaint();
         }
+        //  return the form back to the Reviewing Agent
         else if (command.equals("Return for Review")) {
-            // Close window
+            // close window
             f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             f1.setVisible(false);
             
+            // load the reviewing agent's Reviewing screen
             ReviewGUI gui = new ReviewGUI();
             gui.loadReviewScreen(immigrantDataForm);
         }
     }
-
 }
