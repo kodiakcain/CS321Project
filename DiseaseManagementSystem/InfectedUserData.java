@@ -5,6 +5,9 @@ import java.time.format.DateTimeFormatter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+/**
+ * 
+ */
 public class InfectedUserData {
     String date = "";
     int formNumber = 0;
