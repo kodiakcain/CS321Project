@@ -1,4 +1,5 @@
 package DiseaseManagementSystem;
+
 import java.awt.event.*;
 import java.util.concurrent.TimeUnit;
 
@@ -7,68 +8,93 @@ import java.awt.*;
 
 import DiseaseManagementSystem.*;
 
-public class ApprovalGUI extends JFrame implements ActionListener{
+/**
+ * A Graphical User Interface for the ApprovingSystem.
+ * 
+ * @author Youssef Melk
+ */
+public class ApprovalGUI extends JFrame implements ActionListener {
 
-    static JFrame f1;
+    /**
+     * JFrame that provides a window on the screen.
+     */
+    private static JFrame f1;
 
-    // Labels to display text
-    static JLabel l1, l2, l3, l4, l5, l6;
+    /**
+     * Labels to display text to the Approving Agent user.
+     */
+    private static JLabel l1, l2, l3, l4, l5, l6;
     
-    static InfectedUserData immigrantDataForm;
+    /**
+     * The immigrant's infectious disease form.
+     */
+    private static InfectedUserData immigrantDataForm;
 
-    static GridBagConstraints gbc;
+    /**
+     * Specifies the constraints on the display.
+     */
+    private static GridBagConstraints gbc;
 
-    static JPanel p;
+    /**
+     * Container to store all components such as buttons and textfields.
+     */
+    private static JPanel p;
 
+    /**
+     * Displays the Immigrant's infectious disease information to the Approving
+     *     Agent User. This Graphical User Interface is the screen for the
+     *     ApprovingSystem class.
+     * 
+     * @param form for the Immigrant's infectious disease form that contains
+     *     its corresponding data.
+     */
     public static void loadApprovalScreen(InfectedUserData form) {
         immigrantDataForm = form;
         
         // New frame for Approving Agent
-        f1 = new JFrame("Disease Management System - Approve Data");
-        
+        f1 = new JFrame("Disease Management System - Approve Data"); 
         ApprovalGUI gui = new ApprovalGUI();
-
-        // Approval Button
+        
+        // approval button
         JButton approveButton = new JButton("Send Approval Email");
         approveButton.addActionListener(gui);
-
-        // Return Button
+        
+        // return button
         JButton returnButton = new JButton("Return for Review");
         returnButton.addActionListener(gui);
 
-        // Set the frame to visible
+        // set the frame to visible
         f1.setVisible(true);
-
-        //maximize the screen size
+        // maximize the screen size
         f1.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
-        // Store all provided data from Review Agent
+        // store all provided data received from Review Agent
         l1 = new JLabel("Entered Name: " + form.getName());
         l2 = new JLabel("Entered Email: " + form.getEmail());
         l3 = new JLabel("Entered Birthdate: " + form.getBirthdate());
         l4 = new JLabel("Entered Number of Children: " + form.getNumChildren());
         l5 = new JLabel("Entered Disease Data: " + form.getData());
 
+        // stores all components
         p = new JPanel(new GridBagLayout());
-
         gbc = new GridBagConstraints();
         gbc.insets.set(5, 5, 5, 5);
 
-        // add title to top
+        // center component
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 2;
-
-        // Move downwards
+        // move downwards
         gbc.gridy++;
 
-        // Center the labels
+        // center the labels
         gbc.anchor = GridBagConstraints.CENTER;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridwidth = 2;
         gbc.gridx = 0;
 
+        // add labels
         p.add(l1, gbc);
         gbc.gridy++;
         p.add(l2, gbc);
@@ -79,16 +105,23 @@ public class ApprovalGUI extends JFrame implements ActionListener{
         gbc.gridy++;
         p.add(l5, gbc);
 
-        // Add buttons
+        // move downwards
         gbc.gridy++;
-        gbc.gridwidth = 1; // reset gridwidth for buttons
+        // reset gridwidth for buttons
+        gbc.gridwidth = 1;
+        // add buttons
         p.add(approveButton, gbc);
-        gbc.gridx++; // Move Right
+        // move right
+        gbc.gridx++;
         p.add(returnButton, gbc);
-
         f1.add(p);
     }
 
+    /**
+     * 
+     * 
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
