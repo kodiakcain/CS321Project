@@ -5,6 +5,13 @@ import java.awt.*;
 
 import DiseaseManagementSystem.*;
 
+/**
+ * The ReviewGUI class provides a graphical user interface for reviewing the data
+ * of individuals in a disease management context. It allows for the validation and submission
+ * of immigrant data for further processing.
+ *
+ * @author John Fulton
+ */
 public class ReviewGUI extends JFrame implements ActionListener {
     static JFrame f1;
     // Labels to display text
@@ -13,6 +20,13 @@ public class ReviewGUI extends JFrame implements ActionListener {
     static JTextField t1, t2, t3, t4, t5;
     static InfectedUserData immigrantDataForm;
 
+    /**
+     * Loads the review screen with the data from the given InfectedUserData form.
+     * This screen will show the immigrants data on the screen and provides input fields 
+     * for correction from the review agent, if necessary.
+     *
+     * @param form The InfectedUserData containing the information to be reviewed.
+     */
     public static void loadReviewScreen(InfectedUserData form) {
 
         immigrantDataForm = form;
@@ -97,6 +111,14 @@ public class ReviewGUI extends JFrame implements ActionListener {
         f1.add(p);
     }
 
+    /**
+     * Validates the data entered by the review agent (same logic as DataEntryGUI).
+     * The method checks the validity of various fields such as name, email, birthdate,
+     * number of children, and disease data.
+     *
+     * @param form The InfectedUserData form to be validated.
+     * @return The number of valid data parts. A fully valid form would return 5.
+     */
     public static int validate(InfectedUserData form) {
 
         //final number of valid parts
@@ -141,6 +163,13 @@ public class ReviewGUI extends JFrame implements ActionListener {
         return finalNum;
     }
 
+    /**
+     * Handles action events triggered by the user interface elements. Specifically, this
+     * method is responsible for handling the submission for approval.
+     *
+     * @param e The ActionEvent that contains information about the event
+     *          and its source (clicking the submit for approval button).
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
