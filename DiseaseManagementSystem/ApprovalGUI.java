@@ -9,7 +9,8 @@ import java.awt.*;
 import DiseaseManagementSystem.*;
 
 /**
- * A Graphical User Interface for the ApprovingSystem.
+ * A Graphical User Interface for the Approving Agent to approve or return
+ *     Infectious Disease forms.
  * 
  * @author Youssef Melk
  */
