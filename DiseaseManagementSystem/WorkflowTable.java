@@ -56,6 +56,7 @@ public class WorkflowTable {
         } else {
             return false;
         }
+
     }
 
     /**
@@ -75,6 +76,7 @@ public class WorkflowTable {
         } else {
             return placeholder;
         }
+
     }
 
     /**
@@ -86,6 +88,7 @@ public class WorkflowTable {
      *     approvalIDQueue, otherwise return false.
      */
     public boolean addApprovalForm(InfectedUserData form) {
+        
         if (approvalQueue.add(form) == true) {
             return true;
         } else {

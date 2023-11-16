@@ -2,6 +2,7 @@ package DiseaseManagementSystem;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 
 import DiseaseManagementSystem.*;
 
@@ -11,7 +12,7 @@ import DiseaseManagementSystem.*;
  * 
  * @author John Fulton, Cain Clifton, Youssef Melk
  */
-public class CentralGUI {
+public class CentralGUI extends JFrame implements ActionListener {
     
     /**
      * These are the various buttons that the user can press to choose what screen they want
@@ -44,6 +45,12 @@ public class CentralGUI {
         approvalButton = new JButton("Load Approval System");
 
         CentralGUI gui = new CentralGUI();
+
+        dataEntryButton.addActionListener(gui);
+        reviewButton.addActionListener(gui);
+        approvalButton.addActionListener(gui);
+
+
 
 
     }
