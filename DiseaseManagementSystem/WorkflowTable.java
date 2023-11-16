@@ -72,6 +72,9 @@ public class WorkflowTable {
         InfectedUserData placeholder = new InfectedUserData(null, null, null, null, 0, false, null);
 
         if (!reviewQueue.isEmpty()) {
+            // needs to be changed to properly implement queue functionality.
+            // we actually want to remove the form, not just retrieve it.
+            // peek() won't remove the form for us.
             return reviewQueue.peek();
         } else {
             return placeholder;
