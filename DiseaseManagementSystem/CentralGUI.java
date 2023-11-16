@@ -27,7 +27,7 @@ public class CentralGUI extends JFrame implements ActionListener {
     /**
      * This JFrame is the window that the screen will be displayed in.
      */
-    static JFrame f;
+    static JFrame frame;
 
     /**
      * This method loads the central screen
@@ -35,7 +35,7 @@ public class CentralGUI extends JFrame implements ActionListener {
     public static void loadCentralScreen() {
 
         // making frame
-        f = new JFrame("Disease Management System");
+        frame = new JFrame("Disease Management System");
 
         // making label
         welcomeMessage = new JLabel("Welcome to the Disease Management System");
@@ -55,9 +55,6 @@ public class CentralGUI extends JFrame implements ActionListener {
 
         // creating panel and gbc
         JPanel centralPanel = new JPanel(new GridBagLayout());
-
-        // displaying 3 
-        GridBagConstraints centralGBC = new GridBagConstraints();
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 1.0;
@@ -66,41 +63,34 @@ public class CentralGUI extends JFrame implements ActionListener {
         // Adding the welcome label
         gbc.gridx = 1;
         gbc.gridy = 0;
-        frame.add(welcomeLabel, gbc);
+        centralPanel.add(welcomeMessage, gbc);
 
-        // Adding the first button
+        // Adding the data entry button
         gbc.gridx = 0;
         gbc.gridy = 1;
-        frame.add(button1, gbc);
+        centralPanel.add(dataEntryButton, gbc);
 
-        // Adding the second (central) button
+        // Adding the review button
         gbc.gridx = 1;
         gbc.gridy = 1;
-        frame.add(button2, gbc);
+        centralPanel.add(reviewButton, gbc);
 
-        // Adding the third button
+        // Adding the approval button
         gbc.gridx = 2;
         gbc.gridy = 1;
-        frame.add(button3, gbc);
+        centralPanel.add(approvalButton, gbc);
 
         // Adding the exit button
         gbc.gridx = 1;
         gbc.gridy = 2;
-        frame.add(exitButton, gbc);
+        frame.add(exitButton, gbc);   
 
+        frame.add(centralPanel);
 
-        centralGBC.gridx = 0; // First column
-        frame.add(button1, centralGBC);
-
-        centralGBC.gridx = 1; // Second column
-        frame.add(button2, centralGBC);
-
-        centralGBC.gridx = 2; // Third column
-        frame.add(button3, centralGBC);
-
-        
-
+        frame.setSize(300,300);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+
     }
 
     /**
