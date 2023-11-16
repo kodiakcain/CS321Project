@@ -41,10 +41,10 @@ public class CentralGUI extends JFrame implements ActionListener {
         welcomeMessage = new JLabel("Welcome to the Disease Management System");
 
         // making buttons
-        dataEntryButton = new JButton("Load Data Entry System");
-        reviewButton = new JButton("Load Reviewing System");
-        approvalButton = new JButton("Load Approval System");
-
+        dataEntryButton = new JButton("Data Entry System");
+        reviewButton = new JButton("Reviewing System");
+        approvalButton = new JButton("Approval System");
+        exitButton = new JButton("Exit");
         // making gui object
         CentralGUI gui = new CentralGUI();
 
@@ -52,6 +52,7 @@ public class CentralGUI extends JFrame implements ActionListener {
         dataEntryButton.addActionListener(gui);
         reviewButton.addActionListener(gui);
         approvalButton.addActionListener(gui);
+        exitButton.addActionListener(gui);
 
         // creating panel and gbc
         JPanel centralPanel = new JPanel(new GridBagLayout());
@@ -83,13 +84,14 @@ public class CentralGUI extends JFrame implements ActionListener {
         // Adding the exit button
         gbc.gridx = 1;
         gbc.gridy = 2;
-        frame.add(exitButton, gbc);   
+        centralPanel.add(exitButton, gbc);   
 
         frame.add(centralPanel);
 
         frame.setSize(300,300);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
     }
 
@@ -100,7 +102,18 @@ public class CentralGUI extends JFrame implements ActionListener {
      * @param e the event recorded by the action listener (what button the user pressed).
      */
     public void actionPerformed(ActionEvent e) {
+        String buttonPressed = e.getActionCommand();
 
+        if (buttonPressed.equals("Data Entry System")) {
+            DataEntryGUI dataGUI = new DataEntryGUI();
+            dataGUI.loadDataScreen();
+        } else if (buttonPressed.equals("Reviewing System")) {
+            ReviewGUI reviewGUI = new ReviewGUI();
+            reviewGUI.loadReviewScreen(null);
+        } else if (buttonPressed.equals("Approval System")) {
+            ApprovalGUI approvalGUI = new ApprovalGUI();
+            approvalGUI.loadApprovalScreen(null);
+        }
     }
 
     /**
