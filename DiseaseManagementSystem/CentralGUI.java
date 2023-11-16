@@ -1,8 +1,9 @@
 package DiseaseManagementSystem;
+import java.awt.event.*;
+import java.security.NoSuchAlgorithmException;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 
 import DiseaseManagementSystem.*;
 
@@ -44,15 +45,62 @@ public class CentralGUI extends JFrame implements ActionListener {
         reviewButton = new JButton("Load Reviewing System");
         approvalButton = new JButton("Load Approval System");
 
+        // making gui object
         CentralGUI gui = new CentralGUI();
 
+        // added action listeners
         dataEntryButton.addActionListener(gui);
         reviewButton.addActionListener(gui);
         approvalButton.addActionListener(gui);
 
+        // creating panel and gbc
+        JPanel centralPanel = new JPanel(new GridBagLayout());
+
+        // displaying 3 
+        GridBagConstraints centralGBC = new GridBagConstraints();
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.weightx = 1.0;
+        gbc.weighty = 1.0;
+
+        // Adding the welcome label
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        frame.add(welcomeLabel, gbc);
+
+        // Adding the first button
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        frame.add(button1, gbc);
+
+        // Adding the second (central) button
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        frame.add(button2, gbc);
+
+        // Adding the third button
+        gbc.gridx = 2;
+        gbc.gridy = 1;
+        frame.add(button3, gbc);
+
+        // Adding the exit button
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        frame.add(exitButton, gbc);
 
 
+        centralGBC.gridx = 0; // First column
+        frame.add(button1, centralGBC);
 
+        centralGBC.gridx = 1; // Second column
+        frame.add(button2, centralGBC);
+
+        centralGBC.gridx = 2; // Third column
+        frame.add(button3, centralGBC);
+
+        
+
+        frame.setVisible(true);
     }
 
     /**
