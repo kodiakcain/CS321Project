@@ -92,7 +92,7 @@ public class WorkflowTable {
      */
     public boolean addApprovalForm(InfectedUserData form) {
         
-        if (approvalQueue.add(form) == true) {
+        if (approvalQueue.add(form)) {
             return true;
         } else {
             return false;
