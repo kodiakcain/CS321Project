@@ -29,7 +29,7 @@ class DataEntryGUI extends JFrame implements ActionListener {
     static JFrame f2;
 
     // JButton to submit to review
-    static JButton b;
+    static JButton b, exit;
 
     // Labels to display text
     static JLabel l1, l2, l3, l4, l5, title;
@@ -109,10 +109,8 @@ class DataEntryGUI extends JFrame implements ActionListener {
             //if all fields are valid, 
             if (DataEntryGUI.validate(ImmigrantDataForm) == 5) {
             
-            //remove everything from the screen
-            Container contentPane = f.getContentPane();
-            contentPane.removeAll();
-            contentPane.repaint();
+                f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                f.setVisible(false);
 
             //set the flag to true
             flag1 = true;
@@ -127,38 +125,21 @@ class DataEntryGUI extends JFrame implements ActionListener {
             //add the ID hash to the review queue
             reviewQueue.add(ImmigrantDataForm.getEmail());
 
-            //new review gui object
-            ReviewGUI review = new ReviewGUI();
-
-            if (flag1 == true) {
-
-                f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                f.setVisible(false);
-
-                ImmigrantDataForm.setName(name);
-                ImmigrantDataForm.setEmail(email);
-                ImmigrantDataForm.setBirthdate(birthdate);
-                ImmigrantDataForm.setNumChildren(Integer.parseInt(children));
-                ImmigrantDataForm.setData(diseaseData);
-
-                ReviewGUI.loadReviewScreen(ImmigrantDataForm);
-            }
-
-            //review screen complete flag is false
-            flag2 = false;
-
-            WorkflowTable workflowObject = new WorkflowTable();
-
-            workflowObject.addReviewForm(ImmigrantDataForm);
+            DataEntryGUI.loadDataScreen();
 
             } 
+        } 
+        if (s.equals("Exit")) {
+            f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            f.setVisible(false);
+            CentralGUI centralgui = new CentralGUI();
+            centralgui.loadCentralScreen();
         }
     }
     /**
      * Validates the data entered by the review agent (same logic as ReviewGUI).
      * The method checks the validity of various fields such as name, email, birthdate,
      * number of children, and disease data.
-     *
      * @param form The InfectedUserData form to be validated.
      * @return The number of valid data parts. A fully valid form would return 5.
      */
@@ -229,12 +210,14 @@ class DataEntryGUI extends JFrame implements ActionListener {
 
             //=Create submit button
             b = new JButton("Submit");
+            exit = new JButton("Exit");
 
             //make the gui object
             DataEntryGUI gui = new DataEntryGUI();
 
             //make the 
             b.addActionListener(gui);
+            exit.addActionListener(gui);
 
             //make the five textfields
             t1 = new JTextField(16);
@@ -293,6 +276,8 @@ class DataEntryGUI extends JFrame implements ActionListener {
             gbc.gridy++;
             gbc.anchor = GridBagConstraints.CENTER;
             p.add(b, gbc);
+            gbc.gridy++;
+            p.add(exit, gbc);
 
             //add panel to frame
             f.add(p);
