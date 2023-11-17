@@ -110,12 +110,12 @@ public class CentralGUI extends JFrame implements ActionListener {
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(false);
             DataEntryGUI dataGUI = new DataEntryGUI();
-            dataGUI.loadDataScreen(null);
+            dataGUI.loadDataScreen(workflowtable);
         } else if (buttonPressed.equals("Reviewing System")) {
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(false);
             ReviewGUI reviewGUI = new ReviewGUI();
-            reviewGUI.loadReviewScreen(null);
+            reviewGUI.loadReviewScreen(workflowtable);
         } else if (buttonPressed.equals("Approval System")) {
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(false);
