@@ -19,7 +19,7 @@ public class ApprovalGUI extends JFrame implements ActionListener {
     /**
      * JFrame that provides a window on the screen.
      */
-    private static JFrame f1;
+    private static JFrame frame;
 
     /**
      * Labels to display text to the Approving Agent user.
@@ -49,24 +49,24 @@ public class ApprovalGUI extends JFrame implements ActionListener {
      *     its corresponding data.
      */
     public static void loadApprovalScreen(InfectedUserData form) {
+        // immigrant's immigration form
         immigrantDataForm = form;
         
-        // New frame for Approving Agent
-        f1 = new JFrame("Disease Management System - Approve Data"); 
+        // New frame to show the Approving Agent
+        frame = new JFrame("Disease Management System - Approve Data"); 
         ApprovalGUI gui = new ApprovalGUI();
         
         // approval button
         JButton approveButton = new JButton("Send Approval Email");
         approveButton.addActionListener(gui);
-        
         // return button
         JButton returnButton = new JButton("Return for Review");
         returnButton.addActionListener(gui);
 
         // set the frame to visible
-        f1.setVisible(true);
+        frame.setVisible(true);
         // maximize the screen size
-        f1.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         // store all provided data received from Review Agent
         l1 = new JLabel("Entered Name: " + form.getName());
@@ -114,7 +114,7 @@ public class ApprovalGUI extends JFrame implements ActionListener {
         // move right
         gbc.gridx++;
         p.add(returnButton, gbc);
-        f1.add(p);
+        frame.add(p);
     }
 
     /**
@@ -142,8 +142,8 @@ public class ApprovalGUI extends JFrame implements ActionListener {
                 @Override
                 public void actionPerformed(ActionEvent event) {
                     // close window
-                    f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    f1.setVisible(false);
+                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    frame.setVisible(false);
                 }
             });
 
@@ -156,15 +156,15 @@ public class ApprovalGUI extends JFrame implements ActionListener {
             p.add(closeButton, gbc);
 
             // refresh the frame to show new label (tell layout manager of change)
-            f1.revalidate();
+            frame.revalidate();
             // ensure the change is displayed
-            f1.repaint();
+            frame.repaint();
         }
         //  return the form back to the Reviewing Agent
         else if (command.equals("Return for Review")) {
             // close window
-            f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            f1.setVisible(false);
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setVisible(false);
             
             // load the reviewing agent's Reviewing screen
             ReviewGUI gui = new ReviewGUI();
