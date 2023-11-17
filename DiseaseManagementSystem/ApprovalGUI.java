@@ -88,9 +88,9 @@ public class ApprovalGUI extends JFrame implements ActionListener {
         frame = new JFrame("Disease Management System - Approve Data"); 
         ApprovalGUI gui = new ApprovalGUI();
 
-         // container to store components 
+         // Container to store components 
         panel = new JPanel(new GridBagLayout());
-        // component constraints
+        // Component constraints
         gridBagConst = new GridBagConstraints();
         gridBagConst.insets.set(5, 5, 5, 5);
 
@@ -116,21 +116,21 @@ public class ApprovalGUI extends JFrame implements ActionListener {
         numChildren = new JLabel("Entered Number of Children: " + immigrantDataForm.getNumChildren());
         diseaseName = new JLabel("Entered Disease Data: " + immigrantDataForm.getData());
 
-        // center component
+        // Center component
         gridBagConst.anchor = GridBagConstraints.CENTER;
         gridBagConst.gridx = 0;
         gridBagConst.gridy = 0;
         gridBagConst.gridwidth = 2;
-        // move downwards
+        // Move downwards
         gridBagConst.gridy++;
 
-        // center the labels
+        // Center the labels
         gridBagConst.anchor = GridBagConstraints.CENTER;
         gridBagConst.fill = GridBagConstraints.HORIZONTAL;
         gridBagConst.gridwidth = 2;
         gridBagConst.gridx = 0;
 
-        // add all labels
+        // Add all labels
         panel.add(name, gridBagConst);
         gridBagConst.gridy++;
         panel.add(email, gridBagConst);
@@ -141,30 +141,29 @@ public class ApprovalGUI extends JFrame implements ActionListener {
         gridBagConst.gridy++;
         panel.add(diseaseName, gridBagConst);
 
-        // move downwards
+        // Move downwards
         gridBagConst.gridy++;
         // reset gridwidth for buttons
         gridBagConst.gridwidth = 1;
 
-        // add approve button to container
+        // Add approve button to container
         panel.add(approveButton, gridBagConst);
-        // move right
+        // Move right
         gridBagConst.gridx++;
 
-        // add return button to container
+        // Add return button to container
         panel.add(returnButton, gridBagConst);
         frame.add(panel);
     }
 
     /**
-     * TODO: WIP FIX JAVADOC
-     * 
      * Handles action events triggered by the Approving Agent when they press
-     *     the following buttons: The "Send Approval Email" currently ONLY 
-     *     notifies the Approving Agent that an approval email has been sent
-     *     to the immigrant. The "Return for Review" button currently returns
-     *     the immigrant's infectious disease form data back to the Reviewing
-     *     Agent to be reviewed for correction.
+     *     the following buttons: The "Send Approval Email" button informs
+     *     the Approving Agent that a confirmation email has been sent to the
+     *     immigrant, and that the Approving Agent may return to the Central
+     *     screen. The "Return for Review" button returns the applicant's form
+     *     back to the Reviewing Agent for correction, then the next Approval
+     *     form is viewed to the Approving Agent.
      * 
      * @param e for the ActionEvent to indicate that one of the following two
      *     has been pressed: "Send Approval Email" or "Return for Review".
@@ -175,13 +174,13 @@ public class ApprovalGUI extends JFrame implements ActionListener {
 
         // Approving agent presses "Send Approval Email" button
         if (command.equals("Send Approval Email")) {
-            // notifies Approving Agent the confirmation email was sent
+            // Notifies Approving Agent the confirmation email was sent
             approvalEmail =  new JLabel(
                 "Approval Email sent to Immigrant, Exit System."
             );
             approvalEmail.setText("Approval Email Sent, Exit");
             
-            // exit Approval System button and return to Central GUI screen
+            // Exit Approval System button and return to Central GUI screen
             JButton closeButton  = new JButton("Exit");
             closeButton.addActionListener(new ActionListener() {
                 @Override
