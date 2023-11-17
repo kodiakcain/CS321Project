@@ -222,7 +222,7 @@ public class ReviewGUI extends JFrame implements ActionListener {
             if (validationResult != 5) {
             // This means not all fields are valid
                 JOptionPane.showMessageDialog(f1, "Some fields have invalid data. Please check and try again.");
-                loadReviewScreen(immigrantDataForm);
+                loadReviewScreen(workflowtable);
             } else {
                 // All fields are valid, so proceed
                 f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
