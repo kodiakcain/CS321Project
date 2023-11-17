@@ -121,7 +121,7 @@ public class CentralGUI extends JFrame implements ActionListener {
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(false);
             ApprovalGUI approvalGUI = new ApprovalGUI();
-            approvalGUI.loadApprovalScreen(null);
+            approvalGUI.loadApprovalScreen(workflowtable);
         } else if (buttonPressed.equals("Exit")) {
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(false);
