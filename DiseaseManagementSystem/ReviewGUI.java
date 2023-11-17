@@ -19,6 +19,7 @@ public class ReviewGUI extends JFrame implements ActionListener {
     // Add text fields
     static JTextField nameTextField, emailTextField, DOBTextField, numChildrenTextField, diseaseTextField;
     static InfectedUserData immigrantDataForm;
+    static WorkflowTable workflowtable;
 
     /**
      * Loads the review screen with the data from the given InfectedUserData form.
@@ -30,7 +31,7 @@ public class ReviewGUI extends JFrame implements ActionListener {
     public static void loadReviewScreen(InfectedUserData form) {
 
         // creating copy of form 
-        immigrantDataForm = form;
+        immigrantDataForm = workflowtable.getNextReviewForm();
 
         // displaying frame
         f1 = new JFrame("Disease Management System - Review Data");
@@ -116,57 +117,57 @@ public class ReviewGUI extends JFrame implements ActionListener {
         f1.add(p);
     }
 
-    /**
-     * Validates the data entered by the review agent (same logic as DataEntryGUI).
-     * The method checks the validity of various fields such as name, email, birthdate,
-     * number of children, and disease data.
-     *
-     * @param form The InfectedUserData form to be validated.
-     * @return The number of valid data parts. A fully valid form would return 5.
-     */
-    public static int validate(InfectedUserData form) {
+    // /**
+    //  * Validates the data entered by the review agent (same logic as DataEntryGUI).
+    //  * The method checks the validity of various fields such as name, email, birthdate,
+    //  * number of children, and disease data.
+    //  *
+    //  * @param form The InfectedUserData form to be validated.
+    //  * @return The number of valid data parts. A fully valid form would return 5.
+    //  */
+    // public static int validate(InfectedUserData form) {
 
-        //final number of valid parts
-        int finalNum = 0;
+    //     //final number of valid parts
+    //     int finalNum = 0;
 
-        //add validation for name
-        if (form.validateName(form.getName()) == 1) {
-            finalNum++;
-        } else {
-            //add clear data form and show name error message
-        }
+    //     //add validation for name
+    //     if (form.validateName(form.getName()) == 1) {
+    //         finalNum++;
+    //     } else {
+    //         //add clear data form and show name error message
+    //     }
 
-        //add validation for disease data
-        if (form.validateInfectiousData(form.getData()) == 1) {
-            finalNum++;
-        } else {
-            //add clear data form and show data error message
-        }
+    //     //add validation for disease data
+    //     if (form.validateInfectiousData(form.getData()) == 1) {
+    //         finalNum++;
+    //     } else {
+    //         //add clear data form and show data error message
+    //     }
 
-        //add validation for email
-        if (form.validateEmail(form.getEmail()) == 1) {
-            finalNum++;
-        } else {
-            //add clear data form and show email error message
-        }
+    //     //add validation for email
+    //     if (form.validateEmail(form.getEmail()) == 1) {
+    //         finalNum++;
+    //     } else {
+    //         //add clear data form and show email error message
+    //     }
 
-        //add validation for birthdate
-        if (form.validateBirthdate(form.getBirthdate()) == 1) {
-            finalNum++;
-        } else {
-            //add clear data form and show birthdate error message
-        }
+    //     //add validation for birthdate
+    //     if (form.validateBirthdate(form.getBirthdate()) == 1) {
+    //         finalNum++;
+    //     } else {
+    //         //add clear data form and show birthdate error message
+    //     }
 
-        //add validation for number of children
-        if (form.validateNumChild(form.getNumChildren()) == 1) {
-            finalNum++;
-        } else {
-            //add clear data form and show birthdate error message
-        }
+    //     //add validation for number of children
+    //     if (form.validateNumChild(form.getNumChildren()) == 1) {
+    //         finalNum++;
+    //     } else {
+    //         //add clear data form and show birthdate error message
+    //     }
         
-        //return total valid
-        return finalNum;
-    }
+    //     //return total valid
+    //     return finalNum;
+    // }
 
     /**
      * Validates the data entered by the review agent.
@@ -176,30 +177,43 @@ public class ReviewGUI extends JFrame implements ActionListener {
      * @param form The InfectedUserData form to be validated.
      * @return The number of valid data parts. A fully valid form would return 5.
      */
-    public void validate(InfectedUserData form) {
+    public boolean validate(InfectedUserData form) {
+        boolean nameFlag = true;
+        boolean emailFlag = true;
+        boolean birthdateFlag = true;
+        boolean numChildrenFlag = true;
+        boolean dataFlag = true;
 
         if (form.validateName(form.getName()) != 1) {
+            // Setting flag to false.
+            nameFlag = false;
             // clear text field for name entry
-
+            nameTextField.setText("");
             // display message to user that they need to fix the name
-
         }
 
         if (form.validateEmail(form.getEmail()) != 1) {
-
+            emailFlag = false;
+            emailTextField.setText("");
         }
 
         if (form.validateBirthdate(form.getBirthdate()) != 1) {
-            
+            birthdateFlag = false;
+            DOBTextField.setText("");
         }
 
         if (form.validateNumChild(form.getNumChildren()) != 1) {
-
+            numChildrenFlag = false;
+            numChildrenTextField.setText("");
         }
 
         if (form.validateInfectiousData(form.getData()) != 1) {
-
+            dataFlag = false;
+            diseaseTextField.setText("");
         }
+
+        return nameFlag && emailFlag && birthdateFlag && numChildrenFlag && dataFlag;
+
     }
 
     /**
@@ -213,13 +227,14 @@ public class ReviewGUI extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
         if (command.equals("Submit for Approval")) {
+
+            // making frame invisible to user
             f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                f1.setVisible(false);
+            f1.setVisible(false);
 
             // Create a new instance of ApprovalGUI
             ApprovalGUI approval = new ApprovalGUI();
 
-            
             // Making a deep copy of the current immigrant form
             InfectedUserData copy = new InfectedUserData(immigrantDataForm.getName(), immigrantDataForm.getData(), immigrantDataForm.getEmail(), immigrantDataForm.getBirthdate(), immigrantDataForm.getNumChildren(), immigrantDataForm.getIsGuardian(), immigrantDataForm.getDate());
             
@@ -251,21 +266,36 @@ public class ReviewGUI extends JFrame implements ActionListener {
             }
             
             // Validate the data and let the user know if it was invalid.
-            int validationResult = validate(copy);
+            // int validationResult = validate(copy);
 
-            if (validationResult != 5) {
-            // This means not all fields are valid
+            // if (validationResult != 5) {
+            //     // This means not all fields are valid
+            //     JOptionPane.showMessageDialog(f1, "Some fields have invalid data. Please check and try again.");
+            //     loadReviewScreen(workflowtable);
+            // } else {
+            //     // All fields are valid, so proceed
+            //     f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            //     f1.setVisible(false);
+
+            //     // load the approval screen with the new version of the form
+            //     approval.loadApprovalScreen(copy);
+
+            // }
+
+            boolean validationResult = validate(copy);
+
+            while (!validationResult) {
                 JOptionPane.showMessageDialog(f1, "Some fields have invalid data. Please check and try again.");
-                loadReviewScreen(workflowtable);
-            } else {
-                // All fields are valid, so proceed
-                f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                f1.setVisible(false);
-
-                // load the approval screen with the new version of the form
-                approval.loadApprovalScreen(copy);
-
+                validate(copy);
             }
+
+            f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            f1.setVisible(false);
+
+            workflowtable.addApprovalForm(copy);
+
+            approval.loadApprovalScreen(null);
+
         }
     }
 }
