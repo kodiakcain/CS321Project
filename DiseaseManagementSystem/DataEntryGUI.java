@@ -29,7 +29,7 @@ class DataEntryGUI extends JFrame implements ActionListener {
     static JFrame f2;
 
     // JButton to submit to review
-    static JButton b;
+    static JButton b, exit;
 
     // Labels to display text
     static JLabel l1, l2, l3, l4, l5, title;
@@ -152,6 +152,12 @@ class DataEntryGUI extends JFrame implements ActionListener {
             workflowObject.addReviewForm(ImmigrantDataForm);
 
             } 
+        } 
+        if (s.equals("Exit")) {
+            f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            f.setVisible(false);
+            CentralGUI centralgui = new CentralGUI();
+            centralgui.loadCentralScreen();
         }
     }
     /**
@@ -229,12 +235,14 @@ class DataEntryGUI extends JFrame implements ActionListener {
 
             //=Create submit button
             b = new JButton("Submit");
+            exit = new JButton("Exit");
 
             //make the gui object
             DataEntryGUI gui = new DataEntryGUI();
 
             //make the 
             b.addActionListener(gui);
+            exit.addActionListener(gui);
 
             //make the five textfields
             t1 = new JTextField(16);
@@ -293,6 +301,8 @@ class DataEntryGUI extends JFrame implements ActionListener {
             gbc.gridy++;
             gbc.anchor = GridBagConstraints.CENTER;
             p.add(b, gbc);
+            gbc.gridy++;
+            p.add(exit, gbc);
 
             //add panel to frame
             f.add(p);
