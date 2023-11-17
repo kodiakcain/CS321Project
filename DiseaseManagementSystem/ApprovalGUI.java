@@ -22,9 +22,36 @@ public class ApprovalGUI extends JFrame implements ActionListener {
     private static JFrame frame;
 
     /**
-     * Labels to display text to the Approving Agent user.
+     * Label to display the immigrant's name to the Approving Agent user.
      */
-    private static JLabel l1, l2, l3, l4, l5, l6;
+    private static JLabel name;
+    
+    /**
+     * Label to display the immigrant's email to the Approving Agent user.
+     */
+    private static JLabel email;
+    
+    /**
+     * Label to display the immigrant's birthdate to the Approving Agent user.
+     */
+    private static JLabel birthdate;
+
+    /**
+     * Label to display the immigrant's number of children to the Approving
+     *     Agent user.
+     */
+    private static JLabel numChildren;
+
+    /**
+     * Label to display the immigrant's disease to the Approving Agent user.
+     */
+    private static JLabel diseaseName;
+
+    /**
+     * Label to notify the Approving Agent user that the confirmation email has
+     *     been sent.
+     */
+    private static JLabel approvalEmail;
     
     /**
      * The immigrant's infectious disease form.
@@ -69,11 +96,11 @@ public class ApprovalGUI extends JFrame implements ActionListener {
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         // store all provided data received from Review Agent
-        l1 = new JLabel("Entered Name: " + form.getName());
-        l2 = new JLabel("Entered Email: " + form.getEmail());
-        l3 = new JLabel("Entered Birthdate: " + form.getBirthdate());
-        l4 = new JLabel("Entered Number of Children: " + form.getNumChildren());
-        l5 = new JLabel("Entered Disease Data: " + form.getData());
+        name = new JLabel("Entered Name: " + form.getName());
+        email = new JLabel("Entered Email: " + form.getEmail());
+        birthdate = new JLabel("Entered Birthdate: " + form.getBirthdate());
+        numChildren = new JLabel("Entered Number of Children: " + form.getNumChildren());
+        diseaseName = new JLabel("Entered Disease Data: " + form.getData());
 
         // stores all components
         p = new JPanel(new GridBagLayout());
@@ -95,15 +122,15 @@ public class ApprovalGUI extends JFrame implements ActionListener {
         gbc.gridx = 0;
 
         // add labels
-        p.add(l1, gbc);
+        p.add(name, gbc);
         gbc.gridy++;
-        p.add(l2, gbc);
+        p.add(email, gbc);
         gbc.gridy++;
-        p.add(l3, gbc);
+        p.add(birthdate, gbc);
         gbc.gridy++;
-        p.add(l4, gbc);
+        p.add(numChildren, gbc);
         gbc.gridy++;
-        p.add(l5, gbc);
+        p.add(diseaseName, gbc);
 
         // move downwards
         gbc.gridy++;
@@ -134,8 +161,8 @@ public class ApprovalGUI extends JFrame implements ActionListener {
 
         if (command.equals("Send Approval Email")) {
             // email-sending logic
-            l6 =  new JLabel("Approval Email sent to Immigrant, Exit System.");
-            l6.setText("Approval Email Sent, Exit System");
+            approvalEmail =  new JLabel("Approval Email sent to Immigrant, Exit System.");
+            approvalEmail.setText("Approval Email Sent, Exit System");
             
             JButton closeButton  = new JButton("Exit System");
             closeButton.addActionListener(new ActionListener() {
@@ -151,7 +178,7 @@ public class ApprovalGUI extends JFrame implements ActionListener {
             gbc.gridx--;
             // Move downwards
             gbc.gridy++;
-            p.add(l6, gbc);
+            p.add(approvalEmail, gbc);
             gbc.gridy++;
             p.add(closeButton, gbc);
 
@@ -160,10 +187,12 @@ public class ApprovalGUI extends JFrame implements ActionListener {
             // ensure the change is displayed
             frame.repaint();
         }
+
         //  return the form back to the Reviewing Agent
         else if (command.equals("Return for Review")) {
             // close window
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            // set off visibility
             frame.setVisible(false);
             
             // load the reviewing agent's Reviewing screen
