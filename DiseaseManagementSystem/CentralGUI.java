@@ -34,7 +34,7 @@ public class CentralGUI extends JFrame implements ActionListener {
     /**
      * This method loads the central screen
      */
-    public static void loadCentralScreen() {
+    public static void loadCentralScreen(WorkflowTable workflowtable) {
 
         // making frame
         frame = new JFrame("Disease Management System");
@@ -54,13 +54,7 @@ public class CentralGUI extends JFrame implements ActionListener {
         dataEntryButton.addActionListener(gui);
         reviewButton.addActionListener(gui);
         approvalButton.addActionListener(gui);
-        exitButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // close window
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setVisible(false);
-            }
-        });
+        exitButton.addActionListener(gui);
 
         // creating panel and gbc
         JPanel centralPanel = new JPanel(new GridBagLayout());
@@ -127,6 +121,9 @@ public class CentralGUI extends JFrame implements ActionListener {
             frame.setVisible(false);
             ApprovalGUI approvalGUI = new ApprovalGUI();
             approvalGUI.loadApprovalScreen(null);
+        } else if (buttonPressed.equals("Exit")) {
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setVisible(false);
         }
     }
 
@@ -135,7 +132,8 @@ public class CentralGUI extends JFrame implements ActionListener {
      * @param args the array of strings passed in as CLI by the user.
      */
     public static void main(String[] args) {
-        loadCentralScreen();
+        WorkflowTable workflowtable = new WorkflowTable();
+        loadCentralScreen(workflowtable);
     }
 
 

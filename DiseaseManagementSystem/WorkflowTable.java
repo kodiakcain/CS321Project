@@ -79,7 +79,6 @@ public class WorkflowTable {
         } else {
             return placeholder;
         }
-
     }
 
     /**
