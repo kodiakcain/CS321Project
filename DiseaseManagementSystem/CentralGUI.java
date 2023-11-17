@@ -29,6 +29,8 @@ public class CentralGUI extends JFrame implements ActionListener {
      */
     static JFrame frame;
 
+    static WorkflowTable workflowtable;
+
     /**
      * This method loads the central screen
      */
@@ -52,7 +54,13 @@ public class CentralGUI extends JFrame implements ActionListener {
         dataEntryButton.addActionListener(gui);
         reviewButton.addActionListener(gui);
         approvalButton.addActionListener(gui);
-        exitButton.addActionListener(gui);
+        exitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // close window
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setVisible(false);
+            }
+        });
 
         // creating panel and gbc
         JPanel centralPanel = new JPanel(new GridBagLayout());
