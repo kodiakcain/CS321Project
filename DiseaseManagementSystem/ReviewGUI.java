@@ -41,7 +41,11 @@ public class ReviewGUI extends JFrame implements ActionListener {
 
         JButton b = new JButton("Submit for Approval");
 
+        JButton exit = new JButton("Exit");
+
         b.addActionListener(gui);
+
+        exit.addActionListener(gui);
 
         // Set the frame to visible
         f1.setVisible(true);
@@ -115,6 +119,9 @@ public class ReviewGUI extends JFrame implements ActionListener {
         gbc.gridy++;
 
         p.add(b, gbc);
+        gbc.gridy++;
+
+        p.add(exit, gbc);
         f1.add(p);
     }
 
@@ -298,6 +305,12 @@ public class ReviewGUI extends JFrame implements ActionListener {
             ReviewGUI gui = new ReviewGUI();
             gui.loadReviewScreen(workflowtable);
 
+        }
+        else if (command.equals("Exit")) {
+                f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                f1.setVisible(false);
+                CentralGUI central = new CentralGUI();
+                central.loadCentralScreen(workflowtable); 
         }
     }
 }
