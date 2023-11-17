@@ -157,6 +157,8 @@ public class ApprovalGUI extends JFrame implements ActionListener {
     }
 
     /**
+     * TODO: WIP FIX JAVADOC
+     * 
      * Handles action events triggered by the Approving Agent when they press
      *     the following buttons: The "Send Approval Email" currently ONLY 
      *     notifies the Approving Agent that an approval email has been sent
@@ -171,21 +173,26 @@ public class ApprovalGUI extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
 
+        // Approving agent presses "Send Approval Email" button
         if (command.equals("Send Approval Email")) {
             // notifies Approving Agent the confirmation email was sent
             approvalEmail =  new JLabel(
                 "Approval Email sent to Immigrant, Exit System."
             );
-            approvalEmail.setText("Approval Email Sent, Exit System");
+            approvalEmail.setText("Approval Email Sent, Exit");
             
-            // exit button
-            JButton closeButton  = new JButton("Exit System");
+            // exit Approval System button and return to Central GUI screen
+            JButton closeButton  = new JButton("Exit");
             closeButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent event) {
-                    // close window
+                    // close ApprovalGUI screen
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     frame.setVisible(false);
+
+                    // return to CentralGUI screen
+                    CentralGUI centralGUI = new CentralGUI();
+                    centralGUI.loadCentralScreen(workFlowTable);
                 }
             });
 
@@ -203,16 +210,14 @@ public class ApprovalGUI extends JFrame implements ActionListener {
             frame.repaint();
         }
 
-        //  return the form back to the Reviewing Agent
+        // return the form back to the Reviewing Agent
         else if (command.equals("Return for Review")) {
-            // close window
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            // set off visibility
-            frame.setVisible(false);
-            
-            // load the reviewing agent's Reviewing screen
-            ReviewGUI gui = new ReviewGUI();
-            gui.loadReviewScreen(workFlowTable);
+            // send immigrant's form back to the workflow table's reviewQueue
+            workFlowTable.addReviewForm(immigrantDataForm);
+
+            // load the next Approval form for the Approving Agent
+            ApprovalGUI approvalGUI = new ApprovalGUI();
+            approvalGUI.loadApprovalScreen(workFlowTable);
         }
     }
 }
