@@ -17,7 +17,7 @@ public class ReviewGUI extends JFrame implements ActionListener {
     // Labels to display text
     static JLabel l1, l2, l3, l4, l5;
     // Add text fields
-    static JTextField t1, t2, t3, t4, t5;
+    static JTextField nameTextField, emailTextField, DOBTextField, numChildrenTextField, diseaseTextField;
     static InfectedUserData immigrantDataForm;
 
     /**
@@ -55,19 +55,19 @@ public class ReviewGUI extends JFrame implements ActionListener {
         l5 = new JLabel("Entered Disease Data: " + form.data);
 
         // Make the five text fields
-        t1 = new JTextField(16);
-        t2 = new JTextField(16);
-        t3 = new JTextField(16);
-        t4 = new JTextField(16);
-        t5 = new JTextField(16);
+        nameTextField = new JTextField(16);
+        emailTextField = new JTextField(16);
+        DOBTextField = new JTextField(16);
+        numChildrenTextField = new JTextField(16);
+        diseaseTextField = new JTextField(16);
 
         // Set the size of the text fields
         Dimension fieldSize = new Dimension(100, 20); // Adjust the size as needed
-        t1.setPreferredSize(fieldSize);
-        t2.setPreferredSize(fieldSize);
-        t3.setPreferredSize(fieldSize);
-        t4.setPreferredSize(fieldSize);
-        t5.setPreferredSize(fieldSize);
+        nameTextField.setPreferredSize(fieldSize);
+        emailTextField.setPreferredSize(fieldSize);
+        DOBTextField.setPreferredSize(fieldSize);
+        numChildrenTextField.setPreferredSize(fieldSize);
+        diseaseTextField.setPreferredSize(fieldSize);
 
         JPanel p = new JPanel(new GridBagLayout());
 
@@ -81,35 +81,35 @@ public class ReviewGUI extends JFrame implements ActionListener {
         p.add(l1, gbc);
 
         gbc.gridx = 1;
-        p.add(t1, gbc);
+        p.add(nameTextField, gbc);
 
         gbc.gridy++;
         gbc.gridx = 0;
         p.add(l2, gbc);
 
         gbc.gridx = 1;
-        p.add(t2, gbc);
+        p.add(emailTextField, gbc);
 
         gbc.gridy++;
         gbc.gridx = 0;
         p.add(l3, gbc);
 
         gbc.gridx = 1;
-        p.add(t3, gbc);
+        p.add(DOBTextField, gbc);
 
         gbc.gridy++;
         gbc.gridx = 0;
         p.add(l4, gbc);
 
         gbc.gridx = 1;
-        p.add(t4, gbc);
+        p.add(numChildrenTextField, gbc);
 
         gbc.gridy++;
         gbc.gridx = 0;
         p.add(l5, gbc);
 
         gbc.gridx = 1;
-        p.add(t5, gbc);
+        p.add(diseaseTextField, gbc);
         gbc.gridy++;
 
         p.add(b, gbc);
@@ -169,6 +169,40 @@ public class ReviewGUI extends JFrame implements ActionListener {
     }
 
     /**
+     * Validates the data entered by the review agent.
+     * The method checks the validity of various fields such as name, email, birthdate,
+     * number of children, and disease data.
+     *
+     * @param form The InfectedUserData form to be validated.
+     * @return The number of valid data parts. A fully valid form would return 5.
+     */
+    public void validate(InfectedUserData form) {
+
+        if (form.validateName(form.getName()) != 1) {
+            // clear text field for name entry
+
+            // display message to user that they need to fix the name
+
+        }
+
+        if (form.validateEmail(form.getEmail()) != 1) {
+
+        }
+
+        if (form.validateBirthdate(form.getBirthdate()) != 1) {
+            
+        }
+
+        if (form.validateNumChild(form.getNumChildren()) != 1) {
+
+        }
+
+        if (form.validateInfectiousData(form.getData()) != 1) {
+
+        }
+    }
+
+    /**
      * Handles action events triggered by the user interface elements. Specifically, this
      * method is responsible for handling when the user presses the submission for approval button.
      *
@@ -190,30 +224,30 @@ public class ReviewGUI extends JFrame implements ActionListener {
             InfectedUserData copy = new InfectedUserData(immigrantDataForm.getName(), immigrantDataForm.getData(), immigrantDataForm.getEmail(), immigrantDataForm.getBirthdate(), immigrantDataForm.getNumChildren(), immigrantDataForm.getIsGuardian(), immigrantDataForm.getDate());
             
             // Validate any data that was entered by the review agent.
-            if (!(t1.getText().equals(""))) {
-                copy.setName(t1.getText());
+            if (!(nameTextField.getText().equals(""))) {
+                copy.setName(nameTextField.getText());
             } 
             
-            if (!(t2.getText().equals(""))) {
-                copy.setEmail(t2.getText());
+            if (!(emailTextField.getText().equals(""))) {
+                copy.setEmail(emailTextField.getText());
             }
             
-            if (!(t3.getText().equals(""))) {
-                copy.setBirthdate(t3.getText());
+            if (!(DOBTextField.getText().equals(""))) {
+                copy.setBirthdate(DOBTextField.getText());
             }
             
-            if (!(t4.getText().equals(""))) {
-                if (Integer.parseInt(t4.getText()) > 0) {
+            if (!(numChildrenTextField.getText().equals(""))) {
+                if (Integer.parseInt(numChildrenTextField.getText()) > 0) {
                     copy.setGuardian(true);
-                    copy.setNumChildren(Integer.parseInt(t4.getText()));
+                    copy.setNumChildren(Integer.parseInt(numChildrenTextField.getText()));
                 } else  {
                     copy.setGuardian(false);
-                    copy.setNumChildren(Integer.parseInt(t4.getText()));
+                    copy.setNumChildren(Integer.parseInt(numChildrenTextField.getText()));
                 }
             } 
             
-            if (!(t5.getText().equals(""))) {
-                copy.setData(t5.getText());
+            if (!(diseaseTextField.getText().equals(""))) {
+                copy.setData(diseaseTextField.getText());
             }
             
             // Validate the data and let the user know if it was invalid.
