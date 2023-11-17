@@ -28,8 +28,9 @@ public class ReviewGUI extends JFrame implements ActionListener {
      *
      * @param form The InfectedUserData containing the information to be reviewed.
      */
-    public static void loadReviewScreen(InfectedUserData form) {
+    public static void loadReviewScreen(WorkflowTable wft) {
 
+        workflowtable = wft;
         // creating copy of form 
         immigrantDataForm = workflowtable.getNextReviewForm();
 
