@@ -92,12 +92,12 @@ class DataEntryGUI extends JFrame implements ActionListener {
             //fill the form with the data
             ImmigrantDataForm = new InfectedUserData(name, diseaseData, email, birthdate, 0, false, null);
 
-            //add form to review queue
-            workflowtable.addReviewForm(ImmigrantDataForm);
 
             //if there is more than zero children, the immigrant is a parent or guardian
-            if (Integer.parseInt(children) > 0) {
-                ImmigrantDataForm.setGuardian(true);
+            if (!children.equals("")) {
+                if (Integer.parseInt(children) > 0) {
+                    ImmigrantDataForm.setGuardian(true);
+                }
             }
 
             //if all validations are not done, dispose of the old screen, and reload a new screen for data entry 
@@ -117,12 +117,8 @@ class DataEntryGUI extends JFrame implements ActionListener {
             //set the flag to true
             flag1 = true;
 
-            //calculate the form number based on the SHA-256 hash of the email, and replace the email
-            try {
-                ImmigrantDataForm.calculateFormNumber();
-            } catch (NoSuchAlgorithmException e1) {
-                e1.printStackTrace();
-            }
+            //add form to review queue
+            workflowtable.addReviewForm(ImmigrantDataForm);
 
             DataEntryGUI.loadDataScreen(workflowtable);
 
@@ -176,7 +172,7 @@ class DataEntryGUI extends JFrame implements ActionListener {
         }
 
         //add validation for number of children
-        if (form.validateNumChild(Integer.parseInt(children)) == 1) {
+        if (!children.equals("") && form.validateNumChild(Integer.parseInt(children)) == 1) {
             finalNum++;
         } else {
             //add clear data form and show birthdate error message

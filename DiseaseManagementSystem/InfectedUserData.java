@@ -305,33 +305,7 @@ public class InfectedUserData {
             return 1;
         }
     }
-
-    /**
-     * Calculates a unique form ID.
-     * @return Returns unique form ID for the form.
-     * @throws NoSuchAlgorithmException
-     */
-    public void calculateFormNumber() throws NoSuchAlgorithmException {
-
-        String hashString = this.getEmail();
-
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
-
-        // compute the hash of the input string
-        byte[] hash = md.digest(hashString.getBytes());
-
-        // convert the hash to a hexadecimal string
-        StringBuilder hexString = new StringBuilder();
-        for (byte b : hash) {
-        hexString.append(String.format("%02x", b));
-        }
-
-        String newEmail = hexString.toString();
-        
-
-        this.email = newEmail;
-    }      
-
+    
     /**
      * Stores all the data in the
      */

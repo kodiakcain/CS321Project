@@ -9,6 +9,13 @@
             "name": "CentralGUI",
             "request": "launch",
             "mainClass": "DiseaseManagementSystem.CentralGUI",
+            "projectName": "CS321Project_29fdea36"
+        },
+        {
+            "type": "java",
+            "name": "CentralGUI",
+            "request": "launch",
+            "mainClass": "DiseaseManagementSystem.CentralGUI",
             "projectName": "CS321Project_d4d1137f"
         },
         {

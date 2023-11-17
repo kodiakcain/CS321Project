@@ -34,8 +34,9 @@ public class CentralGUI extends JFrame implements ActionListener {
     /**
      * This method loads the central screen
      */
-    public static void loadCentralScreen(WorkflowTable workflowtable) {
+    public static void loadCentralScreen(WorkflowTable wft) {
 
+        workflowtable = wft;
         // making frame
         frame = new JFrame("Disease Management System");
 

@@ -50,11 +50,11 @@ public class ReviewGUI extends JFrame implements ActionListener {
         f1.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         // Displaying immigrant information
-        l1 = new JLabel("Entered Name: " + form.name);
-        l2 = new JLabel("Entered Email: " + form.email);
-        l3 = new JLabel("Entered Birthdate: " + form.birthdate);
-        l4 = new JLabel("Entered Number of Children: " + form.numChildren);
-        l5 = new JLabel("Entered Disease Data: " + form.data);
+        l1 = new JLabel("Entered Name: " + immigrantDataForm.name);
+        l2 = new JLabel("Entered Email: " + immigrantDataForm.email);
+        l3 = new JLabel("Entered Birthdate: " + immigrantDataForm.birthdate);
+        l4 = new JLabel("Entered Number of Children: " + immigrantDataForm.numChildren);
+        l5 = new JLabel("Entered Disease Data: " + immigrantDataForm.data);
 
         // Make the five text fields
         nameTextField = new JTextField(16);
@@ -295,7 +295,8 @@ public class ReviewGUI extends JFrame implements ActionListener {
 
             workflowtable.addApprovalForm(copy);
 
-            approval.loadApprovalScreen(null);
+            ReviewGUI gui = new ReviewGUI();
+            gui.loadReviewScreen(workflowtable);
 
         }
     }
