@@ -145,7 +145,7 @@ public class ApprovalGUI extends JFrame implements ActionListener {
         gridBagConst.gridy++;
         // reset gridwidth for buttons
         gridBagConst.gridwidth = 1;
-        
+
         // add approve button to container
         panel.add(approveButton, gridBagConst);
         // move right
@@ -172,13 +172,13 @@ public class ApprovalGUI extends JFrame implements ActionListener {
         String command = e.getActionCommand();
 
         if (command.equals("Send Approval Email")) {
-            // email-sending logic
+            // notifies Approving Agent the confirmation email was sent
             approvalEmail =  new JLabel(
                 "Approval Email sent to Immigrant, Exit System."
             );
-
             approvalEmail.setText("Approval Email Sent, Exit System");
             
+            // exit button
             JButton closeButton  = new JButton("Exit System");
             closeButton.addActionListener(new ActionListener() {
                 @Override
