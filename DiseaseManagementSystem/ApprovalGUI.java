@@ -145,10 +145,13 @@ public class ApprovalGUI extends JFrame implements ActionListener {
         gridBagConst.gridy++;
         // reset gridwidth for buttons
         gridBagConst.gridwidth = 1;
-        // add buttons
+        
+        // add approve button to container
         panel.add(approveButton, gridBagConst);
         // move right
         gridBagConst.gridx++;
+
+        // add return button to container
         panel.add(returnButton, gridBagConst);
         frame.add(panel);
     }
