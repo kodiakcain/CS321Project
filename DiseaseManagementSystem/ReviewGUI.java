@@ -26,7 +26,7 @@ public class ReviewGUI extends JFrame implements ActionListener {
      * This screen will show the immigrants data on the screen and provides input fields 
      * for correction from the review agent, if necessary.
      *
-     * @param form The InfectedUserData containing the information to be reviewed.
+     * @param wft The workflow table containing the information to be reviewed.
      */
     public static void loadReviewScreen(WorkflowTable wft) {
 
