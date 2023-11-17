@@ -72,6 +72,11 @@ public class ApprovalGUI extends JFrame implements ActionListener {
     private static WorkflowTable workFlowTable;
 
     /**
+     * Flag to indicate if an Approval Form has been approved.
+     */
+    private static boolean approvalFlag;
+
+    /**
      * Displays the Immigrant's infectious disease information to the Approving
      *     Agent User.
      * 
@@ -159,12 +164,14 @@ public class ApprovalGUI extends JFrame implements ActionListener {
         // Add return button to container
         panel.add(returnButton, gridBagConst);
         frame.add(panel);
-
+        
+        // move exitButton downwards before adding it
+        gridBagConst.gridy++;
         // Add exit button to container
         panel.add(exitButton, gridBagConst);
         frame.add(panel);
     }
-
+    
     /**
      * Handles action events triggered by the Approving Agent when they press
      *     the following buttons: The "Send Approval Email" button informs
@@ -183,45 +190,58 @@ public class ApprovalGUI extends JFrame implements ActionListener {
 
         // Approving agent presses "Send Approval Email" button
         if (command.equals("Send Approval Email")) {
+            // check if Approval form has already been approved by agent
+            if (approvalFlag == true) {
+                return;
+            }
+            
             // Notifies Approving Agent the confirmation email was sent
             approvalEmail =  new JLabel(
-                "Approval Email sent to Immigrant."
+                "Approval Email sent to Immigrant: Load next Approval form or Exit"
             );
             approvalEmail.setText("Approval Email Sent");
             
-            // // Exit Approval System button and return to Central GUI screen
-            // JButton closeButton  = new JButton("Exit");
-            // closeButton.addActionListener(new ActionListener() {
-            //     @Override
-            //     public void actionPerformed(ActionEvent event) {
-            //         // close ApprovalGUI screen
-            //         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            //         frame.setVisible(false);
+            // Exit Approval System button and return to Central GUI screen
+            JButton nextButton  = new JButton("Next Approval Item");
+            nextButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent event) {
+                    // Set approvalFlag to false to indicate the form was not approved
+                    approvalFlag = false;
+                    
+                    // Close ApprovalGUI screen to load next Approval form screen
+                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    frame.setVisible(false);
 
-            //         // return to CentralGUI screen
-            //         CentralGUI centralGUI = new CentralGUI();
-            //         centralGUI.loadCentralScreen(workFlowTable);
-            //     }
-            // });
+                    // load the next Approval form for the Approving Agent
+                    ApprovalGUI approvalGUI = new ApprovalGUI();
+                    approvalGUI.loadApprovalScreen(workFlowTable);
+                }
+            });
 
             gridBagConst.anchor = GridBagConstraints.CENTER;
             gridBagConst.gridx--;
+            panel.add(nextButton, gridBagConst);
             // Move downwards
             gridBagConst.gridy++;
             panel.add(approvalEmail, gridBagConst);
-            gridBagConst.gridy++;
-            // panel.add(closeButton, gridBagConst);
 
-            // // refresh the frame to show new label (tell layout manager of change)
-            // frame.revalidate();
-            // // ensure the change is displayed
-            // frame.repaint();
+            // refresh the frame to show new label (tell layout manager of change)
+            frame.revalidate();
+            // ensure the change is displayed
+            frame.repaint();
+            
+            // Set approvalFlag to true to indicate the form was approved
+            approvalFlag = true;
         }
 
         // Return the form back to the Reviewing Agent
         else if (command.equals("Return for Review")) {
             // send immigrant's form back to the workflow table's reviewQueue
             workFlowTable.addReviewForm(immigrantDataForm);
+            
+            // Set approvalFlag to false to indicate the form was not approved
+            approvalFlag = false;
 
             // close ApprovalGUI screen to open screen for next Approval form
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -233,34 +253,17 @@ public class ApprovalGUI extends JFrame implements ActionListener {
         }
 
         // Approving Agent decides to return to Central screen
-        else if (command.equals("Exit")) {
-            // Exit Approval System button and return to Central GUI screen
-            JButton closeButton  = new JButton("Exit");
-            closeButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent event) {
-                    // close ApprovalGUI screen
-                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                    frame.setVisible(false);
+        else if (command.equals("Exit")) {            
+            // close ApprovalGUI screen
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setVisible(false);
 
-                    // return to CentralGUI screen
-                    CentralGUI centralGUI = new CentralGUI();
-                    centralGUI.loadCentralScreen(workFlowTable);
-                }
-            });
+            // Set approvalFlag to false to indicate the form was not approved
+            approvalFlag = false;
 
-            // gridBagConst.anchor = GridBagConstraints.CENTER;
-            // gridBagConst.gridx--;
-            // // Move downwards
-            // gridBagConst.gridy++;
-            // panel.add(approvalEmail, gridBagConst);
-            // gridBagConst.gridy++;
-            // panel.add(closeButton, gridBagConst);
-
-            // // refresh the frame to show new label (tell layout manager of change)
-            // frame.revalidate();
-            // // ensure the change is displayed
-            // frame.repaint();
+            // return to CentralGUI screen
+            CentralGUI centralGUI = new CentralGUI();
+            centralGUI.loadCentralScreen(workFlowTable);
         }
     }
 }
