@@ -69,6 +69,12 @@ public class ApprovalGUI extends JFrame implements ActionListener {
     private static JPanel panel;
 
     /**
+     * The Workflow Table that contains the Infectious Disease Forms
+     *     of all immigrants. 
+     */
+    private static WorkflowTable workflowtable;
+
+    /**
      * Displays the Immigrant's infectious disease information to the Approving
      *     Agent User.
      * 
@@ -161,7 +167,10 @@ public class ApprovalGUI extends JFrame implements ActionListener {
 
         if (command.equals("Send Approval Email")) {
             // email-sending logic
-            approvalEmail =  new JLabel("Approval Email sent to Immigrant, Exit System.");
+            approvalEmail =  new JLabel(
+                "Approval Email sent to Immigrant, Exit System."
+            );
+
             approvalEmail.setText("Approval Email Sent, Exit System");
             
             JButton closeButton  = new JButton("Exit System");
