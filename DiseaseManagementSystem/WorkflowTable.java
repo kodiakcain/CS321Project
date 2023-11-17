@@ -2,6 +2,7 @@
 package DiseaseManagementSystem;
 
 import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * Workflow Table that will contain the corresponding IDs of all applicants'
@@ -13,13 +14,13 @@ public class WorkflowTable {
      * The list of IDs for all Infected User Data forms that are waiting to be
      *     reviewed.
      */
-    private LinkedList<InfectedUserData> reviewQueue;
+    private Queue<InfectedUserData> reviewQueue;
 
     /**
      * The list of IDs for all Infected User Data forms that are waiting to be
      *     approved.
      */
-    private LinkedList<InfectedUserData> approvalQueue;
+    private Queue<InfectedUserData> approvalQueue;
 
     /**
      * Helper method that constructs the Workflow Table with its lists of
@@ -75,7 +76,7 @@ public class WorkflowTable {
             // needs to be changed to properly implement queue functionality.
             // we actually want to remove the form, not just retrieve it.
             // peek() won't remove the form for us.
-            return reviewQueue.peek();
+            return reviewQueue.poll();
         } else {
             return placeholder;
         }
@@ -111,7 +112,7 @@ public class WorkflowTable {
         InfectedUserData placeholder = new InfectedUserData(null, null, null, null, 0, false, null);
 
         if (!approvalQueue.isEmpty()) {
-            return approvalQueue.peek();
+            return approvalQueue.poll();
         } else {
             return placeholder;
         }

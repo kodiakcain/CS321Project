@@ -31,7 +31,7 @@ public class ReviewGUI extends JFrame implements ActionListener {
     public static void loadReviewScreen(InfectedUserData form) {
 
         // creating copy of form 
-        immigrantDataForm = form;
+        immigrantDataForm = workflowtable.getNextReviewForm();
 
         // displaying frame
         f1 = new JFrame("Disease Management System - Review Data");
