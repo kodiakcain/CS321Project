@@ -86,7 +86,7 @@ public class ApprovalGUI extends JFrame implements ActionListener {
 
         // New frame to be shown to the Approving Agent
         frame = new JFrame("Disease Management System - Approve Data"); 
-        ApprovalGUI gui = new ApprovalGUI();
+        ApprovalGUI approvalGUI = new ApprovalGUI();
 
          // Container to store components 
         panel = new JPanel(new GridBagLayout());
@@ -102,12 +102,17 @@ public class ApprovalGUI extends JFrame implements ActionListener {
         // Approval button
         JButton approveButton = new JButton("Send Approval Email");
         // Prepare specific action when approveButton is pressed
-        approveButton.addActionListener(gui);
+        approveButton.addActionListener(approvalGUI);
         
         // Return button
         JButton returnButton = new JButton("Return for Review");
         // Prepare specific action when returnButton is pressed
-        returnButton.addActionListener(gui);
+        returnButton.addActionListener(approvalGUI);
+
+        // Exit button
+        JButton exitButton = new JButton("Exit");
+        // Prepare specific action when exitButton is pressed
+        exitButton.addActionListener(approvalGUI);
 
         // Store all provided data received from Review Agent
         name = new JLabel("Entered Name: " + immigrantDataForm.getName());
@@ -154,6 +159,10 @@ public class ApprovalGUI extends JFrame implements ActionListener {
         // Add return button to container
         panel.add(returnButton, gridBagConst);
         frame.add(panel);
+
+        // Add exit button to container
+        panel.add(exitButton, gridBagConst);
+        frame.add(panel);
     }
 
     /**
@@ -176,10 +185,55 @@ public class ApprovalGUI extends JFrame implements ActionListener {
         if (command.equals("Send Approval Email")) {
             // Notifies Approving Agent the confirmation email was sent
             approvalEmail =  new JLabel(
-                "Approval Email sent to Immigrant, Exit System."
+                "Approval Email sent to Immigrant."
             );
-            approvalEmail.setText("Approval Email Sent, Exit");
+            approvalEmail.setText("Approval Email Sent");
             
+            // // Exit Approval System button and return to Central GUI screen
+            // JButton closeButton  = new JButton("Exit");
+            // closeButton.addActionListener(new ActionListener() {
+            //     @Override
+            //     public void actionPerformed(ActionEvent event) {
+            //         // close ApprovalGUI screen
+            //         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            //         frame.setVisible(false);
+
+            //         // return to CentralGUI screen
+            //         CentralGUI centralGUI = new CentralGUI();
+            //         centralGUI.loadCentralScreen(workFlowTable);
+            //     }
+            // });
+
+            gridBagConst.anchor = GridBagConstraints.CENTER;
+            gridBagConst.gridx--;
+            // Move downwards
+            gridBagConst.gridy++;
+            panel.add(approvalEmail, gridBagConst);
+            gridBagConst.gridy++;
+            // panel.add(closeButton, gridBagConst);
+
+            // // refresh the frame to show new label (tell layout manager of change)
+            // frame.revalidate();
+            // // ensure the change is displayed
+            // frame.repaint();
+        }
+
+        // Return the form back to the Reviewing Agent
+        else if (command.equals("Return for Review")) {
+            // send immigrant's form back to the workflow table's reviewQueue
+            workFlowTable.addReviewForm(immigrantDataForm);
+
+            // close ApprovalGUI screen to open screen for next Approval form
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            frame.setVisible(false);
+
+            // load the next Approval form for the Approving Agent
+            ApprovalGUI approvalGUI = new ApprovalGUI();
+            approvalGUI.loadApprovalScreen(workFlowTable);
+        }
+
+        // Approving Agent decides to return to Central screen
+        else if (command.equals("Exit")) {
             // Exit Approval System button and return to Central GUI screen
             JButton closeButton  = new JButton("Exit");
             closeButton.addActionListener(new ActionListener() {
@@ -195,28 +249,18 @@ public class ApprovalGUI extends JFrame implements ActionListener {
                 }
             });
 
-            gridBagConst.anchor = GridBagConstraints.CENTER;
-            gridBagConst.gridx--;
-            // Move downwards
-            gridBagConst.gridy++;
-            panel.add(approvalEmail, gridBagConst);
-            gridBagConst.gridy++;
-            panel.add(closeButton, gridBagConst);
+            // gridBagConst.anchor = GridBagConstraints.CENTER;
+            // gridBagConst.gridx--;
+            // // Move downwards
+            // gridBagConst.gridy++;
+            // panel.add(approvalEmail, gridBagConst);
+            // gridBagConst.gridy++;
+            // panel.add(closeButton, gridBagConst);
 
-            // refresh the frame to show new label (tell layout manager of change)
-            frame.revalidate();
-            // ensure the change is displayed
-            frame.repaint();
-        }
-
-        // return the form back to the Reviewing Agent
-        else if (command.equals("Return for Review")) {
-            // send immigrant's form back to the workflow table's reviewQueue
-            workFlowTable.addReviewForm(immigrantDataForm);
-
-            // load the next Approval form for the Approving Agent
-            ApprovalGUI approvalGUI = new ApprovalGUI();
-            approvalGUI.loadApprovalScreen(workFlowTable);
+            // // refresh the frame to show new label (tell layout manager of change)
+            // frame.revalidate();
+            // // ensure the change is displayed
+            // frame.repaint();
         }
     }
 }
