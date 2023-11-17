@@ -92,6 +92,8 @@ class DataEntryGUI extends JFrame implements ActionListener {
             //fill the form with the data
             ImmigrantDataForm = new InfectedUserData(name, diseaseData, email, birthdate, 0, false, null);
 
+            //add form to review queue
+            workflowtable.addReviewForm(ImmigrantDataForm);
 
             //if there is more than zero children, the immigrant is a parent or guardian
             if (Integer.parseInt(children) > 0) {
