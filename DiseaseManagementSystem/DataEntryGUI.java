@@ -52,11 +52,9 @@ class DataEntryGUI extends JFrame implements ActionListener {
     //flag for completion of review screen and ready for approval screen
     static boolean flag2 = false;
 
-    //workflow table for approvalQueue
-    static Queue<String> approvalQueue = new LinkedList<String>();
+    static WorkflowTable workflowtable;
 
-    //workflow table for reviewQueue
-    static Queue<String> reviewQueue = new LinkedList<String>();
+    
     public static void main(String[] args) {
 
         //load the initial data screen
@@ -77,6 +75,7 @@ class DataEntryGUI extends JFrame implements ActionListener {
         String s = e.getActionCommand();
         if (s.equals("Submit")) {
 
+             
             //once the button is pressed the first submission is done
             firstSubmission = true;
 
@@ -93,6 +92,9 @@ class DataEntryGUI extends JFrame implements ActionListener {
             //fill the form with the data
             ImmigrantDataForm = new InfectedUserData(name, diseaseData, email, birthdate, 0, false, null);
 
+            //add form to review queue
+            workflowtable.addReviewForm(ImmigrantDataForm);
+
             //if there is more than zero children, the immigrant is a parent or guardian
             if (Integer.parseInt(children) > 0) {
                 ImmigrantDataForm.setGuardian(true);
@@ -102,17 +104,15 @@ class DataEntryGUI extends JFrame implements ActionListener {
             if (DataEntryGUI.validate(ImmigrantDataForm) != 5) {
         
                 f.dispose();
-                DataEntryGUI.loadDataScreen();
+                DataEntryGUI.loadDataScreen(workflowtable);
 
             }
 
             //if all fields are valid, 
             if (DataEntryGUI.validate(ImmigrantDataForm) == 5) {
             
-            //remove everything from the screen
-            Container contentPane = f.getContentPane();
-            contentPane.removeAll();
-            contentPane.repaint();
+                f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                f.setVisible(false);
 
             //set the flag to true
             flag1 = true;
@@ -124,32 +124,7 @@ class DataEntryGUI extends JFrame implements ActionListener {
                 e1.printStackTrace();
             }
 
-            //add the ID hash to the review queue
-            reviewQueue.add(ImmigrantDataForm.getEmail());
-
-            //new review gui object
-            ReviewGUI review = new ReviewGUI();
-
-            if (flag1 == true) {
-
-                f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                f.setVisible(false);
-
-                ImmigrantDataForm.setName(name);
-                ImmigrantDataForm.setEmail(email);
-                ImmigrantDataForm.setBirthdate(birthdate);
-                ImmigrantDataForm.setNumChildren(Integer.parseInt(children));
-                ImmigrantDataForm.setData(diseaseData);
-
-                ReviewGUI.loadReviewScreen(ImmigrantDataForm);
-            }
-
-            //review screen complete flag is false
-            flag2 = false;
-
-            WorkflowTable workflowObject = new WorkflowTable();
-
-            workflowObject.addReviewForm(ImmigrantDataForm);
+            DataEntryGUI.loadDataScreen(workflowtable);
 
             } 
         } 
@@ -157,14 +132,13 @@ class DataEntryGUI extends JFrame implements ActionListener {
             f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             f.setVisible(false);
             CentralGUI centralgui = new CentralGUI();
-            centralgui.loadCentralScreen();
+            centralgui.loadCentralScreen(workflowtable);
         }
     }
     /**
      * Validates the data entered by the review agent (same logic as ReviewGUI).
      * The method checks the validity of various fields such as name, email, birthdate,
      * number of children, and disease data.
-     *
      * @param form The InfectedUserData form to be validated.
      * @return The number of valid data parts. A fully valid form would return 5.
      */
@@ -216,9 +190,9 @@ class DataEntryGUI extends JFrame implements ActionListener {
      * Loads the data entry screen for the user to enter data into the InfectedUserData form.
      * Displays appropriate GUI components via Swing.
      */
-    public static void loadDataScreen() {
+    public static void loadDataScreen(WorkflowTable workflow) {
+        workflowtable = workflow;
         firstSubmission = false;
-
         if (firstSubmission == false) {
             //Make the JFrame
             f = new JFrame("Disease Management System - Enter Data");
