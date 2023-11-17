@@ -117,6 +117,8 @@ class DataEntryGUI extends JFrame implements ActionListener {
             //set the flag to true
             flag1 = true;
 
+            ImmigrantDataForm.setNumChildren(Integer.parseInt(children));
+
             //add form to review queue
             workflowtable.addReviewForm(ImmigrantDataForm);
 
