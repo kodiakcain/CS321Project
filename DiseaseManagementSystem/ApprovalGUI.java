@@ -66,7 +66,7 @@ public class ApprovalGUI extends JFrame implements ActionListener {
     /**
      * Container to store all components such as buttons and textfields.
      */
-    private static JPanel p;
+    private static JPanel panel;
 
     /**
      * Displays the Immigrant's infectious disease information to the Approving
@@ -75,10 +75,10 @@ public class ApprovalGUI extends JFrame implements ActionListener {
      * @param form for the Immigrant's infectious disease form that contains
      *     its corresponding data.
      */
-    public static void loadApprovalScreen(InfectedUserData form) {
-        // immigrant's immigration form
-        immigrantDataForm = form;
-        
+    public static void loadApprovalScreen(WorkflowTable workflowtable) {
+        // get next immigrant infectious disease form for approval
+        immigrantDataForm = workflowtable.getNextApprovalForm();
+
         // New frame to show the Approving Agent
         frame = new JFrame("Disease Management System - Approve Data"); 
         ApprovalGUI gui = new ApprovalGUI();
@@ -96,14 +96,14 @@ public class ApprovalGUI extends JFrame implements ActionListener {
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         // store all provided data received from Review Agent
-        name = new JLabel("Entered Name: " + form.getName());
-        email = new JLabel("Entered Email: " + form.getEmail());
-        birthdate = new JLabel("Entered Birthdate: " + form.getBirthdate());
-        numChildren = new JLabel("Entered Number of Children: " + form.getNumChildren());
-        diseaseName = new JLabel("Entered Disease Data: " + form.getData());
+        name = new JLabel("Entered Name: " + immigrantDataForm.getName());
+        email = new JLabel("Entered Email: " + immigrantDataForm.getEmail());
+        birthdate = new JLabel("Entered Birthdate: " + immigrantDataForm.getBirthdate());
+        numChildren = new JLabel("Entered Number of Children: " + immigrantDataForm.getNumChildren());
+        diseaseName = new JLabel("Entered Disease Data: " + immigrantDataForm.getData());
 
         // stores all components
-        p = new JPanel(new GridBagLayout());
+        panel = new JPanel(new GridBagLayout());
         gbc = new GridBagConstraints();
         gbc.insets.set(5, 5, 5, 5);
 
@@ -122,15 +122,15 @@ public class ApprovalGUI extends JFrame implements ActionListener {
         gbc.gridx = 0;
 
         // add labels
-        p.add(name, gbc);
+        panel.add(name, gbc);
         gbc.gridy++;
-        p.add(email, gbc);
+        panel.add(email, gbc);
         gbc.gridy++;
-        p.add(birthdate, gbc);
+        panel.add(birthdate, gbc);
         gbc.gridy++;
-        p.add(numChildren, gbc);
+        panel.add(numChildren, gbc);
         gbc.gridy++;
-        p.add(diseaseName, gbc);
+        panel.add(diseaseName, gbc);
 
         // move downwards
         gbc.gridy++;
