@@ -113,17 +113,17 @@ class DataEntryGUI extends JFrame implements ActionListener {
             
                 f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 f.setVisible(false);
-
-            //set the flag to true
-            flag1 = true;
-
-            ImmigrantDataForm.setNumChildren(Integer.parseInt(children));
-
-            //add form to review queue
-            workflowtable.addReviewForm(ImmigrantDataForm);
-
-            DataEntryGUI.loadDataScreen(workflowtable);
-
+                
+                //set the flag to true
+                flag1 = true;
+                
+                ImmigrantDataForm.setNumChildren(Integer.parseInt(children));
+                
+                //add form to review queue
+                workflowtable.addReviewForm(ImmigrantDataForm);
+    
+                DataEntryGUI.loadDataScreen(workflowtable);
+                
             } 
         } 
         if (s.equals("Exit")) {
