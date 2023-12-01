@@ -52,6 +52,10 @@ public class WorkflowTable {
      */
     public boolean addReviewForm(InfectedUserData form) {
 
+        if (form == null) {
+            return false;
+        }
+
         if (reviewQueue.add(form) == true) {
             return true;
         } else {
@@ -92,6 +96,10 @@ public class WorkflowTable {
      */
     public boolean addApprovalForm(InfectedUserData form) {
         
+        if (form == null) {
+            return false;
+        }
+
         if (approvalQueue.add(form)) {
             return true;
         } else {

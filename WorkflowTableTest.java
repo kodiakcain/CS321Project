@@ -99,23 +99,9 @@ public class WorkflowTableTest {
     @Test
     public void getNextApproveFormReturnsForm() {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
+        InfectedUserData expected = new InfectedUserData("John", "tb", "johnfulton8@gmail.com", "04/09/1998", 2, true, null)
         workflowTable.addApprovalForm(new InfectedUserData(null, null, null, null, 0, false, null));
         InfectedUserData actual = workflowTable.getNextReviewForm();
-        InfectedUserData expected = 1;
-
-        assertEquals(expected, actual);
-    }
-
-    /**
-     * Tests that getNextApprovalForm() fails (the approvalQueue was not
-     *      initialized) and produces -1.
-     */
-    @Test
-    public void getNextApproveIDReturnsNegativeOne() {
-        WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
-        
-        InfectedUserData actual = workflowTable.getNextApproveID();
-        InfectedUserData expected = -1;
 
         assertEquals(expected, actual);
     }
