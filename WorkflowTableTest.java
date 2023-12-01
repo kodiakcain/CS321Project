@@ -43,10 +43,10 @@ public class WorkflowTableTest {
         assertEquals(expected, actual);
     }
     
-    /* ================== getNextReviewID() Test Section ================== */
+    /* ================== getNextReviewForm() Test Section ================== */
 
     /**
-     * Tests that getting the next review ID from the reviewIDQueue is
+     * Tests that getting the next review Form from the reviewQueue is
      *     successful.
      */
     @Test
@@ -62,22 +62,8 @@ public class WorkflowTableTest {
     }
 
     /**
-     * Tests that getNextReviewID() fails (the reviewIDQueue was not
-     *     initialized) and produces null.
-     */
-    @Test
-    public void getNextReviewIDUninitializedQueue() {
-        WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
-
-        InfectedUserData actual = workflowTable.getNextReviewForm();
-        InfectedUserData expected = null;
-
-        assertEquals(expected, actual);
-    }
-
-    /**
-     * Tests that getNextReviewID() fails (the reviewIDQueue was empty) and
-     *     produces 0.
+     * Tests that getNextReviewForm() fails (the reviewQueue was empty) and
+     *     produces null.
      */
     @Test
     public void getNextReviewIDEmptyQueue() {
