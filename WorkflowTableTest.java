@@ -70,7 +70,7 @@ public class WorkflowTableTest {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
 
         InfectedUserData actual = workflowTable.getNextReviewForm();
-        InfectedUserData expected = null;
+        InfectedUserData expected = new InfectedUserData(null, null, null, null, 0, false, null));
 
         assertEquals(expected, actual);
     }
@@ -99,7 +99,7 @@ public class WorkflowTableTest {
     @Test
     public void getNextApproveFormReturnsForm() {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
-        InfectedUserData expected = new InfectedUserData("John", "tb", "johnfulton8@gmail.com", "04/09/1998", 2, true, null)
+        InfectedUserData expected = new InfectedUserData("John", "tb", "johnfulton8@gmail.com", "04/09/1998", 2, true, null);
         workflowTable.addApprovalForm(new InfectedUserData(null, null, null, null, 0, false, null));
         InfectedUserData actual = workflowTable.getNextReviewForm();
 
@@ -114,8 +114,8 @@ public class WorkflowTableTest {
     public void getNextApproveIDReturnsNull() {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
 
-        InfectedUserData actual = workflowTable.getNextApproveForm();
-        InfectedUserData expected = null;
+        InfectedUserData actual = workflowTable.getNextApprovalForm();
+        InfectedUserData expected = new InfectedUserData(null, null, null, null, 0, false, null));
 
         assertEquals(expected, actual);
     }
