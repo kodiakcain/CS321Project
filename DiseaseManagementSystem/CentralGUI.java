@@ -42,6 +42,8 @@ public class CentralGUI extends JFrame implements ActionListener {
 
         // making label
         welcomeMessage = new JLabel("Welcome to the Disease Management System");
+        welcomeMessage.setFont(welcomeMessage.getFont().deriveFont(18.0f));
+        welcomeMessage.setHorizontalAlignment(JLabel.CENTER);
 
         // making buttons
         dataEntryButton = new JButton("Data Entry System");
@@ -116,7 +118,7 @@ public class CentralGUI extends JFrame implements ActionListener {
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(false);
             ReviewGUI reviewGUI = new ReviewGUI();
-            reviewGUI.loadReviewScreen(workflowtable);
+            reviewGUI.loadReviewScreen(workflowtable, null);
         } else if (buttonPressed.equals("Approval System")) {
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(false);

@@ -15,7 +15,7 @@ import DiseaseManagementSystem.*;
 public class ReviewGUI extends JFrame implements ActionListener {
     static JFrame f1;
     // Labels to display text
-    static JLabel l1, l2, l3, l4, l5;
+    static JLabel nameLabel, emailLabel, birthdateLabel, numChildrenLabel, diseaseLabel, reviewTitle, editLabel;
     // Add text fields
     static JTextField nameTextField, emailTextField, DOBTextField, numChildrenTextField, diseaseTextField;
     static InfectedUserData immigrantDataForm;
@@ -28,24 +28,31 @@ public class ReviewGUI extends JFrame implements ActionListener {
      *
      * @param wft The workflow table containing the information to be reviewed.
      */
-    public static void loadReviewScreen(WorkflowTable wft) {
+    public static void loadReviewScreen(WorkflowTable wft, InfectedUserData form) {
 
         workflowtable = wft;
-        // creating copy of form 
-        immigrantDataForm = workflowtable.getNextReviewForm();
+
+        if (form == null) {
+            // creating copy of form 
+            immigrantDataForm = workflowtable.getNextReviewForm();
+        } else {
+            immigrantDataForm = form;
+        }
 
         // displaying frame
         f1 = new JFrame("Disease Management System - Review Data");
 
         ReviewGUI gui = new ReviewGUI();
 
-        JButton b = new JButton("Submit for Approval");
+        JButton submitButton = new JButton("Submit for Approval");
+        submitButton.setHorizontalAlignment(JButton.CENTER);
 
-        JButton exit = new JButton("Exit");
+        JButton exitButton = new JButton("Exit");
+        exitButton.setHorizontalAlignment(JButton.CENTER);
 
-        b.addActionListener(gui);
+        submitButton.addActionListener(gui);
 
-        exit.addActionListener(gui);
+        exitButton.addActionListener(gui);
 
         // Set the frame to visible
         f1.setVisible(true);
@@ -53,12 +60,17 @@ public class ReviewGUI extends JFrame implements ActionListener {
         // Maximize the screen size
         f1.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
+        // Creating title for screen
+        reviewTitle = new JLabel("Review System");
+        reviewTitle.setFont(reviewTitle.getFont().deriveFont(18.0f));
+
         // Displaying immigrant information
-        l1 = new JLabel("Entered Name: " + immigrantDataForm.name);
-        l2 = new JLabel("Entered Email: " + immigrantDataForm.email);
-        l3 = new JLabel("Entered Birthdate: " + immigrantDataForm.birthdate);
-        l4 = new JLabel("Entered Number of Children: " + immigrantDataForm.numChildren);
-        l5 = new JLabel("Entered Disease Data: " + immigrantDataForm.data);
+        nameLabel = new JLabel("Entered Name: " + immigrantDataForm.name);
+        emailLabel = new JLabel("Entered Email: " + immigrantDataForm.email);
+        birthdateLabel = new JLabel("Entered Birthdate: " + immigrantDataForm.birthdate);
+        numChildrenLabel = new JLabel("Entered Number of Children: " + immigrantDataForm.numChildren);
+        diseaseLabel = new JLabel("Entered Disease Data: " + immigrantDataForm.data);
+        editLabel = new JLabel("Please review the data below and enter any changes in the textboxes.");
 
         // Make the five text fields
         nameTextField = new JTextField(16);
@@ -77,105 +89,67 @@ public class ReviewGUI extends JFrame implements ActionListener {
 
         JPanel p = new JPanel(new GridBagLayout());
 
-        // Adding and manipulating various 
+        // Adding and manipulating various components of screen.
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets.set(5, 5, 5, 5);
-
-        gbc.anchor = GridBagConstraints.WEST;
+        
+        // Adding title to the top of the screen
+        gbc.anchor = GridBagConstraints.CENTER;
         gbc.gridx = 0;
         gbc.gridy = 0;
-        p.add(l1, gbc);
+        gbc.gridwidth = 2;
+        p.add(reviewTitle, gbc);
+
+        // Adding edit message for user below
+        gbc.gridy++;
+        p.add(editLabel, gbc);
+
+        // Realigning gridbagconstraints
+        gbc.anchor = GridBagConstraints.WEST;
+
+        // Adding labels and textfields to screen
+        gbc.gridy++;
+        gbc.gridwidth = 1;
+        p.add(nameLabel, gbc);
 
         gbc.gridx = 1;
         p.add(nameTextField, gbc);
 
         gbc.gridy++;
         gbc.gridx = 0;
-        p.add(l2, gbc);
+        p.add(emailLabel, gbc);
 
         gbc.gridx = 1;
         p.add(emailTextField, gbc);
 
         gbc.gridy++;
         gbc.gridx = 0;
-        p.add(l3, gbc);
+        p.add(birthdateLabel, gbc);
 
         gbc.gridx = 1;
         p.add(DOBTextField, gbc);
 
         gbc.gridy++;
         gbc.gridx = 0;
-        p.add(l4, gbc);
+        p.add(numChildrenLabel, gbc);
 
         gbc.gridx = 1;
         p.add(numChildrenTextField, gbc);
 
         gbc.gridy++;
         gbc.gridx = 0;
-        p.add(l5, gbc);
+        p.add(diseaseLabel, gbc);
 
         gbc.gridx = 1;
         p.add(diseaseTextField, gbc);
         gbc.gridy++;
 
-        p.add(b, gbc);
+        p.add(submitButton, gbc);
         gbc.gridy++;
 
-        p.add(exit, gbc);
+        p.add(exitButton, gbc);
         f1.add(p);
     }
-
-    // /**
-    //  * Validates the data entered by the review agent (same logic as DataEntryGUI).
-    //  * The method checks the validity of various fields such as name, email, birthdate,
-    //  * number of children, and disease data.
-    //  *
-    //  * @param form The InfectedUserData form to be validated.
-    //  * @return The number of valid data parts. A fully valid form would return 5.
-    //  */
-    // public static int validate(InfectedUserData form) {
-
-    //     //final number of valid parts
-    //     int finalNum = 0;
-
-    //     //add validation for name
-    //     if (form.validateName(form.getName()) == 1) {
-    //         finalNum++;
-    //     } else {
-    //         //add clear data form and show name error message
-    //     }
-
-    //     //add validation for disease data
-    //     if (form.validateInfectiousData(form.getData()) == 1) {
-    //         finalNum++;
-    //     } else {
-    //         //add clear data form and show data error message
-    //     }
-
-    //     //add validation for email
-    //     if (form.validateEmail(form.getEmail()) == 1) {
-    //         finalNum++;
-    //     } else {
-    //         //add clear data form and show email error message
-    //     }
-
-    //     //add validation for birthdate
-    //     if (form.validateBirthdate(form.getBirthdate()) == 1) {
-    //         finalNum++;
-    //     } else {
-    //         //add clear data form and show birthdate error message
-    //     }
-
-    //     //add validation for number of children
-    //     if (form.validateNumChild(form.getNumChildren()) == 1) {
-    //         finalNum++;
-    //     } else {
-    //         //add clear data form and show birthdate error message
-    //     }
-        
-    //     //return total valid
-    //     return finalNum;
-    // }
 
     /**
      * Validates the data entered by the review agent.
@@ -273,37 +247,22 @@ public class ReviewGUI extends JFrame implements ActionListener {
                 copy.setData(diseaseTextField.getText());
             }
             
-            // Validate the data and let the user know if it was invalid.
-            // int validationResult = validate(copy);
-
-            // if (validationResult != 5) {
-            //     // This means not all fields are valid
-            //     JOptionPane.showMessageDialog(f1, "Some fields have invalid data. Please check and try again.");
-            //     loadReviewScreen(workflowtable);
-            // } else {
-            //     // All fields are valid, so proceed
-            //     f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            //     f1.setVisible(false);
-
-            //     // load the approval screen with the new version of the form
-            //     approval.loadApprovalScreen(copy);
-
-            // }
+            ReviewGUI gui = new ReviewGUI();
 
             boolean validationResult = validate(copy);
 
-            while (!validationResult) {
+            if (!validationResult) {
                 JOptionPane.showMessageDialog(f1, "Some fields have invalid data. Please check and try again.");
-                validate(copy);
+                f1.dispose();
+                gui.loadReviewScreen(workflowtable, immigrantDataForm);
+                return;
             }
 
             f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             f1.setVisible(false);
 
             workflowtable.addApprovalForm(copy);
-
-            ReviewGUI gui = new ReviewGUI();
-            gui.loadReviewScreen(workflowtable);
+            gui.loadReviewScreen(workflowtable, null);
 
         }
         else if (command.equals("Exit")) {
