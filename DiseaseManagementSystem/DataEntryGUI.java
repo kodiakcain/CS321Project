@@ -102,6 +102,9 @@ class DataEntryGUI extends JFrame implements ActionListener {
 
             //if all validations are not done, dispose of the old screen, and reload a new screen for data entry 
             if (DataEntryGUI.validate(ImmigrantDataForm) != 5) {
+
+                JOptionPane.showMessageDialog(f, "Some fields have invalid data. Please check and try again.");
+                f.dispose();
         
                 f.dispose();
                 DataEntryGUI.loadDataScreen(workflowtable);
