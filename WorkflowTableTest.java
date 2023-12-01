@@ -70,14 +70,14 @@ public class WorkflowTableTest {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
 
         InfectedUserData actual = workflowTable.getNextReviewForm();
-        InfectedUserData expected = new InfectedUserData(null, null, null, null, 0, false, null));
+        InfectedUserData expected = new InfectedUserData(null, null, null, null, 0, false, null);
 
         assertEquals(expected, actual);
     }
 
     /* ==================== addApproveID() Test Section ==================== */
 
-     /**
+     /** 
      * Tests if adding a form to the approve queue is successful.
      */
     @Test
