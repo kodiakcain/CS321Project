@@ -25,7 +25,7 @@ public class WorkflowTableTest {
         boolean actual = workflowTable.addReviewForm(newImmigrant);
         boolean expected = true;
 
-        assertEquals(expected, actual);
+        assertEquals(expected, actual); 
     }
 
     /**
@@ -78,28 +78,14 @@ public class WorkflowTableTest {
     /* ==================== addApproveID() Test Section ==================== */
 
      /**
-     * Tests if adding a form ID to the approve queue is successful.
+     * Tests if adding a form to the approve queue is successful.
      */
     @Test
-    public void addApproveIDReturnsTrue() {
+    public void addApproveFormReturnsTrue() {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
         
-        boolean actual = workflowTable.addApproveID(0);
+        boolean actual = workflowTable.addApprovalForm(new InfectedUserData(null, null, null, null, 0, false, null));
         boolean expected = true;
-
-        assertEquals(expected, actual);
-    }
-
-    /**
-     * Tests if adding a form ID to the approve queue is not successful.
-     *     This would occur if the queue was not initialized properly.
-     */
-    @Test
-    public void addApproveIDReturnsFalse() {
-        WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
-        
-        boolean actual = workflowTable.addApproveID(0);
-        boolean expected = false;
 
         assertEquals(expected, actual);
     }
@@ -107,21 +93,21 @@ public class WorkflowTableTest {
     /* ================= getNextApproveID() Test Section ================= */
 
     /**
-     * Tests that getting the next approve ID from the approve queue is
+     * Tests that getting the next approve form from the approve queue is
      *     successful.
      */
     @Test
-    public void getNextApproveIDReturnsFormID() {
+    public void getNextApproveFormReturnsForm() {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
-        workflowTable.addApproveID(1);
-        InfectedUserData actual = workflowTable.getNextReviewID();
+        workflowTable.addApprovalForm(new InfectedUserData(null, null, null, null, 0, false, null));
+        InfectedUserData actual = workflowTable.getNextReviewForm();
         InfectedUserData expected = 1;
 
         assertEquals(expected, actual);
     }
 
     /**
-     * Tests that getNextApprovalID() fails (the approveIDQueue was not
+     * Tests that getNextApprovalForm() fails (the approvalQueue was not
      *      initialized) and produces -1.
      */
     @Test
@@ -135,15 +121,15 @@ public class WorkflowTableTest {
     }
 
     /**
-     * Tests that getNextApproveID() fails (the approveIDQueue was empty) and
-     *     produces 0.
+     * Tests that getNextApproveForm() fails (the approveIDQueue was empty) and
+     *     produces null.
      */
     @Test
-    public void getNextApproveIDReturnsZero() {
+    public void getNextApproveIDReturnsNull() {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
 
-        InfectedUserData actual = workflowTable.getNextApproveID();
-        InfectedUserData expected = 0;
+        InfectedUserData actual = workflowTable.getNextApproveForm();
+        InfectedUserData expected = null;
 
         assertEquals(expected, actual);
     }
