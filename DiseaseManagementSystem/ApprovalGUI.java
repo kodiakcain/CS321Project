@@ -19,6 +19,12 @@ public class ApprovalGUI extends JFrame implements ActionListener {
     private static JFrame frame;
 
     /**
+     * A Header to be displayed for the agent to indicate that they are looking
+     *     at the Approving Screen.
+     */
+    private static JLabel header;
+
+    /**
      * The label to display the immigrant's name to the Approving Agent user.
      */
     private static JLabel name;
@@ -49,6 +55,12 @@ public class ApprovalGUI extends JFrame implements ActionListener {
      *     been sent.
      */
     private static JLabel approvalEmail;
+
+    /**
+     * The label to notify the Approving Agent that the immigrant form with
+     *     a null field can not be approved.
+     */
+    private static JLabel nullFieldLabel;
     
     /**
      * The immigrant's infectious disease form.
@@ -77,6 +89,17 @@ public class ApprovalGUI extends JFrame implements ActionListener {
     private static boolean approvalFlag;
 
     /**
+     * Flag to indicate if an Approval Form contains a null field.
+     */
+    private static boolean nullFieldFlag;
+
+    /**
+     * Flag to indicate that the Approving Agent has been notified of a null
+     *     field in the immigrant's form.
+     */
+    private static boolean nullFieldMessageFlag;
+
+    /**
      * Displays the Immigrant's infectious disease information to the Approving
      *     Agent User.
      * 
@@ -88,17 +111,21 @@ public class ApprovalGUI extends JFrame implements ActionListener {
         workFlowTable = workFlowTableInput;
         // Get next immigrant infectious disease form for approval
         immigrantDataForm = workFlowTable.getNextApprovalForm();
-
+        
         // New frame to be shown to the Approving Agent
         frame = new JFrame("Disease Management System - Approve Data"); 
         ApprovalGUI approvalGUI = new ApprovalGUI();
 
-         // Container to store components 
+        // the header for the approving screen
+        header = new JLabel("Approval Screen");
+        header.setFont(header.getFont().deriveFont(20.0f));
+
+        // Container to store components 
         panel = new JPanel(new GridBagLayout());
         // Component constraints
         gridBagConst = new GridBagConstraints();
         gridBagConst.insets.set(5, 5, 5, 5);
-
+        
         // Set frame to visible for the user
         frame.setVisible(true);
         // Set screen to fullscreen
@@ -125,6 +152,19 @@ public class ApprovalGUI extends JFrame implements ActionListener {
         birthdate = new JLabel("Entered Birthdate: " + immigrantDataForm.getBirthdate());
         numChildren = new JLabel("Entered Number of Children: " + immigrantDataForm.getNumChildren());
         diseaseName = new JLabel("Entered Disease Data: " + immigrantDataForm.getData());
+
+        // check for possible null fields in the immigrant's form
+        if (immigrantDataForm.getName() == null ||
+            immigrantDataForm.getEmail() == null ||
+            immigrantDataForm.getBirthdate() == null ||
+            immigrantDataForm.getData() == null) {
+                // set nullFieldFlag to true; null field was found in the form
+                nullFieldFlag = true;
+            }
+
+        // add the header to the center of the screen, above the form's fields
+        gridBagConst.anchor = GridBagConstraints.CENTER;
+        panel.add(header, gridBagConst);
 
         // Center component
         gridBagConst.anchor = GridBagConstraints.CENTER;
@@ -190,8 +230,39 @@ public class ApprovalGUI extends JFrame implements ActionListener {
 
         // Approving agent presses "Send Approval Email" button
         if (command.equals("Send Approval Email")) {
+            /* 
+             * check if the approving agent has already been notified of 
+             * the null field in the immigrant's form
+             */
+            if (nullFieldMessageFlag == true) {
+                return;
+            }
+
+            // check if the Approval form contains a null field
+            else if (nullFieldFlag == true) {
+                // display error message
+                nullFieldLabel = new JLabel("Null field found");
+                nullFieldLabel.setText(
+                    "Null-Fielded Form: Return."
+                );
+                
+                gridBagConst.anchor = GridBagConstraints.CENTER;
+                gridBagConst.gridx--;
+                // Move downwards
+                panel.add(nullFieldLabel, gridBagConst);
+
+                // refresh the frame to show new label (tell layout manager of change)
+                frame.revalidate();
+                // ensure the change is displayed
+                frame.repaint();
+
+                // the approving agent has been notified of the null field
+                nullFieldMessageFlag = true;
+                return;
+            }
+
             // check if Approval form has already been approved by agent
-            if (approvalFlag == true) {
+            else if (approvalFlag == true) {
                 return;
             }
             
@@ -242,6 +313,8 @@ public class ApprovalGUI extends JFrame implements ActionListener {
             
             // Set approvalFlag to false to indicate the form was not approved
             approvalFlag = false;
+            // Set nullFieldMessageFlag to false for the next form
+            nullFieldMessageFlag = false;
 
             // close ApprovalGUI screen to open screen for next Approval form
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -254,12 +327,20 @@ public class ApprovalGUI extends JFrame implements ActionListener {
 
         // Approving Agent decides to return to Central screen
         else if (command.equals("Exit")) {            
+            // check if currently viewed approval form has not been approved
+            if (approvalFlag == false) {
+                // send immigrant's form back to the workflow table's approveQueue
+                workFlowTable.addApprovalForm(immigrantDataForm);
+            }
+
             // close ApprovalGUI screen
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(false);
 
             // Set approvalFlag to false to indicate the form was not approved
             approvalFlag = false;
+            // Set nullFieldMessageFlag to false when exiting
+            nullFieldMessageFlag = false;
 
             // return to CentralGUI screen
             CentralGUI centralGUI = new CentralGUI();
