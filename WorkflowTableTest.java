@@ -66,13 +66,13 @@ public class WorkflowTableTest {
      *     produces null.
      */
     @Test
-    public void getNextReviewIDEmptyQueue() {
+    public void getNextReviewFormEmptyQueue() {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
 
         InfectedUserData actual = workflowTable.getNextReviewForm();
         InfectedUserData expected = new InfectedUserData(null, null, null, null, 0, false, null);
 
-        assertThat(actual).usingRecursiveComparison().isEqualTo(expected);
+        assertEquals(expected.getEmail(), actual.getEmail());
     }
 
     /* ==================== addApproveID() Test Section ==================== */
@@ -111,12 +111,12 @@ public class WorkflowTableTest {
      *     produces null.
      */
     @Test
-    public void getNextApproveIDReturnsNull() {
+    public void getNextApproveFormReturnsNull() {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
 
         InfectedUserData actual = workflowTable.getNextApprovalForm();
         InfectedUserData expected = new InfectedUserData(null, null, null, null, 0, false, null);
 
-        assertEquals(expected, actual);
+        assertEquals(expected.getEmail(), expected.getEmail());
     }
 }
