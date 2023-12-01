@@ -5,26 +5,27 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * Workflow Table that will contain the corresponding IDs of all applicants'
- *     forms.
+ * Workflow table that manages the movement of forms between the data entry, review and approval systems
+ * @author John Fulton
+ * @author Youssef Melk
  */
 public class WorkflowTable {
 
     /**
-     * The list of IDs for all Infected User Data forms that are waiting to be
+     * The list of all InfectedUserData forms that are waiting to be
      *     reviewed.
      */
     private Queue<InfectedUserData> reviewQueue;
 
     /**
-     * The list of IDs for all Infected User Data forms that are waiting to be
+     * The list of all InfectedUserData forms that are waiting to be
      *     approved.
      */
     private Queue<InfectedUserData> approvalQueue;
 
     /**
-     * Helper method that constructs the Workflow Table with its lists of
-     *     IDs for all forms to be checked for review and approval.
+     * Helper method that constructs the WorkflowTable with its lists of
+     *     all forms to be checked for review and approval.
      */
     WorkflowTable() {
         this.reviewQueue = new LinkedList<>();
@@ -32,23 +33,22 @@ public class WorkflowTable {
     }
 
     /**
-     * Creates the Workflow Table with its lists of IDs for all forms to be
+     * Creates the Workflow Table with its lists of all forms to be
      *     checked for review and approval.
      * 
-     * @return the Workflow Table withs its lists of IDs for all forms to be
-     *     checked for review and approval.
+     * @return the Workflow Table object
      */
     public static WorkflowTable createWorkflowTable() {
         return new WorkflowTable();   
     }
 
     /**
-     * Adds the formID of an applicant's InfectedUserData to the end of the
-     *     reviewIDQueue.
+     * Adds the applicant's InfectedUserData to the end of the
+     *     reviewwQueue.
      * 
-     * @param formID for the formID of the applicant's InfectedUserData.
-     * @return true if the formID was successfully added to the end of the
-     *     reviewIDQueue, otherwise return false.
+     * @param form the applicant's InfectedUserData.
+     * @return true if the form was successfully added to the end of the
+     *     reviewQueue, otherwise return false.
      */
     public boolean addReviewForm(InfectedUserData form) {
 
@@ -65,12 +65,9 @@ public class WorkflowTable {
     }
 
     /**
-     * Returns the formID of an applicant's InfectedUserData to be reviewed
-     *     if it exitsts in the reviewIDQueue.
+     * Returns the next InfectedUserData form in the reviewQueue.
      * 
-     * @return the formID of the applicant's InfectedUserData if it was found
-     *     in the reviewIDQueue; return -1 if the reviewIDQueue was not
-     *     initialized; return 0 if the reviewIDQueue was empty.
+     * @return the next InfectedUserData form in the reviewQueue, otherwise returns and empty form if the queue is empty.
      */
     public InfectedUserData getNextReviewForm() {
 
@@ -87,12 +84,11 @@ public class WorkflowTable {
     }
 
     /**
-     * Adds the formID of an applicant's InfectedUserData to the end of the
-     *     approvalIDQueue.
+     * Adds an InfectedUserData to the end of the approvalQueue.
      * 
-     * @param formID for the formID of the applicant's InfectedUserData.
-     * @return true if the formID was successfully added to the end of the
-     *     approvalIDQueue, otherwise return false.
+     * @param form the applicant's InfectedUserData.
+     * @return true if the form was successfully added to the end of the
+     *     approvalQueue, otherwise return false.
      */
     public boolean addApprovalForm(InfectedUserData form) {
         
@@ -108,12 +104,10 @@ public class WorkflowTable {
     }
 
     /**
-     * Returns the formID of an applicant's InfectedUserData to be approved
-     *     if it exitsts in the approvalIDQueue.
+     * Returns the next form in the approvalQueue.
      * 
-     * @return the formID of the applicant's InfectedUserData if it was found
-     *     in the approvalIDQueue; return -1 if the approvalIDQueue was not
-     *     initialized; return 0 if the approvalIDQueue was empty.
+     * @return the form of the applicant's InfectedUserData if it was found
+     *     in the approvalQueue; otherwise, return an empty form to avoid null pointer errors.
      */
     public InfectedUserData getNextApprovalForm() {
 
