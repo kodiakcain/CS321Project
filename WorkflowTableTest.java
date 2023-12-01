@@ -20,7 +20,7 @@ public class WorkflowTableTest {
     @Test
     public void addReviewFormReturnsTrue() {
         WorkflowTable workflowTable = WorkflowTable.createWorkflowTable();
-        
+            
         InfectedUserData newImmigrant = new InfectedUserData(null, null, null, null, 0, false, null);
         boolean actual = workflowTable.addReviewForm(newImmigrant);
         boolean expected = true;
