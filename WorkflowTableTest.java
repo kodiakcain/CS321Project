@@ -12,10 +12,10 @@ import DiseaseManagementSystem.WorkflowTable;
  */
 public class WorkflowTableTest {
     
-    /* ==================== addReviewID() Test Section ==================== */
+    /* ==================== addReviewForm() Test Section ==================== */
 
     /**
-     * Tests if adding a form ID to the reviewIDQueue is successful.
+     * Tests if adding a form form to the reviewQueue is successful.
      */
     @Test
     public void addReviewFormReturnsTrue() {
@@ -29,8 +29,7 @@ public class WorkflowTableTest {
     }
 
     /**
-     * Tests if adding a form ID to the reviewIDQueue is not successful.
-     *     This would occur if the queue was not initialized properly.
+     * Tests if adding a form to the reviewQueue is not successful.
      */
     @Test
     public void addReviewFormReturnsFalse() {
@@ -46,7 +45,7 @@ public class WorkflowTableTest {
     /* ================== getNextReviewForm() Test Section ================== */
 
     /**
-     * Tests that getting the next review Form from the reviewQueue is
+     * Tests that getting the next reviewForm from the reviewQueue is
      *     successful.
      */
     @Test
@@ -75,10 +74,10 @@ public class WorkflowTableTest {
         assertEquals(expected.getEmail(), actual.getEmail());
     }
 
-    /* ==================== addApproveID() Test Section ==================== */
+    /* ==================== addApprovalForm() Test Section ==================== */
 
      /** 
-     * Tests if adding a form to the approve queue is successful.
+     * Tests if adding a form to the approval queue is successful.
      */
     @Test
     public void addApproveFormReturnsTrue() {
@@ -90,10 +89,10 @@ public class WorkflowTableTest {
         assertEquals(expected, actual);
     }
 
-    /* ================= getNextApproveID() Test Section ================= */
+    /* ================= getNextApprovalForm() Test Section ================= */
 
     /**
-     * Tests that getting the next approve form from the approve queue is
+     * Tests that getting the next approve form from the approval queue is
      *     successful.
      */
     @Test
@@ -107,7 +106,7 @@ public class WorkflowTableTest {
     }
 
     /**
-     * Tests that getNextApproveForm() fails (the approveIDQueue was empty) and
+     * Tests that getNextApprovalForm() fails (the approvalQueue was empty) and
      *     produces null.
      */
     @Test
