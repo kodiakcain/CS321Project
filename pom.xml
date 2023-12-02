@@ -28,7 +28,7 @@
   </dependencies>
 
   <build>
-    <sourceDirectory>kodiakcain/CS321Project</sourceDirectory>
+    <sourceDirectory>kodiakcain/CS321Project/DiseaseManagementSystem</sourceDirectory>
     <testSourceDirectory>kodiakcain/CS321Project</testSourceDirectory>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
