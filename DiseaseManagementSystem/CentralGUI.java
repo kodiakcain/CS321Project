@@ -10,7 +10,7 @@ import DiseaseManagementSystem.*;
 /**
  * This class serves as the central screen which displays for our user. They are shown 3 buttons which
  * they can press to load the various screens in the system.
- * 
+ *
  * @author John Fulton, Cain Clifton, Youssef Melk
  */
 public class CentralGUI extends JFrame implements ActionListener {
